@@ -64,6 +64,7 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["dagger-android-compiler"]
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     annotationProcessor rootProject.ext.dependencies["room-compiler"]
+
 //    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
 
     println IsBuildMudle.toBoolean()

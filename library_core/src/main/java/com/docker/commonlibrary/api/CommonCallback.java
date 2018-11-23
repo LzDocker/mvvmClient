@@ -13,7 +13,7 @@ public abstract class CommonCallback<T> {
     public void onComplete() {}
     public abstract void onComplete(T Result);
 
-    public abstract void onBusinessError();
+    public abstract void onBusinessError(ApiResponse apiResponse);
 
     public abstract void onNetworkError(ApiResponse apiResponse);
 }

@@ -12,6 +12,8 @@ import com.docker.accountmodule.api.AccountService;
 import com.docker.accountmodule.databinding.ModuleaccountActivityAccountBinding;
 import com.docker.accountmodule.viewmodel.accountViewModel;
 import com.docker.accountmodule.vo.BannerVo;
+import com.docker.accountmodule.vo.LoginVo;
+import com.docker.accountmodule.vo.RegisterVo;
 import com.docker.commonlibrary.api.ApiResponse;
 import com.docker.commonlibrary.api.BaseResponse;
 import com.docker.commonlibrary.api.CommonCallback;
@@ -19,12 +21,14 @@ import com.docker.commonlibrary.api.CommonObserver;
 import com.docker.commonlibrary.base.BaseActivity;
 import com.docker.constantmodule.Constant.ConstantsRouter;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 @Route(path = ConstantsRouter.ModuleAccount.ACTIVITY_ACCOUNT)
-public class accountActivity extends BaseActivity<accountViewModel,ModuleaccountActivityAccountBinding> {
+public class accountActivity extends BaseActivity<accountViewModel, ModuleaccountActivityAccountBinding> {
 
 
     @Inject
@@ -34,6 +38,8 @@ public class accountActivity extends BaseActivity<accountViewModel,Moduleaccount
     @Inject
     AccountService service;
 
+    RegisterVo registerVo;
+
     @Override
     protected int getLayoutId() {
         return R.layout.moduleaccount_activity_account;
@@ -41,8 +47,9 @@ public class accountActivity extends BaseActivity<accountViewModel,Moduleaccount
 
     @Override
     public accountViewModel getViewModel() {
-        return ViewModelProviders.of(this,factory).get(accountViewModel.class);
+        return ViewModelProviders.of(this, factory).get(accountViewModel.class);
     }
+
     @Override
     protected void inject() {
         super.inject();
@@ -52,33 +59,33 @@ public class accountActivity extends BaseActivity<accountViewModel,Moduleaccount
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        service.getBanners().observe(this, new CommonObserver<List<BannerVo>>(new CommonCallback<List<BannerVo>>() {
-            @Override
-            public void onComplete(List<BannerVo> Result) {
-                Log.d("comm", "onComplete: "+Result.get(0).getDesc());
-            }
-
-            @Override
-            public void onBusinessError() {
-                Log.d("comm", "onBusinessError: ");
-            }
-
-            @Override
-            public void onNetworkError(ApiResponse apiResponse) {
-                Log.d("comm", "onNetworkError: ");
-            }
-
-            @Override
-            public void onComplete(BaseResponse<List<BannerVo>> baseResponse) {
-                super.onComplete(baseResponse);
-                Log.d("comm", "BaseResponse: "+baseResponse.getData());
-            }
-        }));
-
+        initview();
     }
 
+    private void initview() {
+        registerVo = new RegisterVo();
+        mBinding.setVo(registerVo);
 
+        mBinding.tvRegister.setOnClickListener(v -> {
+            mViewModel.register(mBinding.getVo()).observe(this, new CommonObserver<>(new CommonCallback<LoginVo>() {
+                @Override
+                public void onComplete(LoginVo Result) {
+                       if(Result!=null){
+                           finish();
+                       }
+                }
+                @Override
+                public void onBusinessError(ApiResponse apiResponse) {
+
+                }
+                @Override
+                public void onNetworkError(ApiResponse apiResponse) {
+
+                }
+            }));
+
+        });
+    }
 
 
 }

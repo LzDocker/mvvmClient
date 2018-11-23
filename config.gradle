@@ -8,10 +8,7 @@ ext {
             versionCode      : 100,
             versionName      : "1.0.0"
     ]
-//    push = [
-//            JPUSH_APPKEY : "d0c941560a3b93539d02e230", //JPush上注册的包名对应的appkey.
-//            JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
-//    ]
+
     dependencies = [
             "junit"                   : 'junit:junit:4.12',
             "arouter"                 : 'com.alibaba:arouter-api:1.2.4',

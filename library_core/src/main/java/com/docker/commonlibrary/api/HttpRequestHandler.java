@@ -1,5 +1,7 @@
 package com.docker.commonlibrary.api;
 
+import android.util.Log;
+
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;

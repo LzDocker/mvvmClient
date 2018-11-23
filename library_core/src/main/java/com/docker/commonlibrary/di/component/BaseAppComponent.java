@@ -34,6 +34,7 @@ public interface BaseAppComponent {
 
 //    ServiceManager serviceManager();
 
+
     OkHttpClient okHttpClient();
 
     BaseApplication baseApplication();

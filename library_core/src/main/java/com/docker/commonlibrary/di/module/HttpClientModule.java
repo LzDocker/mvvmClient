@@ -1,7 +1,11 @@
 package com.docker.commonlibrary.di.module;
 
+import android.content.Context;
+
 import com.docker.commonlibrary.api.RequestInterceptor;
 import com.docker.commonlibrary.util.LiveDataCallAdapterFactory;
+import com.docker.commonlibrary.util.cookie.CookieJarImpl;
+import com.docker.commonlibrary.util.cookie.PersistentCookieStore;
 import com.google.gson.Gson;
 
 import java.util.List;
@@ -11,6 +15,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.CookieJar;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -22,8 +27,10 @@ import retrofit2.Retrofit;
 @Module
 public class HttpClientModule {
     private static final int TIME_OUT_SECONDS = 20;
+    private Context context;
 
-    public HttpClientModule() {
+    public HttpClientModule(Context context) {
+        this.context = context;
     }
 
     @Singleton
@@ -40,11 +47,13 @@ public class HttpClientModule {
     @Singleton
     @Provides
     OkHttpClient provideClient(OkHttpClient.Builder okHttpClient, Interceptor intercept
-            , List<Interceptor> interceptors) {
+            , List<Interceptor> interceptors,CookieJar cookieJar) {
         OkHttpClient.Builder builder = okHttpClient
                 .connectTimeout(TIME_OUT_SECONDS, TimeUnit.SECONDS)
                 .readTimeout(TIME_OUT_SECONDS, TimeUnit.SECONDS)
+                .cookieJar(cookieJar)
                 .addNetworkInterceptor(intercept);
+
         if (interceptors != null && interceptors.size() > 0) {
             for (Interceptor interceptor : interceptors) {
                 builder.addInterceptor(interceptor);
@@ -52,6 +61,15 @@ public class HttpClientModule {
         }
         return builder.build();
     }
+
+
+    @Singleton
+    @Provides
+    CookieJar providerCookieJar(){
+
+        return  new CookieJarImpl(new PersistentCookieStore(context));
+    }
+
 
     @Singleton
     @Provides

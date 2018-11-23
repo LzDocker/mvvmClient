@@ -24,7 +24,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class MainActivity extends BaseActivity<MainViewModel,ActivityMainBinding> {
+public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBinding> {
 
     @Inject
     ViewModelProvider.Factory factory;
@@ -45,16 +45,25 @@ public class MainActivity extends BaseActivity<MainViewModel,ActivityMainBinding
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-          initView();
+        initView();
+    }
 
-            mViewModel.getData().observe(this,new CommonObserver<>(new CommonCallback<List<BannerVo>>() {
+
+    private void initView() {
+
+        mBinding.tvAccount.setOnClickListener(v -> {
+
+            ARouter.getInstance().build(ConstantsRouter.ModuleAccount.ACTIVITY_ACCOUNT).navigation();
+
+
+            mViewModel.getData().observe(this, new CommonObserver<>(new CommonCallback<List<BannerVo>>() {
                 @Override
                 public void onComplete(List<BannerVo> Result) {
                     Log.d("ssss", "onComplete: -------------------------------");
                 }
 
                 @Override
-                public void onBusinessError() {
+                public void onBusinessError(ApiResponse apiResponse) {
                     Log.d("ssss", "onBusinessError: -------------------------------");
                 }
 
@@ -64,15 +73,6 @@ public class MainActivity extends BaseActivity<MainViewModel,ActivityMainBinding
                 }
             }));
 
-    }
-
-
-    private void initView(){
-
-        mBinding.tvAccount.setOnClickListener(v -> {
-
-            ARouter.getInstance().build(ConstantsRouter.ModuleAccount.ACTIVITY_ACCOUNT).navigation();
-
         });
 
         mBinding.tvGank.setOnClickListener(v -> {
@@ -81,7 +81,6 @@ public class MainActivity extends BaseActivity<MainViewModel,ActivityMainBinding
 
         });
     }
-
 
 
 }

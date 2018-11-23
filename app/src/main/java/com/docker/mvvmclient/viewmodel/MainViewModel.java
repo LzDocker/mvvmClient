@@ -21,14 +21,14 @@ public class MainViewModel extends BaseViewModel {
     AccountService service;
 
 
-         @Inject
-         public MainViewModel(){
+    @Inject
+    public MainViewModel() {
 
-         }
+    }
 
 
-         public LiveData<ApiResponse<BaseResponse<List<BannerVo>>>> getData(){
+    public LiveData<ApiResponse<BaseResponse<List<BannerVo>>>> getData() {
 
-             return service.getBanners();
-         }
+        return service.getBanners();
+    }
 }
