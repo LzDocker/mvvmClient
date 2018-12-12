@@ -4,7 +4,14 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
+import android.view.animation.TranslateAnimation;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -41,6 +48,12 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
     public MainViewModel getViewModel() {
         return ViewModelProviders.of(this, factory).get(MainViewModel.class);
     }
+
+
+    private int ScreenWidth;
+    private int ScreenHeight;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,7 +93,100 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
             ARouter.getInstance().build(ConstantsRouter.ModuleGank.ACTIVITY_GANK).navigation();
 
         });
+
+
+
+
+        DisplayMetrics dm = new DisplayMetrics();
+
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        ScreenWidth = dm.widthPixels;
+        ScreenHeight = dm.heightPixels;
+        anim();
+
     }
 
 
+
+
+
+    private void Animation(View view,boolean flag) {
+        TranslateAnimation translateAnimation;
+
+
+
+
+    }
+
+
+
+    private  void anim(){
+        TranslateAnimation leftani  = new TranslateAnimation(-ScreenWidth, ScreenWidth, 0, 0);
+        TranslateAnimation rightani  = new TranslateAnimation(ScreenWidth, -ScreenWidth, 0, 0);
+
+        leftani.setDuration(2000);
+        leftani.setRepeatCount(0);
+        rightani.setDuration(2000);
+        rightani.setRepeatCount(0);
+
+        mBinding.image.setAnimation(leftani);
+        leftani.startNow();
+
+
+        leftani.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+//                RotateAnimation rotate  = new RotateAnimation(0f, -180f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+//                rotate.setDuration(0);//设置动画持续周期
+//                rotate.setRepeatCount(0);//设置重复次数
+//                rotate.setFillAfter(true);//动画执行完后是否停留在执行完的状态
+//                mBinding.image.setAnimation(rotate);
+//                rotate.startNow();
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+
+                mBinding.image.setAnimation(rightani);
+                rightani.startNow();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        rightani.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                RotateAnimation rotate  = new RotateAnimation(0f, 180f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                rotate.setDuration(0);//设置动画持续周期
+                rotate.setRepeatCount(0);//设置重复次数
+                rotate.setFillAfter(true);//动画执行完后是否停留在执行完的状态
+                mBinding.image.setAnimation(rotate);
+                rotate.startNow();
+//
+//                mBinding.image.setAnimation(rightani);
+//                rightani.startNow();
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+
+
+                mBinding.image.setAnimation(leftani);
+                leftani.startNow();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+    }
 }
+
+
