@@ -1,1 +1,1 @@
-include ':app', ':library_core', ':moduleAccount', ':moduleGank', ':library_common'
+include ':app', ':library_core', ':moduleAccount', ':moduleGank', ':library_common', ':moduleplayer'

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape>
+            <corners
+                android:bottomLeftRadius="4.0dip"
+                android:bottomRightRadius="4.0dip"
+                android:topLeftRadius="1.0dip"
+                android:topRightRadius="1.0dip" />
+
+            <solid android:color="#fff" />
+
+            <padding
+                android:bottom="1.0dip"
+                android:left="1.0dip"
+                android:right="1.0dip"
+                android:top="0.0dip" />
+        </shape>
+    </item>
+    <item
+        android:width="120dp"
+        android:height="120dp"
+        android:drawable="@mipmap/ic_launcher"
+        android:gravity="center" />
+
+</layer-list>

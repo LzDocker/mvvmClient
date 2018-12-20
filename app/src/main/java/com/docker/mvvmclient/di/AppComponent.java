@@ -9,6 +9,10 @@ import com.docker.commonlibrary.di.module.BaseViewModelModule;
 import com.docker.commonlibrary.di.module.CacheModule;
 import com.docker.commonlibrary.di.module.GlobalConfigModule;
 import com.docker.commonlibrary.di.module.HttpClientModule;
+import com.docker.moduleplayer.di.PlayerServiceModule;
+import com.docker.moduleplayer.di.PlayerUiModule;
+import com.docker.moduleplayer.di.PlayerViewModelModule;
+import com.docker.moduleplayer.viewmodel.PlayerhomeViewModel;
 import com.google.gson.Gson;
 
 import javax.inject.Singleton;
@@ -30,6 +34,7 @@ import okhttp3.OkHttpClient;
         GlobalConfigModule.class,
         ServiceModule.class,
         CacheModule.class,
+
         UIMoudle.class,
         ViewModelModule.class,
         BaseViewModelModule.class,
@@ -38,6 +43,9 @@ import okhttp3.OkHttpClient;
         AccountViewModelModule.class,
         AccountServiceModule.class,
 
+        PlayerUiModule.class,
+        PlayerViewModelModule.class,
+        PlayerServiceModule.class
         //下面应该是所有module对应的所有Activities:
         //BActivitiesModule.class
         //CActivitiesModule.class

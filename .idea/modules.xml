@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/library_core/library_core.iml" filepath="$PROJECT_DIR$/library_core/library_core.iml" />
       <module fileurl="file://$PROJECT_DIR$/moduleAccount/moduleAccount.iml" filepath="$PROJECT_DIR$/moduleAccount/moduleAccount.iml" />
       <module fileurl="file://$PROJECT_DIR$/moduleGank/moduleGank.iml" filepath="$PROJECT_DIR$/moduleGank/moduleGank.iml" />
+      <module fileurl="file://$PROJECT_DIR$/moduleplayer/moduleplayer.iml" filepath="$PROJECT_DIR$/moduleplayer/moduleplayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/mvvmClient.iml" filepath="$PROJECT_DIR$/mvvmClient.iml" />
     </modules>
   </component>

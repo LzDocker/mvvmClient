@@ -9,15 +9,18 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.docker.commonlibrary.R;
+import com.docker.constantmodule.util.SpTool;
+import com.docker.constantmodule.util.ToastTool;
 
 
-public  abstract  class BaseActivity<VM extends BaseViewModel, VB extends ViewDataBinding> extends BaseInjectActivity {
+public abstract class BaseActivity<VM extends BaseViewModel, VB extends ViewDataBinding> extends BaseInjectActivity {
 
 
     protected VB mBinding;
     protected VM mViewModel;
 
     protected abstract int getLayoutId();
+
     public abstract VM getViewModel();
 
     /*
@@ -28,25 +31,24 @@ public  abstract  class BaseActivity<VM extends BaseViewModel, VB extends ViewDa
     @Override
     public void onCreate(@Nullable Bundle savedInstanceStates) {
         super.onCreate(savedInstanceStates);
-        getSupportActionBar().hide();
-         if(isOverrideContentView){
-           mBinding = DataBindingUtil.setContentView(this,getLayoutId());
-         }else{
-             setContentView(R.layout.activity_base);
-             LinearLayout rootView = (LinearLayout) findViewById(R.id.root_layout);
-             mBinding = DataBindingUtil.inflate(getLayoutInflater(), getLayoutId(), rootView, false);
-             initToolBar(rootView);
-             rootView.addView(mBinding.getRoot(), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-         }
-         mViewModel = getViewModel();
-         getLifecycle().addObserver(mViewModel);
+        if (isOverrideContentView) {
+            mBinding = DataBindingUtil.setContentView(this, getLayoutId());
+        } else {
+            setContentView(R.layout.activity_base);
+            LinearLayout rootView = (LinearLayout) findViewById(R.id.root_layout);
+            mBinding = DataBindingUtil.inflate(getLayoutInflater(), getLayoutId(), rootView, false);
+            initToolBar(rootView);
+            rootView.addView(mBinding.getRoot(), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        }
+        mViewModel = getViewModel();
+        getLifecycle().addObserver(mViewModel);
     }
 
     /*
     *
     * 未覆盖父布局的默认包含一个toolbar
     * */
-    protected void initToolBar(ViewGroup rootView){
+    protected void initToolBar(ViewGroup rootView) {
 
 
     }
@@ -57,6 +59,12 @@ public  abstract  class BaseActivity<VM extends BaseViewModel, VB extends ViewDa
 
     }
 
+    protected void showToast(String content){
+        ToastTool.show(this,content);
+    }
 
+    protected void spSqve(String key, Object object){
+        SpTool.save(this,key,object);
+    }
 
 }

@@ -71,6 +71,7 @@ dependencies {
     if (!IsBuildMudle.toBoolean()) {
         compile project(':moduleAccount')
         compile project(':moduleGank')
+        compile project(':moduleplayer')
     } else {
         compile project(':library_core')
     }

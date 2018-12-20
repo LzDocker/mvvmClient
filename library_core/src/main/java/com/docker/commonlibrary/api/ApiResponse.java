@@ -39,8 +39,7 @@ public class ApiResponse<T> {
     public static String TAG = "ApiResponse";
     private static final Pattern LINK_PATTERN = Pattern
             .compile("<([^>]*)>[\\s]*;[\\s]*rel=\"([a-zA-Z0-9]+)\"");
-    private static final Pattern PAGE_PATTERN = Pattern.compile("page=(\\d)+");
-    private static final String NEXT_LINK = "next";
+
     public final int code;
     @Nullable
     public final T body;
@@ -99,7 +98,4 @@ public class ApiResponse<T> {
         }
     }
 
-    public boolean isSuccessful() {
-        return code >= 200 && code < 300;
-    }
 }

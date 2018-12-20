@@ -1,12 +1,15 @@
 package com.docker.accountmodule.vo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
  * Created by zhangxindang on 2018/11/22.
  */
 
-public class LoginVo {
+public class LoginVo implements Parcelable {
 
 
     private String username;
@@ -14,6 +17,25 @@ public class LoginVo {
     private String icon;
     private int type;
     private List<Integer> collectIds;
+
+    protected LoginVo(Parcel in) {
+        username = in.readString();
+        password = in.readString();
+        icon = in.readString();
+        type = in.readInt();
+    }
+
+    public static final Creator<LoginVo> CREATOR = new Creator<LoginVo>() {
+        @Override
+        public LoginVo createFromParcel(Parcel in) {
+            return new LoginVo(in);
+        }
+
+        @Override
+        public LoginVo[] newArray(int size) {
+            return new LoginVo[size];
+        }
+    };
 
     public String getUsername() {
         return username;
@@ -53,5 +75,18 @@ public class LoginVo {
 
     public void setCollectIds(List<Integer> collectIds) {
         this.collectIds = collectIds;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(username);
+        dest.writeString(password);
+        dest.writeString(icon);
+        dest.writeInt(type);
     }
 }

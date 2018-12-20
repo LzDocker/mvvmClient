@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.docker.moduleplayer">
+
+    <application>
+        <activity android:name=".ui.index.PlayerMainActivity" android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".ui.common.WebActivity"></activity>
+        <activity android:name=".ui.common.KnowledgeDetialActivity"></activity>
+    </application>
+
+</manifest>

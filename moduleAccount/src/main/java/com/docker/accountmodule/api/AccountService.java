@@ -30,16 +30,12 @@ public interface AccountService {
 
     @POST("user/register")
     @FormUrlEncoded
-    LiveData<ApiResponse<BaseResponse<String>>> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
-
-    @POST("user/register")
-    @FormUrlEncoded
-    LiveData<ApiResponse<BaseResponse<LoginVo>>> getRegisterData(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
+    LiveData<ApiResponse<BaseResponse<LoginVo>>> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
 
 
     @POST("user/login")
     @FormUrlEncoded
-    LiveData<ApiResponse<BaseResponse<String>>> login(@Field("username") String username, @Field("password") String password);
+    LiveData<ApiResponse<BaseResponse<LoginVo>>> login(@Field("username") String username, @Field("password") String password);
 
     @GET("lg/collect/list/0/json")
     LiveData<ApiResponse<BaseResponse<String>>> get();
