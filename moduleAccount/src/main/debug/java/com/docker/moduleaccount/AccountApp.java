@@ -14,7 +14,7 @@ public class AccountApp extends BaseApplication {
         DaggerAccountAppComponent.builder().appModule(getAppModule())
                 .globalConfigModule(getGlobalConfigModule())
                 .httpClientModule(getHttpClientModule())
-                .accountServiceModule(new AccountServiceModule())
+//                .accountServiceModule(new AccountServiceModule())
                 .build()
                 .inject(this);
     }

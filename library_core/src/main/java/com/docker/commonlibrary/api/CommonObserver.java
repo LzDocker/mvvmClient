@@ -16,8 +16,8 @@ public  class CommonObserver<T> implements android.arch.lifecycle.Observer<ApiRe
         this.commonCallback.onComplete();
         if(apiResponse.code != 200) {
             this.commonCallback.onNetworkError(apiResponse);
-        } else if(apiResponse.body == null||"-1001".equals((T)((BaseResponse)apiResponse.body).getErrorCode()) ) {
-            this.commonCallback.onBusinessError(apiResponse);
+        } else if(apiResponse.body == null||"-1".equals((T)((BaseResponse)apiResponse.body).getErrorCode()) ) {
+            this.commonCallback.onBusinessError(((BaseResponse)apiResponse.body));
         } else {
             this.commonCallback.onComplete((BaseResponse)apiResponse.body);
             this.commonCallback.onComplete((T)((BaseResponse)apiResponse.body).getData());

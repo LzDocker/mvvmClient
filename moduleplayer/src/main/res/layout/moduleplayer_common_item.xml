@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.docker.moduleplayer.vo.FeedArticleData" />
+
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/item_search_pager_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="3dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:text="@{item.author}"
+                android:textColor="@color/modulePlayer_colorPrimary" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/item_search_pager_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:drawablePadding="5dp"
+                    android:gravity="left"
+                    android:text="@{item.title}"
+                    android:textColor="#666" />
+
+                <TextView
+                    android:id="@+id/item_search_pager_chapterName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/item_search_pager_author"
+                    android:layout_centerVertical="true"
+                    android:gravity="end"
+                    android:text="@{item.origin}" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/item_search_pager_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:gravity="left"
+                android:text="@{item.desc}"
+                android:textColor="#666"
+                android:textSize="16sp" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:id="@+id/item_search_tag_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/item_search_pager_tag_green_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@{item.superChapterName}"
+                        android:textColor="@color/modulePlayer_colorPrimary" />
+                </LinearLayout>
+
+                <!-- app:placeHolder="@{@drawable/ic}"
+                    app:error="@{@drawable/error}"-->
+                <!--<ImageView-->
+                    <!--android:id="@+id/item_search_pager_like_iv"-->
+                    <!--android:layout_width="120dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:layout_height="120dp"-->
+                    <!--app:imageUrl="@{item.envelopePic}"-->
+                    <!--android:contentDescription="@null" />-->
+
+                <TextView
+                    android:id="@+id/item_search_pager_niceDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="@{item.niceDate}" />
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</layout>

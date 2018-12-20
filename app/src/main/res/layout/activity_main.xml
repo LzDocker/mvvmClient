@@ -8,37 +8,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="bottom"
+    android:id="@+id/coutainer"
     >
 
 
 
     <TextView
-        android:layout_width="120dp"
-        android:layout_height="60dp"
-        android:gravity="center"
-        android:background="@color/colorAccent"
-        android:text="module_account"
-        android:id="@+id/tv_account"
-        />
-
-
-    <TextView
-        android:layout_width="120dp"
-        android:text="module_gank"
-        android:layout_height="60dp"
-        android:gravity="center"
-        android:background="@color/colorPrimaryDark"
-        android:id="@+id/tv_gank"
-        />
-
-
-    <ImageView
-        android:id="@+id/image"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/scan1" />
-
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:text="copyright - Zone"
+        android:textStyle="bold"
+        android:id="@+id/tv_version"
+        />
 
 
 </LinearLayout>

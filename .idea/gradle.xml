@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/library_core" />
             <option value="$PROJECT_DIR$/moduleAccount" />
             <option value="$PROJECT_DIR$/moduleGank" />
+            <option value="$PROJECT_DIR$/moduleplayer" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

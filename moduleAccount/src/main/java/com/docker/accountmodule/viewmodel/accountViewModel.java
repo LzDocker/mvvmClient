@@ -34,7 +34,6 @@ public class accountViewModel extends BaseViewModel {
     }
 
 
-
     public LiveData<ApiResponse<BaseResponse<List<BannerVo>>>> getBanners() {
 
         return service.getBanners();
@@ -43,11 +42,18 @@ public class accountViewModel extends BaseViewModel {
     /*
     * 注册
     * */
-     public  LiveData<ApiResponse<BaseResponse<LoginVo>>> register(RegisterVo registerVo){
+    public LiveData<ApiResponse<BaseResponse<LoginVo>>> register(RegisterVo registerVo) {
 
-        return service.getRegisterData(registerVo.getUsername().toString().trim(),
-                registerVo.getPassword().toString().trim(),registerVo.getRepassword().toString().trim());
+        return service.register(registerVo.getUsername().toString().trim(),
+                registerVo.getPassword().toString().trim(), registerVo.getRepassword().toString().trim());
     }
+
+    public LiveData<ApiResponse<BaseResponse<LoginVo>>> login(RegisterVo registerVo) {
+
+        return service.login(registerVo.getUsername().toString().trim(),
+                registerVo.getPassword().toString().trim());
+    }
+
 
     @Override
     protected void onCleared() {
