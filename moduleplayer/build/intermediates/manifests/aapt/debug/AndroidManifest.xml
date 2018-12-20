@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.docker.moduleplayer"
+    android:versionCode="100"
+    android:versionName="1.0.0" >
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="25" />
+
+    <application>
+        <activity
+            android:name="com.docker.moduleplayer.ui.index.PlayerMainActivity"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity android:name="com.docker.moduleplayer.ui.common.WebActivity" />
+        <activity android:name="com.docker.moduleplayer.ui.common.KnowledgeDetialActivity" />
+    </application>
+
+</manifest>

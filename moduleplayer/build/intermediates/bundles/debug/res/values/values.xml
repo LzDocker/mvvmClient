@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="modulePlayer_colorAccent">#448aff</color>
+    <color name="modulePlayer_colorGreay">#666666</color>
+    <color name="modulePlayer_colorPrimary">#448aff</color>
+    <color name="modulePlayer_colorPrimaryDark">#448aff</color>
+    <color name="modulePlayer_colorWhite">#FFFFFF</color>
+    <string name="app_name">modulePlayer</string>
+</resources>

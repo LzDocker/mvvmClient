@@ -1,0 +1,36 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-zh/values-zh.xml",
+            "map": [
+                {
+                    "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/xrecyclerview-1.5.9.aar/39794840e6f3255b7ad8632b5a3e7035/res/values-zh/values-zh.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,116,180,242,295,341,388,434",
+                        "endColumns": "60,63,61,52,45,46,45,46",
+                        "endOffsets": "111,175,237,290,336,383,429,476"
+                    }
+                },
+                {
+                    "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/SmartRefreshLayout-1.0.5.1.aar/0245cc3b6fac3e73f9368040ed0ea7a6/res/values-zh/values-zh.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,163",
+                        "endColumns": "107,91",
+                        "endOffsets": "158,250"
+                    },
+                    "to": {
+                        "startLines": "10,11",
+                        "startColumns": "4,4",
+                        "startOffsets": "481,589",
+                        "endColumns": "107,91",
+                        "endOffsets": "584,676"
+                    }
+                }
+            ]
+        }
+    ]
+}

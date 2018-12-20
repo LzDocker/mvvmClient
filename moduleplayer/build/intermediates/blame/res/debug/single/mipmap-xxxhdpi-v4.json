@@ -1,0 +1,42 @@
+[
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/ic_nav_nomal.png",
+        "source": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/src/main/res/mipmap-xxxhdpi/ic_nav_nomal.png"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/ic_home.png",
+        "source": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/src/main/res/mipmap-xxxhdpi/ic_home.png"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/ic_pro_nomal.png",
+        "source": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/src/main/res/mipmap-xxxhdpi/ic_pro_nomal.png"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/ic_nav.png",
+        "source": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/src/main/res/mipmap-xxxhdpi/ic_nav.png"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/ic_knowleage_nomal.png",
+        "source": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/src/main/res/mipmap-xxxhdpi/ic_knowleage_nomal.png"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/ic_knowledge.png",
+        "source": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/src/main/res/mipmap-xxxhdpi/ic_knowledge.png"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/ic_pub_nomal.png",
+        "source": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/src/main/res/mipmap-xxxhdpi/ic_pub_nomal.png"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/ic_pub.png",
+        "source": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/src/main/res/mipmap-xxxhdpi/ic_pub.png"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/ic_home_nomal.png",
+        "source": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/src/main/res/mipmap-xxxhdpi/ic_home_nomal.png"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/ic_pro.png",
+        "source": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/src/main/res/mipmap-xxxhdpi/ic_pro.png"
+    }
+]
