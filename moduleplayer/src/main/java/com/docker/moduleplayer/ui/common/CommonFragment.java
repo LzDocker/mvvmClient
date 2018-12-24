@@ -20,6 +20,8 @@ import com.docker.moduleplayer.databinding.ModuleplayerFragmentCommonBinding;
 import com.docker.moduleplayer.viewmodel.PlayerhomeViewModel;
 import com.docker.moduleplayer.vo.FeedArticleData;
 import com.docker.moduleplayer.vo.FeedArticleListData;
+import com.jcodecraeer.xrecyclerview.ProgressStyle;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -71,25 +73,30 @@ public class CommonFragment extends BaseFragment<PlayerhomeViewModel, Moduleplay
             }
         });
 
-        mBinding.get().refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+
+        mBinding.get().recycle.setLoadingMoreProgressStyle(ProgressStyle.SquareSpin);
+        mBinding.get().recycle.setRefreshProgressStyle(ProgressStyle.BallGridPulse);
+        mAdapter.setOnItemClickListener(new SimpleCommonRecyclerAdapter.OnItemClickListener() {
             @Override
-            public void onRefresh(RefreshLayout refreshLayout) {
+            public void onItemClick(View view, int position) {
+                enterDetial(mAdapter.getmObjects().get(position-1).getLink());
+            }
+        });
+
+        mBinding.get().recycle.getDefaultRefreshHeaderView().setRefreshTimeVisible(true);
+        mBinding.get().recycle.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
                 page = 0;
                 initData();
             }
-        });
-        mBinding.get().refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+
             @Override
-            public void onLoadMore(RefreshLayout refreshLayout) {
+            public void onLoadMore() {
                 initData();
             }
         });
-        mBinding.get().emptyLayout.setEmptyButtonClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                initData();
-            }
-        });
+
     }
 
     @Override
@@ -121,9 +128,9 @@ public class CommonFragment extends BaseFragment<PlayerhomeViewModel, Moduleplay
                     page++;
                 }else{
                     if(page==0){
-                        mBinding.get().emptyLayout.showEmpty();
+//                        mBinding.get().emptyLayout.showEmpty();
                     }else{
-                        mBinding.get().refreshLayout.setNoMoreData(true);
+//                        mBinding.get().refreshLayout.setNoMoreData(true);
                     }
                 }
             }
@@ -131,8 +138,8 @@ public class CommonFragment extends BaseFragment<PlayerhomeViewModel, Moduleplay
             @Override
             public void onComplete() {
                 super.onComplete();
-                mBinding.get().refreshLayout.finishRefresh();
-                mBinding.get().refreshLayout.finishLoadMore();
+                mBinding.get().recycle.refreshComplete();
+                mBinding.get().recycle.loadMoreComplete();
             }
 
             @Override
@@ -152,5 +159,12 @@ public class CommonFragment extends BaseFragment<PlayerhomeViewModel, Moduleplay
         Intent intent = new Intent(this.getActivity(), WebActivity.class);
         intent.putExtra("targetUrl", targetUrl);
         startActivity(intent);
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mBinding != null && mBinding.get() != null && mBinding.get().recycle != null) {
+            mBinding.get().recycle.destroy();
+        }
     }
 }

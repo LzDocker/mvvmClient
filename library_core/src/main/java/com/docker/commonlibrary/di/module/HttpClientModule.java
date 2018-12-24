@@ -47,7 +47,7 @@ public class HttpClientModule {
     @Singleton
     @Provides
     OkHttpClient provideClient(OkHttpClient.Builder okHttpClient, Interceptor intercept
-            , List<Interceptor> interceptors,CookieJar cookieJar) {
+            , List<Interceptor> interceptors, CookieJar cookieJar) {
         OkHttpClient.Builder builder = okHttpClient
                 .connectTimeout(TIME_OUT_SECONDS, TimeUnit.SECONDS)
                 .readTimeout(TIME_OUT_SECONDS, TimeUnit.SECONDS)
@@ -65,11 +65,9 @@ public class HttpClientModule {
 
     @Singleton
     @Provides
-    CookieJar providerCookieJar(){
-
-        return  new CookieJarImpl(new PersistentCookieStore(context));
+    CookieJar providerCookieJar() {
+        return new CookieJarImpl(new PersistentCookieStore(context));
     }
-
 
     @Singleton
     @Provides

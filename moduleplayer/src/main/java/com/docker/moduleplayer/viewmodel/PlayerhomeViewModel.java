@@ -6,6 +6,7 @@ import com.docker.commonlibrary.api.ApiResponse;
 import com.docker.commonlibrary.api.BaseResponse;
 import com.docker.commonlibrary.base.BaseViewModel;
 import com.docker.moduleplayer.api.PlayerService;
+import com.docker.moduleplayer.repository.PlayerRepository;
 import com.docker.moduleplayer.vo.BannerVo;
 import com.docker.moduleplayer.vo.FeedArticleListData;
 import com.docker.moduleplayer.vo.KnowledgeHierarchyData;
@@ -36,6 +37,10 @@ public class PlayerhomeViewModel extends BaseViewModel {
     public PlayerhomeViewModel() {
     }
 
+    public LiveData<ApiResponse<BaseResponse<List<BannerVo>>>> getBanners() {
+
+        return service.getBanner();
+    }
 
     public LiveData<ApiResponse<BaseResponse<List<BannerVo>>>> getBanner() {
         return service.getBanner();
@@ -69,17 +74,14 @@ public class PlayerhomeViewModel extends BaseViewModel {
         return service.getNavigationListData();
     }
 
-     public LiveData<ApiResponse<BaseResponse<List<ProjectClassifyData>>>> getProjectClassifyData() {
+    public LiveData<ApiResponse<BaseResponse<List<ProjectClassifyData>>>> getProjectClassifyData() {
         return service.getProjectClassifyData();
     }
 
 
-     public LiveData<ApiResponse<BaseResponse<ProjectListData>>>getProjectListData(int page,int cid) {
+    public LiveData<ApiResponse<BaseResponse<ProjectListData>>> getProjectListData(int page, int cid) {
         return service.getProjectListData(page, cid);
     }
-
-
-
 
 
 }

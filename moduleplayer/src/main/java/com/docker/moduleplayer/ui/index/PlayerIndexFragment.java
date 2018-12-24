@@ -68,16 +68,17 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
     @Override
     protected void initView(View var) {
         mAdapter = new SimpleCommonRecyclerAdapter<>(R.layout.moduleplayer_item_article_index, BR.item);
-     LinearLayoutManager linearLayoutManager =    new LinearLayoutManager(getActivity());
-     linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mBinding.get().recycle.setLayoutManager(linearLayoutManager);
         mBinding.get().recycle.setAdapter(mAdapter);
         mBinding.get().recycle.setLoadingMoreProgressStyle(ProgressStyle.SquareSpin);
         mBinding.get().recycle.setRefreshProgressStyle(ProgressStyle.BallGridPulse);
+
         mAdapter.setOnItemClickListener(new SimpleCommonRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                enterDetial(mAdapter.getmObjects().get(position).getLink());
+                enterDetial(mAdapter.getmObjects().get(position-2).getLink());
             }
         });
 
@@ -100,11 +101,12 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initData();
+        getBanner();
+        mBinding.get().recycle.refresh();
     }
 
-    private void initData() {
 
+    private void  getBanner(){
         mViewModel.getBanner().observe(this, new CommonObserver<>(new CommonCallback<List<BannerVo>>() {
             @Override
             public void onComplete(List<BannerVo> Result) {
@@ -123,8 +125,8 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
 
             }
         }));
-        getArticleData();
     }
+
 
     private void getArticleData() {
         mViewModel.getIndexList(page).observe(this, new CommonObserver<>(new CommonCallback<FeedArticleListData>() {
@@ -171,11 +173,10 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
             });
             viewList.add(imageView);
         }
-        View header =   LayoutInflater.from(this.getActivity()).inflate(R.layout.moduleplayer_header_banner, null,true);
-           /*     BannerView bannerView = headView.findViewById(R.id.banner_view);
+        View header = LayoutInflater.from(this.getActivity()).inflate(R.layout.moduleplayer_header_banner, (ViewGroup) this.getActivity().findViewById(android.R.id.content), false);
+        BannerView bannerView = header.findViewById(R.id.banner_view);
         bannerView.setViewList(viewList);
-        bannerView.startLoop(true);*/
-
+        bannerView.startLoop(true);
         mBinding.get().recycle.addHeaderView(header);
     }
 
@@ -188,7 +189,7 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(mBinding!=null&&mBinding.get()!=null&&mBinding.get().recycle!=null){
+        if (mBinding != null && mBinding.get() != null && mBinding.get().recycle != null) {
             mBinding.get().recycle.destroy();
         }
     }

@@ -7,21 +7,13 @@ import android.support.annotation.Nullable;
 @javax.annotation.Generated("Android Data Binding")
 public abstract class ModuleplayerFragmentCommonBinding extends ViewDataBinding {
     @NonNull
-    public final com.docker.constantmodule.widget.EmptyLayout emptyLayout;
-    @NonNull
-    public final android.support.v7.widget.RecyclerView recycle;
-    @NonNull
-    public final com.scwang.smartrefresh.layout.SmartRefreshLayout refreshLayout;
+    public final com.jcodecraeer.xrecyclerview.XRecyclerView recycle;
     // variables
     protected ModuleplayerFragmentCommonBinding(@Nullable android.databinding.DataBindingComponent bindingComponent, @Nullable android.view.View root_, int localFieldCount
-        , com.docker.constantmodule.widget.EmptyLayout emptyLayout1
-        , android.support.v7.widget.RecyclerView recycle1
-        , com.scwang.smartrefresh.layout.SmartRefreshLayout refreshLayout1
+        , com.jcodecraeer.xrecyclerview.XRecyclerView recycle1
     ) {
         super(bindingComponent, root_, localFieldCount);
-        this.emptyLayout = emptyLayout1;
         this.recycle = recycle1;
-        this.refreshLayout = refreshLayout1;
     }
     //getters and abstract setters
     @NonNull

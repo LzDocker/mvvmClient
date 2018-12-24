@@ -31,6 +31,27 @@
             android:orientation="vertical"
             android:padding="12dp">
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{item.author}"
+                    android:textColor="@color/modulePlayer_colorPrimary" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="@{item.superChapterName+'/'+item.chapterName}"
+                    android:textColor="@color/modulePlayer_colorPrimary" />
+            </LinearLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -42,10 +63,9 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:drawablePadding="5dp"
-                    android:text="@{item.title}"
                     android:gravity="center"
-                    android:textColor="@color/modulePlayer_colorPrimary"
-                     />
+                    android:text="@{item.title}"
+                    android:textColor="@color/modulePlayer_colorPrimary" />
 
                 <TextView
                     android:id="@+id/item_search_pager_chapterName"
@@ -53,8 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:gravity="end"
-                    android:text="@{item.origin}"
-                    />
+                    android:text="@{item.origin}" />
             </RelativeLayout>
 
             <TextView
@@ -64,9 +83,9 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
+                android:text="@{item.desc}"
                 android:textColor="#666"
-                android:textSize="16sp"
-               android:text="@{item.desc}" />
+                android:textSize="16sp" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -84,17 +103,17 @@
                         android:id="@+id/item_search_pager_tag_red_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_marginRight="5dp"
-                       android:text='@{item.zan+"个赞"}' />
+                        android:gravity="center"
+                        android:text='@{item.zan+"赞"}' />
 
                     <TextView
                         android:id="@+id/item_search_pager_tag_green_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:textColor="@color/modulePlayer_colorPrimary"
-                        android:text="@{item.superChapterName}" />
+                        android:text="@{item.superChapterName}"
+                        android:textColor="@color/modulePlayer_colorPrimary" />
                 </LinearLayout>
 
                 <ImageView
@@ -108,7 +127,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
-                   android:text="@{item.niceDate}"/>
+                    android:text="@{item.niceDate}" />
             </RelativeLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

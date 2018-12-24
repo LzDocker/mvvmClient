@@ -26,11 +26,6 @@ public class GlobalConfigModule {
     private File mCacheFile;
     private HttpRequestHandler mHandler;
 
-    /**
-     * @author: jess
-     * @date 8/5/16 11:03 AM
-     * @description: baseurl
-     */
     private GlobalConfigModule(Buidler buidler) {
         this.mApiUrl = buidler.apiUrl;
         this.mInterceptors = buidler.interceptors;
@@ -71,6 +66,7 @@ public class GlobalConfigModule {
         private Buidler() {
 
         }
+
         public Buidler baseurl(String baseurl) {
             if (TextUtils.isEmpty(baseurl)) {
                 throw new IllegalArgumentException("baseurl can not be empty");
@@ -98,8 +94,6 @@ public class GlobalConfigModule {
             return new GlobalConfigModule(this);
         }
     }
-
-
 
 
 }

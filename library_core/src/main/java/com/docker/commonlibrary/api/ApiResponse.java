@@ -98,4 +98,7 @@ public class ApiResponse<T> {
         }
     }
 
+    public boolean isSuccessful() {
+        return this.code >= 200 && this.code < 300;
+    }
 }

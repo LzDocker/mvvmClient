@@ -7,13 +7,33 @@ import android.support.annotation.Nullable;
 @javax.annotation.Generated("Android Data Binding")
 public abstract class ModuleplayerActivityPlayerMainBinding extends ViewDataBinding {
     @NonNull
-    public final android.widget.TextView playerTvInfo;
+    public final android.support.design.widget.AppBarLayout appbar;
+    @NonNull
+    public final com.docker.moduleplayer.widget.banner.BannerView bannerView;
+    @NonNull
+    public final android.support.design.widget.CollapsingToolbarLayout collapsingToolbar;
+    @NonNull
+    public final android.support.design.widget.FloatingActionButton floatingActionButton;
+    @NonNull
+    public final android.support.design.widget.CoordinatorLayout mainContent;
+    @NonNull
+    public final com.jcodecraeer.xrecyclerview.XRecyclerView recycle;
     // variables
     protected ModuleplayerActivityPlayerMainBinding(@Nullable android.databinding.DataBindingComponent bindingComponent, @Nullable android.view.View root_, int localFieldCount
-        , android.widget.TextView playerTvInfo1
+        , android.support.design.widget.AppBarLayout appbar1
+        , com.docker.moduleplayer.widget.banner.BannerView bannerView1
+        , android.support.design.widget.CollapsingToolbarLayout collapsingToolbar1
+        , android.support.design.widget.FloatingActionButton floatingActionButton1
+        , android.support.design.widget.CoordinatorLayout mainContent1
+        , com.jcodecraeer.xrecyclerview.XRecyclerView recycle1
     ) {
         super(bindingComponent, root_, localFieldCount);
-        this.playerTvInfo = playerTvInfo1;
+        this.appbar = appbar1;
+        this.bannerView = bannerView1;
+        this.collapsingToolbar = collapsingToolbar1;
+        this.floatingActionButton = floatingActionButton1;
+        this.mainContent = mainContent1;
+        this.recycle = recycle1;
     }
     //getters and abstract setters
     @NonNull

@@ -27,6 +27,8 @@ import com.docker.moduleplayer.vo.BannerVo;
 import com.docker.moduleplayer.vo.FeedArticleData;
 import com.docker.moduleplayer.vo.FeedArticleListData;
 import com.docker.moduleplayer.vo.KnowledgeHierarchyData;
+import com.jcodecraeer.xrecyclerview.ProgressStyle;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -71,23 +73,25 @@ public class KnowledgeFragment extends BaseFragment<PlayerhomeViewModel, Modulep
         mAdapter.setOnItemClickListener(new SimpleCommonRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                enterDetial(mAdapter.getItem(position).getId(), mAdapter.getItem(position));
+                enterDetial(mAdapter.getItem(position-1).getId(), mAdapter.getItem(position-1));
             }
         });
-
-        mBinding.get().refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+        mBinding.get().recycle.setLoadingMoreProgressStyle(ProgressStyle.SquareSpin);
+        mBinding.get().recycle.setRefreshProgressStyle(ProgressStyle.BallGridPulse);
+        mBinding.get().recycle.getDefaultRefreshHeaderView().setRefreshTimeVisible(true);
+        mBinding.get().recycle.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
-            public void onRefresh(RefreshLayout refreshLayout) {
+            public void onRefresh() {
                 page = 0;
                 initData();
             }
-        });
-        mBinding.get().refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+
             @Override
-            public void onLoadMore(RefreshLayout refreshLayout) {
+            public void onLoadMore() {
                 initData();
             }
         });
+
     }
 
     @Override
@@ -97,6 +101,7 @@ public class KnowledgeFragment extends BaseFragment<PlayerhomeViewModel, Modulep
     }
 
     private void initData() {
+
         mViewModel.getKnowledgeHierarchyData().observe(this, new CommonObserver<>(new CommonCallback<List<KnowledgeHierarchyData>>() {
             @Override
             public void onComplete(List<KnowledgeHierarchyData> Result) {
@@ -126,8 +131,8 @@ public class KnowledgeFragment extends BaseFragment<PlayerhomeViewModel, Modulep
             @Override
             public void onComplete() {
                 super.onComplete();
-                mBinding.get().refreshLayout.finishRefresh();
-                mBinding.get().refreshLayout.finishLoadMore();
+                mBinding.get().recycle.refreshComplete();
+                mBinding.get().recycle.loadMoreComplete();
             }
 
             @Override
@@ -143,6 +148,13 @@ public class KnowledgeFragment extends BaseFragment<PlayerhomeViewModel, Modulep
         intent.putExtra("cid", cid);
         intent.putExtra("Data", knowledgeHierarchyData);
         startActivity(intent);
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mBinding != null && mBinding.get() != null && mBinding.get().recycle != null) {
+            mBinding.get().recycle.destroy();
+        }
     }
 
 }

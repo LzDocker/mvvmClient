@@ -61,7 +61,7 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
                 ARouter.getInstance().build(ConstantsRouter.ModuleAccount.ACTIVITY_ACCOUNT).navigation();
 //                finish();
             }
-        }, 3000);
+        }, 2000);
     }
 
 
