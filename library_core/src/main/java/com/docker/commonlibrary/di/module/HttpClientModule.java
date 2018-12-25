@@ -20,6 +20,7 @@ import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by zhangxindang on 2018/11/21.
@@ -39,8 +40,9 @@ public class HttpClientModule {
         return builder
                 .baseUrl(httpUrl)
                 .client(client)
-                .addCallAdapterFactory(new LiveDataCallAdapterFactory())
-                .addConverterFactory(com.docker.commonlibrary.api.converter.GsonConverterFactory.create())
+//                .addCallAdapterFactory(new LiveDataCallAdapterFactory())
+//                .addConverterFactory(com.docker.commonlibrary.api.converter.GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
 

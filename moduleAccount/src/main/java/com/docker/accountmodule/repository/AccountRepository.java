@@ -8,8 +8,6 @@ import com.docker.accountmodule.api.AccountService;
 import com.docker.accountmodule.vo.LoginVo;
 import com.docker.commonlibrary.api.ApiResponse;
 import com.docker.commonlibrary.api.BaseResponse;
-import com.docker.commonlibrary.repository.NetworkBoundResource;
-import com.docker.commonlibrary.repository.NetworkBoundResourceReal;
 import com.docker.commonlibrary.util.AppExecutors;
 import com.docker.commonlibrary.vo.Resource;
 
@@ -33,31 +31,7 @@ public class AccountRepository {
     }
 
     public LiveData<Resource<BaseResponse<LoginVo>>> Login(String username, String pwd) {
-        return new NetworkBoundResourceReal<BaseResponse<LoginVo>,BaseResponse<LoginVo>>(appExecutors){
-
-            @Override
-            protected void saveCallResult(@NonNull BaseResponse<LoginVo> item) {
-
-            }
-
-            @Override
-            protected boolean shouldFetch(@Nullable BaseResponse<LoginVo> data) {
-                return true;
-            }
-
-            @NonNull
-            @Override
-            protected LiveData<BaseResponse<LoginVo>> loadFromDb() {
-
-                return null;
-            }
-
-            @NonNull
-            @Override
-            protected LiveData<ApiResponse<BaseResponse<LoginVo>>> createCall() {
-                return accountService.login(username, pwd);
-            }
-        }.getAsLiveData();
+       return null;
     }
 
 

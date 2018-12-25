@@ -40,12 +40,12 @@
         "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable-xxhdpi-v4/abc_scrubber_track_mtrl_alpha.9.png"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-xxxhdpi-v17_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable-ldrtl-xxxhdpi-v17/abc_ic_menu_copy_mtrl_am_alpha.png"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/drawable_leak_canary_toast_background.xml.flat",
         "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/leakcanary-android-1.5.1.aar/e5cc1a8e0896f7e264ca60eb249a3172/res/drawable/leak_canary_toast_background.xml"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-xxxhdpi-v17_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable-ldrtl-xxxhdpi-v17/abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/drawable-xxxhdpi-v4_abc_btn_radio_to_on_mtrl_000.png.flat",
@@ -56,12 +56,12 @@
         "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/layout/abc_expanded_menu_layout.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4_abc_ic_star_half_black_16dp.png.flat",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable-hdpi-v4/abc_ic_star_half_black_16dp.png"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/mipmap-xhdpi-v4_ic_nav_nomal.png.flat",
         "source": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/bundles/debug/res/mipmap-xhdpi-v4/ic_nav_nomal.png"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4_abc_ic_star_half_black_16dp.png.flat",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable-hdpi-v4/abc_ic_star_half_black_16dp.png"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/drawable_abc_ic_go_search_api_material.xml.flat",
@@ -84,12 +84,12 @@
         "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable-hdpi-v4/abc_list_divider_mtrl_alpha.9.png"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/color_abc_primary_text_disable_only_material_dark.xml.flat",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/color/abc_primary_text_disable_only_material_dark.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/drawable_ic_bg_empty.png.flat",
         "source": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/library_common/build/intermediates/bundles/debug/res/drawable/ic_bg_empty.png"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/color_abc_primary_text_disable_only_material_dark.xml.flat",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/color/abc_primary_text_disable_only_material_dark.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/layout_abc_action_mode_close_item_material.xml.flat",
@@ -220,12 +220,12 @@
         "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable-xxxhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/drawable_notification_bg.xml.flat",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/e884c690934d154d941638c9e5f9ca81/res/drawable/notification_bg.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-hdpi-v17_abc_ic_menu_cut_mtrl_alpha.png.flat",
         "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable-ldrtl-hdpi-v17/abc_ic_menu_cut_mtrl_alpha.png"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/drawable_notification_bg.xml.flat",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/e884c690934d154d941638c9e5f9ca81/res/drawable/notification_bg.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/color_abc_tint_btn_checkable.xml.flat",
@@ -304,12 +304,12 @@
         "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/anim/abc_slide_out_top.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-xxhdpi-v17_abc_ic_menu_cut_mtrl_alpha.png.flat",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable-ldrtl-xxhdpi-v17/abc_ic_menu_cut_mtrl_alpha.png"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4_abc_ic_commit_search_api_mtrl_alpha.png.flat",
         "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable-mdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-xxhdpi-v17_abc_ic_menu_cut_mtrl_alpha.png.flat",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable-ldrtl-xxhdpi-v17/abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/layout_notification_template_lines_media.xml.flat",
@@ -348,12 +348,12 @@
         "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable-ldrtl-xxhdpi-v17/abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/layout_listview_footer.xml.flat",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/xrecyclerview-1.5.9.aar/39794840e6f3255b7ad8632b5a3e7035/res/layout/listview_footer.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4_abc_ic_star_half_black_48dp.png.flat",
         "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable-hdpi-v4/abc_ic_star_half_black_48dp.png"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/layout_listview_footer.xml.flat",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/xrecyclerview-1.5.9.aar/39794840e6f3255b7ad8632b5a3e7035/res/layout/listview_footer.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4_abc_textfield_search_default_mtrl_alpha.9.png.flat",
@@ -404,12 +404,12 @@
         "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/anim/abc_slide_in_top.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-mdpi-v17_abc_ic_menu_cut_mtrl_alpha.png.flat",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable-ldrtl-mdpi-v17/abc_ic_menu_cut_mtrl_alpha.png"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/mipmap-mdpi-v4_ic_nav.png.flat",
         "source": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/bundles/debug/res/mipmap-mdpi-v4/ic_nav.png"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-mdpi-v17_abc_ic_menu_cut_mtrl_alpha.png.flat",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable-ldrtl-mdpi-v17/abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/androidTest/debug/drawable_abc_ic_menu_overflow_material.xml.flat",
