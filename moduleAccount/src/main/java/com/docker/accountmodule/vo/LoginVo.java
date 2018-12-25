@@ -1,5 +1,8 @@
 package com.docker.accountmodule.vo;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -9,16 +12,23 @@ import java.util.List;
  * Created by zhangxindang on 2018/11/22.
  */
 
+@Entity
 public class LoginVo implements Parcelable {
 
+    @PrimaryKey(autoGenerate = true)
+    private int aid;
 
+    @ColumnInfo(name = "username")
     private String username;
+    @ColumnInfo(name = "password")
     private String password;
+    @ColumnInfo(name = "icon")
     private String icon;
+    @ColumnInfo(name = "type")
     private int type;
-    private List<Integer> collectIds;
 
-    public LoginVo(){
+
+    public LoginVo() {
         super();
     }
 
@@ -73,12 +83,12 @@ public class LoginVo implements Parcelable {
         this.type = type;
     }
 
-    public List<Integer> getCollectIds() {
-        return collectIds;
+    public int getAid() {
+        return aid;
     }
 
-    public void setCollectIds(List<Integer> collectIds) {
-        this.collectIds = collectIds;
+    public void setAid(int aid) {
+        this.aid = aid;
     }
 
     @Override

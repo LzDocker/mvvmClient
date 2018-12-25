@@ -13,7 +13,7 @@ android {
         versionName rootProject.ext.android.versionName
         javaCompileOptions {
             annotationProcessorOptions {
-                    arguments = [ moduleName : project.getName() ]
+                arguments = [moduleName: project.getName(),"room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
 

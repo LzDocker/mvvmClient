@@ -5,6 +5,7 @@ import android.arch.lifecycle.MediatorLiveData;
 import android.support.annotation.MainThread;
 
 import com.docker.commonlibrary.api.ApiResponse;
+import com.docker.commonlibrary.api.BaseResponse;
 import com.docker.commonlibrary.util.AppExecutors;
 import com.docker.commonlibrary.vo.Resource;
 
@@ -24,6 +25,7 @@ public abstract class NetworkBoundResourceReal<ResultType, RequestType> extends 
         LiveData<ResultType> dbSource = loadFromDb();
         result.addSource(dbSource, data -> {
             result.removeSource(dbSource);
+
             if (shouldFetch(data)) {
                 fetchFromNetwork(dbSource);
             } else {
@@ -34,15 +36,12 @@ public abstract class NetworkBoundResourceReal<ResultType, RequestType> extends 
     }
 
     private void fetchFromNetwork(final LiveData<ResultType> dbSource) {
-        LiveData<ApiResponse<RequestType>> apiResponse = createCall();
-        // we re-attach dbSource as a new source,
-        // it will dispatch its latest value quickly
+        LiveData<ApiResponse<BaseResponse<RequestType>>> apiResponse = createCall();
         result.addSource(dbSource,
                 newData -> result.setValue(Resource.loading(newData)));
         result.addSource(apiResponse, response -> {
             result.removeSource(apiResponse);
             result.removeSource(dbSource);
-            //noinspection ConstantConditions
             if (response.isSuccessful()) {
                 saveResultAndReInit(response.body);
             } else {
@@ -55,7 +54,7 @@ public abstract class NetworkBoundResourceReal<ResultType, RequestType> extends 
     }
 
     @MainThread
-    private void saveResultAndReInit(RequestType response) {
+    private void saveResultAndReInit(BaseResponse<RequestType> response) {
         appExecutors.diskIO().execute(new Runnable() {
             @Override
             public void run() {

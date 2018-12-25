@@ -1,5 +1,6 @@
 package com.docker.accountmodule.ui;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
@@ -148,29 +149,18 @@ public class accountActivity extends BaseActivity<accountViewModel, Moduleaccoun
         }));
     }
 
+   final Observer<Resource<LoginVo>> loginob = new Observer<Resource<LoginVo>>() {
+        @Override
+        public void onChanged(@Nullable Resource<LoginVo> loginVoResource) {
+            Log.d("sss", "onChanged: -------loginVoResource--------------"+loginVoResource.status);
+        }
+    };
     private void login() {
         chechParam();
-        mViewModel.login(registerVo).observe(this, new CommonObserver<>(new CommonCallback<LoginVo>() {
-            @Override
-            public void onComplete(LoginVo Result) {
-                if (Result != null) {
-                    toHome(Result);
-                    spSqve("LOGIN_FLAG", true);
-                }
-            }
-
-            @Override
-            public void onBusinessError(BaseResponse baseResponse) {
-                showToast(baseResponse.getErrorMsg());
-            }
-
-            @Override
-            public void onNetworkError(ApiResponse apiResponse) {
-                showToast(apiResponse.errorMessage);
-            }
-        }));
-
-//        mViewModel.Login(registerVo.getUsername(),registerVo.getPassword());
+        LiveData<Resource<LoginVo>> liveData = mViewModel.Login(registerVo.getUsername(), registerVo.getPassword());
+        Log.d("sss", "liveData"+liveData.hashCode());
+        Log.d("sss", "loginob"+loginob.hashCode());
+        liveData.observe(this, loginob);
 
     }
 

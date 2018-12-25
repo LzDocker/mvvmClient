@@ -2,6 +2,7 @@ package com.docker.accountmodule.viewmodel;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Transformations;
 
 import com.docker.accountmodule.api.AccountService;
 import com.docker.accountmodule.repository.AccountRepository;
@@ -37,9 +38,11 @@ public class accountViewModel extends BaseViewModel {
     }
 
 
-//    public LiveData<Resource<BaseResponse<LoginVo>>> Login(String username, String pwd) {
-//        return accountRepository.Login(username, pwd);
-//    }
+    public LiveData<Resource<LoginVo>> Login(String username, String pwd) {
+
+
+        return accountRepository.Login(username, pwd);
+    }
 
 
     /*

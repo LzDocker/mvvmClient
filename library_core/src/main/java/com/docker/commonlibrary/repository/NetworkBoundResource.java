@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 
 import com.docker.commonlibrary.api.ApiResponse;
+import com.docker.commonlibrary.api.BaseResponse;
 import com.docker.commonlibrary.vo.Resource;
 
 /**
@@ -18,7 +19,7 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
 
     // Called to save the result of the API response into the database(存储网络请求返回的数据)
     @WorkerThread
-    protected abstract void saveCallResult(@NonNull RequestType item);
+    protected abstract void saveCallResult(@NonNull BaseResponse<RequestType> item);
 
     // Called with the data in the database to decide whether it should be
     // fetched from the network.（根据数据库检索的结果决定是否需要从网络获取数据）
@@ -33,7 +34,7 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
     // Called to create the API call.（创建API）
     @NonNull
     @MainThread
-    protected abstract LiveData<ApiResponse<RequestType>> createCall();
+    protected abstract LiveData<ApiResponse<BaseResponse<RequestType>>> createCall();
 
     // Called when the fetch fails. The child class may want to reset components
     // like rate limiter.（获取数据失败回调）
