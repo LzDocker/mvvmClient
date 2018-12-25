@@ -24,7 +24,7 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
     private final MediatorLiveData<Resource<ResultType>> result = new MediatorLiveData<>();
 
     @MainThread
-    NetworkBoundResource() {
+    public NetworkBoundResource() {
         result.setValue(Resource.loading(null));   //初始化空数据，开始loading
         LiveData<ResultType> dbSource = loadFromDb(); //从本地数据库查询数据
         result.addSource(dbSource, data -> {

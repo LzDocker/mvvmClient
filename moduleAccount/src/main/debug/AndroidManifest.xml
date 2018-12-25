@@ -12,7 +12,7 @@
 
         <activity
             android:name=".ui.accountActivity"
-            android:label="@string/app_name"
+            android:label="@string/moduleAccount_app_name"
             android:theme="@style/AppTheme"
             >
             <intent-filter>

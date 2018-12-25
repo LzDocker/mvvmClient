@@ -1,7 +1,6 @@
 package com.docker.accountmodule.viewmodel;
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 
 import com.docker.accountmodule.api.AccountService;
 import com.docker.accountmodule.repository.AccountRepository;
@@ -11,7 +10,6 @@ import com.docker.commonlibrary.api.ApiResponse;
 import com.docker.commonlibrary.api.BaseResponse;
 import com.docker.commonlibrary.base.BaseViewModel;
 import com.docker.commonlibrary.util.AppExecutors;
-import com.docker.commonlibrary.vo.Resource;
 
 import javax.inject.Inject;
 
@@ -37,9 +35,9 @@ public class accountViewModel extends BaseViewModel {
     }
 
 
-//    public LiveData<Resource<BaseResponse<LoginVo>>> Login(String username, String pwd) {
-//        return accountRepository.Login(username, pwd);
-//    }
+    public LiveData<ApiResponse<BaseResponse<LoginVo>>> Login(String username, String pwd) {
+        return accountRepository.Login(username, pwd);
+    }
 
 
     /*

@@ -1,1 +1,1 @@
-[{"outputType":{"type":"MERGED_MANIFESTS"},"apkInfo":{"type":"MAIN","splits":[],"versionCode":100},"path":"AndroidManifest.xml","properties":{"packageId":"com.docker.moduleplayer","split":""}}]
+[{"outputType":{"type":"MERGED_MANIFESTS"},"apkInfo":{"type":"MAIN","splits":[],"versionCode":100},"path":"AndroidManifest.xml","properties":{"packageId":"com.docker.moduleplayer","split":"","minSdkVersion":"15"}}]

@@ -185,13 +185,13 @@ public abstract class BaseApplication extends MultiDexApplication implements Has
                 .globeHttpHandler(new HttpRequestHandler() {
                     @Override
                     public Response onHttpResultResponse(String httpResult, Interceptor.Chain chain, Response response) {
-
+                        Log.d("response", "response: ------" + response.isSuccessful());
                         return response;
                     }
 
                     @Override
                     public Request onHttpRequestBefore(Interceptor.Chain chain, Request request) {
-                        Log.d("net_request", "onHttpRequestBefore: ------"+request.url());
+                        Log.d("request", "request: ------" + request.url());
 
                         return request;
                     }

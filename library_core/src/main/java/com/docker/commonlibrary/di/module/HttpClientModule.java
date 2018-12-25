@@ -40,8 +40,7 @@ public class HttpClientModule {
         return builder
                 .baseUrl(httpUrl)
                 .client(client)
-//                .addCallAdapterFactory(new LiveDataCallAdapterFactory())
-//                .addConverterFactory(com.docker.commonlibrary.api.converter.GsonConverterFactory.create())
+                .addCallAdapterFactory(new LiveDataCallAdapterFactory())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }

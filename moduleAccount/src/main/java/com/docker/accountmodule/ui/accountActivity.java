@@ -29,6 +29,10 @@ import com.docker.constantmodule.util.SpTool;
 
 import javax.inject.Inject;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 /*
 *
@@ -75,11 +79,11 @@ public class accountActivity extends BaseActivity<accountViewModel, Moduleaccoun
 
     private void initview() {
         boolean islogin = (boolean) SpTool.get(this, "LOGIN_FLAG", false);
-        if (islogin) {
-            toHome(null);
-            finish();
-            return;
-        }
+//        if (islogin) {
+//            toHome(null);
+//            finish();
+//            return;
+//        }
         registerVo = new RegisterVo();
         mBinding.setVo(registerVo);
         Flag = getIntent().getIntExtra("FLAG", RegisterFlag);
@@ -130,7 +134,17 @@ public class accountActivity extends BaseActivity<accountViewModel, Moduleaccoun
 
     private void register() {
 
-        mViewModel.register(registerVo).observe(this, new CommonObserver<>(new CommonCallback<LoginVo>() {
+        mViewModel.register(registerVo).enqueue(new Callback<ApiResponse<BaseResponse<LoginVo>>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<BaseResponse<LoginVo>>> call, Response<ApiResponse<BaseResponse<LoginVo>>> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<BaseResponse<LoginVo>>> call, Throwable t) {
+
+            }
+        });/*.observe(this, new CommonObserver<>(new CommonCallback<LoginVo>() {
             @Override
             public void onComplete(LoginVo Result) {
                 toLogin();
@@ -145,12 +159,24 @@ public class accountActivity extends BaseActivity<accountViewModel, Moduleaccoun
             public void onNetworkError(ApiResponse apiResponse) {
                 showToast(apiResponse.errorMessage);
             }
-        }));
+        }));*/
     }
 
     private void login() {
         chechParam();
-        mViewModel.login(registerVo).observe(this, new CommonObserver<>(new CommonCallback<LoginVo>() {
+        mViewModel.login(registerVo).enqueue(new Callback<ApiResponse<BaseResponse<LoginVo>>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<BaseResponse<LoginVo>>> call, Response<ApiResponse<BaseResponse<LoginVo>>> response) {
+                ApiResponse<BaseResponse<LoginVo>> ll = response.body();
+                LoginVo l = ll.body.getData();
+                showToast("-----onResponse_-----"+l.getUsername());
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<BaseResponse<LoginVo>>> call, Throwable t) {
+                showToast("-----onFailure-----");
+            }
+        });/*.observe(this, new CommonObserver<>(new CommonCallback<LoginVo>() {
             @Override
             public void onComplete(LoginVo Result) {
                 if (Result != null) {
@@ -168,7 +194,7 @@ public class accountActivity extends BaseActivity<accountViewModel, Moduleaccoun
             public void onNetworkError(ApiResponse apiResponse) {
                 showToast(apiResponse.errorMessage);
             }
-        }));
+        }));*/
 
 //        mViewModel.Login(registerVo.getUsername(),registerVo.getPassword());
 
