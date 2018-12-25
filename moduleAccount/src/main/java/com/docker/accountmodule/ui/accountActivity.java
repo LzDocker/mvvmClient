@@ -1,10 +1,13 @@
 package com.docker.accountmodule.ui;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -20,6 +23,7 @@ import com.docker.commonlibrary.api.BaseResponse;
 import com.docker.commonlibrary.api.CommonCallback;
 import com.docker.commonlibrary.api.CommonObserver;
 import com.docker.commonlibrary.base.BaseActivity;
+import com.docker.commonlibrary.vo.Resource;
 import com.docker.constantmodule.Constant.ConstantsRouter;
 import com.docker.constantmodule.util.SpTool;
 
@@ -165,6 +169,9 @@ public class accountActivity extends BaseActivity<accountViewModel, Moduleaccoun
                 showToast(apiResponse.errorMessage);
             }
         }));
+
+//        mViewModel.Login(registerVo.getUsername(),registerVo.getPassword());
+
     }
 
     private void toLogin() {

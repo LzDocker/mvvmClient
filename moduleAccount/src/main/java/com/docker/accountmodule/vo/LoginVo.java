@@ -18,7 +18,11 @@ public class LoginVo implements Parcelable {
     private int type;
     private List<Integer> collectIds;
 
-    protected LoginVo(Parcel in) {
+    public LoginVo(){
+        super();
+    }
+
+    public LoginVo(Parcel in) {
         username = in.readString();
         password = in.readString();
         icon = in.readString();

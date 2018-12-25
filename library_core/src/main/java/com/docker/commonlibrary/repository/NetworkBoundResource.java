@@ -1,4 +1,4 @@
-package com.docker.moduleplayer.repository;
+package com.docker.commonlibrary.repository;
 
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.MainThread;
@@ -7,10 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 
 import com.docker.commonlibrary.api.ApiResponse;
-import com.docker.commonlibrary.util.AppExecutors;
-import com.docker.moduleplayer.vo.Resource;
-
-import javax.inject.Inject;
+import com.docker.commonlibrary.vo.Resource;
 
 /**
  * Created by zhangxindang on 2018/12/24.

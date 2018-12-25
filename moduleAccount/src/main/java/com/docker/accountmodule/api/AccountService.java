@@ -25,8 +25,6 @@ import retrofit2.http.POST;
 
 public interface AccountService {
 
-    @GET("banner/json")
-    LiveData<ApiResponse<BaseResponse<List<BannerVo>>>> getBanners();
 
     @POST("user/register")
     @FormUrlEncoded
@@ -37,7 +35,5 @@ public interface AccountService {
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<LoginVo>>> login(@Field("username") String username, @Field("password") String password);
 
-    @GET("lg/collect/list/0/json")
-    LiveData<ApiResponse<BaseResponse<String>>> get();
 
 }

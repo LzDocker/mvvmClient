@@ -6,7 +6,6 @@ import com.docker.commonlibrary.api.ApiResponse;
 import com.docker.commonlibrary.api.BaseResponse;
 import com.docker.commonlibrary.base.BaseViewModel;
 import com.docker.moduleplayer.api.PlayerService;
-import com.docker.moduleplayer.repository.PlayerRepository;
 import com.docker.moduleplayer.vo.BannerVo;
 import com.docker.moduleplayer.vo.FeedArticleListData;
 import com.docker.moduleplayer.vo.KnowledgeHierarchyData;
@@ -19,10 +18,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 /**
  * Created by zhangxindang on 2018/12/13.

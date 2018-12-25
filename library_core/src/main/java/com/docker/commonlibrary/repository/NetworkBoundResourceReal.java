@@ -1,4 +1,4 @@
-package com.docker.moduleplayer.repository;
+package com.docker.commonlibrary.repository;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
@@ -6,7 +6,7 @@ import android.support.annotation.MainThread;
 
 import com.docker.commonlibrary.api.ApiResponse;
 import com.docker.commonlibrary.util.AppExecutors;
-import com.docker.moduleplayer.vo.Resource;
+import com.docker.commonlibrary.vo.Resource;
 
 /**
  * Created by zhangxindang on 2018/12/24.
@@ -18,7 +18,7 @@ public abstract class NetworkBoundResourceReal<ResultType, RequestType> extends 
     private AppExecutors appExecutors;
 
     @MainThread
-    NetworkBoundResourceReal(AppExecutors appExecutors) {
+    public NetworkBoundResourceReal(AppExecutors appExecutors) {
         this.appExecutors = appExecutors;
         result.setValue(Resource.loading(null));
         LiveData<ResultType> dbSource = loadFromDb();
@@ -44,7 +44,7 @@ public abstract class NetworkBoundResourceReal<ResultType, RequestType> extends 
             result.removeSource(dbSource);
             //noinspection ConstantConditions
             if (response.isSuccessful()) {
-                saveResultAndReInit(response);
+                saveResultAndReInit(response.body);
             } else {
                 onFetchFailed();
                 result.addSource(dbSource,
@@ -55,10 +55,11 @@ public abstract class NetworkBoundResourceReal<ResultType, RequestType> extends 
     }
 
     @MainThread
-    private void saveResultAndReInit(ApiResponse<RequestType> response) {
-        appExecutors.networkIO().execute(new Runnable() {
+    private void saveResultAndReInit(RequestType response) {
+        appExecutors.diskIO().execute(new Runnable() {
             @Override
             public void run() {
+                saveCallResult(response);
                 result.addSource(loadFromDb(),
                         newData -> result.postValue(Resource.success(newData)));
             }

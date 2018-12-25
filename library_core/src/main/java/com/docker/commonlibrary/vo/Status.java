@@ -1,4 +1,4 @@
-package com.docker.moduleplayer.vo;
+package com.docker.commonlibrary.vo;
 
 /**
  * Created by zhangxindang on 2018/12/24.

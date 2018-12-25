@@ -1,21 +1,17 @@
 package com.docker.accountmodule.viewmodel;
 
-import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.util.Log;
 
 import com.docker.accountmodule.api.AccountService;
-import com.docker.accountmodule.vo.BannerVo;
+import com.docker.accountmodule.repository.AccountRepository;
 import com.docker.accountmodule.vo.LoginVo;
 import com.docker.accountmodule.vo.RegisterVo;
 import com.docker.commonlibrary.api.ApiResponse;
 import com.docker.commonlibrary.api.BaseResponse;
-import com.docker.commonlibrary.api.CommonCallback;
-import com.docker.commonlibrary.api.CommonObserver;
 import com.docker.commonlibrary.base.BaseViewModel;
-
-import java.util.List;
+import com.docker.commonlibrary.util.AppExecutors;
+import com.docker.commonlibrary.vo.Resource;
 
 import javax.inject.Inject;
 
@@ -29,15 +25,22 @@ public class accountViewModel extends BaseViewModel {
     AccountService service;
 
     @Inject
+    AppExecutors appExecutors;
+
+
+    @Inject
+    AccountRepository accountRepository;
+
+    @Inject
     public accountViewModel() {
 
     }
 
 
-    public LiveData<ApiResponse<BaseResponse<List<BannerVo>>>> getBanners() {
+//    public LiveData<Resource<BaseResponse<LoginVo>>> Login(String username, String pwd) {
+//        return accountRepository.Login(username, pwd);
+//    }
 
-        return service.getBanners();
-    }
 
     /*
     * 注册

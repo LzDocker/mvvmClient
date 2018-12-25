@@ -1,11 +1,11 @@
-package com.docker.moduleplayer.vo;
+package com.docker.commonlibrary.vo;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import static com.docker.moduleplayer.vo.Status.ERROR;
-import static com.docker.moduleplayer.vo.Status.LOADING;
-import static com.docker.moduleplayer.vo.Status.SUCCESS;
+import static com.docker.commonlibrary.vo.Status.ERROR;
+import static com.docker.commonlibrary.vo.Status.LOADING;
+import static com.docker.commonlibrary.vo.Status.SUCCESS;
 
 /**
  * Created by zhangxindang on 2018/12/24.
