@@ -1,11 +1,11 @@
 [
     {
-        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/drawable-mdpi-v4/abc_ic_menu_cut_mtrl_alpha.png",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable-mdpi-v4/abc_ic_menu_cut_mtrl_alpha.png"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/drawable-mdpi-v4/abc_btn_check_to_on_mtrl_015.png",
         "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable-mdpi-v4/abc_btn_check_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/drawable-mdpi-v4/abc_ic_menu_cut_mtrl_alpha.png",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable-mdpi-v4/abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/drawable-mdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png",

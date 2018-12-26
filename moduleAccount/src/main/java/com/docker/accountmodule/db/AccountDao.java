@@ -19,8 +19,8 @@ import java.util.List;
 @Dao
 public interface AccountDao {
 
-    @Query("SELECT * FROM LoginVo where username =:name and password =:pwd")
-    LiveData<LoginVo> LoadAccount(String name, String pwd);
+    @Query("SELECT * FROM LoginVo where username =:name")
+    LiveData<LoginVo> LoadAccount(String name);
 
     @Insert
     void insertAll(LoginVo... loginVos);

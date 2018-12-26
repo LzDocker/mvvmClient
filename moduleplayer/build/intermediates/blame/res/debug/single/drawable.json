@@ -12,24 +12,24 @@
         "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable/tooltip_frame_light.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/drawable/moduleplayer_pub_selector.xml",
-        "source": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/src/main/res/drawable/moduleplayer_pub_selector.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_dark.xml",
         "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable/abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/drawable/moduleplayer_pub_selector.xml",
+        "source": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/src/main/res/drawable/moduleplayer_pub_selector.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_dark.xml",
         "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable/abc_item_background_holo_dark.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/drawable/tooltip_frame_dark.xml",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable/tooltip_frame_dark.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/drawable/ic_bg_no_network.png",
         "source": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/library_common/build/intermediates/bundles/debug/res/drawable/ic_bg_no_network.png"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/drawable/tooltip_frame_dark.xml",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable/tooltip_frame_dark.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/drawable/abc_switch_thumb_material.xml",
@@ -56,12 +56,12 @@
         "source": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/src/main/res/drawable/moduleplayer_nav_selector.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/drawable/abc_btn_default_mtrl_shape.xml",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable/abc_btn_default_mtrl_shape.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/drawable/abc_btn_colored_material.xml",
         "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable/abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/drawable/abc_btn_default_mtrl_shape.xml",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/drawable/abc_btn_default_mtrl_shape.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/drawable/moduleplayer_round_dot_select.xml",

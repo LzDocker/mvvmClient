@@ -8,5 +8,6 @@ public enum Status {
 
     SUCCESS,
     ERROR,
-    LOADING
+    LOADING,
+    BUSSINESSERROR
 }

@@ -4,12 +4,12 @@
         "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/e884c690934d154d941638c9e5f9ca81/res/layout/notification_action_tombstone.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/layout/abc_action_bar_up_container.xml",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/layout/abc_action_bar_up_container.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/layout/abc_action_menu_layout.xml",
         "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/layout/abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/layout/abc_action_bar_up_container.xml",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/layout/abc_action_bar_up_container.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/layout/design_navigation_item_header.xml",
@@ -128,12 +128,12 @@
         "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/94a1be4c6dbb1b4b88e07d67a69154e1/res/layout/design_bottom_navigation_item.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/layout/abc_popup_menu_header_item_layout.xml",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/layout/abc_popup_menu_header_item_layout.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/moduleplayer_activity_player_main.xml",
         "source": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/src/main/res/layout/moduleplayer_activity_player_main.xml"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/layout/abc_popup_menu_header_item_layout.xml",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/layout/abc_popup_menu_header_item_layout.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/layout/notification_template_part_time.xml",

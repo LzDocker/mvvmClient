@@ -25,10 +25,15 @@ import com.docker.commonlibrary.api.CommonCallback;
 import com.docker.commonlibrary.api.CommonObserver;
 import com.docker.commonlibrary.base.BaseActivity;
 import com.docker.commonlibrary.vo.Resource;
+import com.docker.commonlibrary.vo.Status;
 import com.docker.constantmodule.Constant.ConstantsRouter;
 import com.docker.constantmodule.util.SpTool;
 
+import java.util.Timer;
+
 import javax.inject.Inject;
+
+import timber.log.Timber;
 
 
 /*
@@ -102,6 +107,14 @@ public class accountActivity extends BaseActivity<accountViewModel, Moduleaccoun
         mBinding.tvLogin.setOnClickListener(v -> {
             toLogin();
         });
+
+        mViewModel.loginlv.observe(this, loginVo -> {
+            Log.d("sss", "initview: -----------loginVo----------"+loginVo.status);
+            if(loginVo.status == Status.BUSSINESSERROR ){
+                Log.d("sss", "initview: -----------loginVo----------"+loginVo.message );
+            }
+        });
+
     }
 
 
@@ -149,18 +162,11 @@ public class accountActivity extends BaseActivity<accountViewModel, Moduleaccoun
         }));
     }
 
-   final Observer<Resource<LoginVo>> loginob = new Observer<Resource<LoginVo>>() {
-        @Override
-        public void onChanged(@Nullable Resource<LoginVo> loginVoResource) {
-            Log.d("sss", "onChanged: -------loginVoResource--------------"+loginVoResource.status);
-        }
-    };
+
     private void login() {
         chechParam();
-        LiveData<Resource<LoginVo>> liveData = mViewModel.Login(registerVo.getUsername(), registerVo.getPassword());
-        Log.d("sss", "liveData"+liveData.hashCode());
-        Log.d("sss", "loginob"+loginob.hashCode());
-        liveData.observe(this, loginob);
+        mViewModel.Login(registerVo.getUsername(), registerVo.getPassword());
+
 
     }
 
