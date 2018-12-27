@@ -53,6 +53,7 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
     private SimpleCommonRecyclerAdapter<FeedArticleData> mAdapter;
 
     private FeedArticleListData cacheResult;
+    private View header;
 
 
     @Inject
@@ -82,7 +83,8 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
         mBinding.get().recycle.setAdapter(mAdapter);
         mBinding.get().recycle.setLoadingMoreProgressStyle(ProgressStyle.SquareSpin);
         mBinding.get().recycle.setRefreshProgressStyle(ProgressStyle.BallGridPulse);
-
+        header = LayoutInflater.from(this.getActivity()).inflate(R.layout.moduleplayer_header_banner, (ViewGroup) this.getActivity().findViewById(android.R.id.content), false);
+        mBinding.get().recycle.addHeaderView(header);
         mAdapter.setOnItemClickListener(new SimpleCommonRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -254,11 +256,11 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
             });
             viewList.add(imageView);
         }
-        View header = LayoutInflater.from(this.getActivity()).inflate(R.layout.moduleplayer_header_banner, (ViewGroup) this.getActivity().findViewById(android.R.id.content), false);
+
         BannerView bannerView = header.findViewById(R.id.banner_view);
         bannerView.setViewList(viewList);
         bannerView.startLoop(true);
-        mBinding.get().recycle.addHeaderView(header);
+
     }
 
     private void enterDetial(String targetUrl) {
