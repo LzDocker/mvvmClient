@@ -114,76 +114,76 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
         getBanner();
         mBinding.get().recycle.refresh();
 
-        mViewModel.ArticleData.observe(this,result->{
-            Log.d("sss", "onActivityCreated: "+result.status);
-        });
-//        mViewModel.ArticleData.observe(this, new NetBoundObserver<>(new NetBoundCallback<FeedArticleListData>() {
-//            @Override
-//            public void onComplete(FeedArticleListData Result) {
-//                Log.d("sss", "onComplete: -----------FeedArticleListData----------");
-//                if (cacheResult != null) {
-//                    mAdapter.getmObjects().removeAll(cacheResult.getDatas());
-//                    cacheResult = null;
-//                }
-//                if (Result != null) {
-//                    if (page == 0) {
-//                        mAdapter.replace(Result.getDatas());
-//                        mBinding.get().recycle.refreshComplete();
-//                    } else {
-//                        mBinding.get().recycle.loadMoreComplete();
-//                        mAdapter.getmObjects().addAll(Result.getDatas());
-//                        mAdapter.notifyDataSetChanged();
-//
-//                        Log.d("sss", "onCacheComplete: --------netsize------------" + mAdapter.getmObjects().size());
-//                    }
+//        mViewModel.ArticleData.observe(this,result->{
+//            Log.d("sss", "onActivityCreated: "+result.status);
+//        });
+        mViewModel.ArticleData.observe(this, new NetBoundObserver<>(new NetBoundCallback<FeedArticleListData>() {
+            @Override
+            public void onComplete(FeedArticleListData Result) {
+                Log.d("sss", "onComplete: -----------FeedArticleListData----------");
+                if (cacheResult != null) {
+                    mAdapter.getmObjects().removeAll(cacheResult.getDatas());
+                    cacheResult = null;
+                }
+                if (Result != null) {
+                    if (page == 0) {
+                        mAdapter.replace(Result.getDatas());
+                        mBinding.get().recycle.refreshComplete();
+                    } else {
+                        mBinding.get().recycle.loadMoreComplete();
+                        mAdapter.getmObjects().addAll(Result.getDatas());
+                        mAdapter.notifyDataSetChanged();
+
+                        Log.d("sss", "onCacheComplete: --------netsize------------" + mAdapter.getmObjects().size());
+                    }
+                    page++;
+                }
+            }
+
+            @Override
+            public void onBusinessError(Resource<FeedArticleListData> resource) {
+                Log.d("sss", "onBusinessError: -----------Resource<FeedArticleListData>----------");
+            }
+
+            @Override
+            public void onNetworkError(Resource<FeedArticleListData> resource) {
+                Log.d("sss", "onNetworkError: -----------Resource<FeedArticleListData>----------");
+                if (resource.data != null) {
+                    page++;
+                }
+            }
+
+            @Override
+            public void onComplete() {
+                super.onComplete();
+                Log.d("sss", "onComplete: -----------()----------");
+            }
+
+            @Override
+            public void onComplete(Resource<FeedArticleListData> resource) {
+                super.onComplete(resource);
+                Log.d("sss", "onComplete: -----------Resource<FeedArticleListData>----------");
+            }
+
+            @Override
+            public void onCacheComplete(FeedArticleListData Result) {
+                super.onCacheComplete(Result);
+                if (Result != null) {
+                    cacheResult = Result;
+                    if (page == 0) {
+                        mAdapter.replace(Result.getDatas());
+                        mBinding.get().recycle.refreshComplete();
+                    } else {
+                        mBinding.get().recycle.loadMoreComplete();
+                        mAdapter.getmObjects().addAll(Result.getDatas());
+                        Log.d("sss", "onCacheComplete: --------cachesize------------" + mAdapter.getmObjects().size());
+                        mAdapter.notifyDataSetChanged();
+                    }
 //                    page++;
-//                }
-//            }
-//
-//            @Override
-//            public void onBusinessError(Resource<FeedArticleListData> resource) {
-//                Log.d("sss", "onBusinessError: -----------Resource<FeedArticleListData>----------");
-//            }
-//
-//            @Override
-//            public void onNetworkError(Resource<FeedArticleListData> resource) {
-//                Log.d("sss", "onNetworkError: -----------Resource<FeedArticleListData>----------");
-//                if(resource.data!=null){
-//                    page++;
-//                }
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//                super.onComplete();
-//                Log.d("sss", "onComplete: -----------()----------");
-//            }
-//
-//            @Override
-//            public void onComplete(Resource<FeedArticleListData> resource) {
-//                super.onComplete(resource);
-//                Log.d("sss", "onComplete: -----------Resource<FeedArticleListData>----------");
-//            }
-//
-//            @Override
-//            public void onCacheComplete(FeedArticleListData Result) {
-//                super.onCacheComplete(Result);
-//                if (Result != null) {
-//                    cacheResult = Result;
-//                    if (page == 0) {
-//                        mAdapter.replace(Result.getDatas());
-//                        mBinding.get().recycle.refreshComplete();
-//                    } else {
-//                        mBinding.get().recycle.loadMoreComplete();
-//                        mAdapter.getmObjects().addAll(Result.getDatas());
-//                        Log.d("sss", "onCacheComplete: --------cachesize------------" + mAdapter.getmObjects().size());
-//                        mAdapter.notifyDataSetChanged();
-//                    }
-////                    page++;
-//                }
-//                Log.d("sss", "onCacheComplete: -----------FeedArticleListData----------");
-//            }
-//        }));
+                }
+                Log.d("sss", "onCacheComplete: -----------FeedArticleListData----------");
+            }
+        }));
 
     }
 

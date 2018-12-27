@@ -113,31 +113,26 @@ public class accountActivity extends BaseActivity<accountViewModel, Moduleaccoun
         mViewModel.loginlv.observe(this, new NetBoundObserver<>(new NetBoundCallback<LoginVo>() {
             @Override
             public void onComplete(LoginVo Result) {
-                Log.d("sss", "onComplete: -----------loginVo----------");
                 spSqve("LOGIN_FLAG",true);
                 toHome(null);
 
             }
             @Override
             public void onBusinessError(Resource<LoginVo> resource) {
-                Log.d("sss", "onBusinessError: -----------loginVo----------");
             }
 
             @Override
             public void onNetworkError(Resource<LoginVo> resource) {
-                Log.d("sss", "onNetworkError: -----------loginVo----------");
             }
 
             @Override
             public void onCacheComplete(LoginVo Result) {
                 super.onCacheComplete(Result);
-                Log.d("sss", "onCacheComplete: -----------loginVo----------");
             }
 
             @Override
             public void onComplete() {
                 super.onComplete();
-                Log.d("sss", "onComplete(   ): -----------loginVo----------");
             }
         }));
     }
