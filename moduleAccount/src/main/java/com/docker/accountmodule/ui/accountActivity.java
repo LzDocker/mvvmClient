@@ -24,6 +24,7 @@ import com.docker.commonlibrary.api.NetBoundCallback;
 import com.docker.commonlibrary.api.NetBoundObserver;
 import com.docker.commonlibrary.base.BaseActivity;
 import com.docker.commonlibrary.vo.Resource;
+import com.docker.commonlibrary.vo.Status;
 import com.docker.constantmodule.Constant.ConstantsRouter;
 import com.docker.constantmodule.util.SpTool;
 
