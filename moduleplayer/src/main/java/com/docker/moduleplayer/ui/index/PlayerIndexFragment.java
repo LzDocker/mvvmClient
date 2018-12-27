@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,10 @@ import com.docker.commonlibrary.api.ApiResponse;
 import com.docker.commonlibrary.api.BaseResponse;
 import com.docker.commonlibrary.api.CommonCallback;
 import com.docker.commonlibrary.api.CommonObserver;
+import com.docker.commonlibrary.api.NetBoundCallback;
+import com.docker.commonlibrary.api.NetBoundObserver;
 import com.docker.commonlibrary.base.BaseFragment;
+import com.docker.commonlibrary.vo.Resource;
 import com.docker.moduleplayer.BR;
 import com.docker.moduleplayer.R;
 import com.docker.moduleplayer.databinding.ModuleplayerFragmentIndexBinding;
@@ -47,6 +51,10 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
     private int page = 0;
 
     private SimpleCommonRecyclerAdapter<FeedArticleData> mAdapter;
+
+    private FeedArticleListData cacheResult;
+
+
     @Inject
     ViewModelProvider.Factory factory;
 
@@ -78,7 +86,7 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
         mAdapter.setOnItemClickListener(new SimpleCommonRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                enterDetial(mAdapter.getmObjects().get(position-2).getLink());
+                enterDetial(mAdapter.getmObjects().get(position - 2).getLink());
             }
         });
 
@@ -103,10 +111,82 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
         super.onActivityCreated(savedInstanceState);
         getBanner();
         mBinding.get().recycle.refresh();
+
+//        mViewModel.ArticleData.observe(this,result->{
+//            Log.d("sss", "onActivityCreated: "+result.status);
+//        });
+        mViewModel.ArticleData.observe(this, new NetBoundObserver<>(new NetBoundCallback<FeedArticleListData>() {
+            @Override
+            public void onComplete(FeedArticleListData Result) {
+                Log.d("sss", "onComplete: -----------FeedArticleListData----------");
+                if (cacheResult != null) {
+                    mAdapter.getmObjects().removeAll(cacheResult.getDatas());
+                    cacheResult = null;
+                }
+                if (Result != null) {
+                    if (page == 0) {
+                        mAdapter.replace(Result.getDatas());
+                        mBinding.get().recycle.refreshComplete();
+                    } else {
+                        mBinding.get().recycle.loadMoreComplete();
+                        mAdapter.getmObjects().addAll(Result.getDatas());
+                        mAdapter.notifyDataSetChanged();
+
+                        Log.d("sss", "onCacheComplete: --------netsize------------" + mAdapter.getmObjects().size());
+                    }
+                    page++;
+                }
+            }
+
+            @Override
+            public void onBusinessError(Resource<FeedArticleListData> resource) {
+                Log.d("sss", "onBusinessError: -----------Resource<FeedArticleListData>----------");
+            }
+
+            @Override
+            public void onNetworkError(Resource<FeedArticleListData> resource) {
+                Log.d("sss", "onNetworkError: -----------Resource<FeedArticleListData>----------");
+                if(resource.data!=null){
+                    page++;
+                }
+            }
+
+            @Override
+            public void onComplete() {
+                super.onComplete();
+                Log.d("sss", "onComplete: -----------()----------");
+            }
+
+            @Override
+            public void onComplete(Resource<FeedArticleListData> resource) {
+                super.onComplete(resource);
+                Log.d("sss", "onComplete: -----------Resource<FeedArticleListData>----------");
+            }
+
+            @Override
+            public void onCacheComplete(FeedArticleListData Result) {
+                super.onCacheComplete(Result);
+                if (Result != null) {
+                    cacheResult = Result;
+                    if (page == 0) {
+                        mAdapter.replace(Result.getDatas());
+                        mBinding.get().recycle.refreshComplete();
+                    } else {
+                        mBinding.get().recycle.loadMoreComplete();
+                        mAdapter.getmObjects().addAll(Result.getDatas());
+                        Log.d("sss", "onCacheComplete: --------cachesize------------" + mAdapter.getmObjects().size());
+                        mAdapter.notifyDataSetChanged();
+                    }
+//                    page++;
+                }
+                Log.d("sss", "onCacheComplete: -----------FeedArticleListData----------");
+            }
+        }));
+
     }
 
 
-    private void  getBanner(){
+    private void getBanner() {
         mViewModel.getBanner().observe(this, new CommonObserver<>(new CommonCallback<List<BannerVo>>() {
             @Override
             public void onComplete(List<BannerVo> Result) {
@@ -129,36 +209,37 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
 
 
     private void getArticleData() {
-        mViewModel.getIndexList(page).observe(this, new CommonObserver<>(new CommonCallback<FeedArticleListData>() {
-            @Override
-            public void onComplete(FeedArticleListData Result) {
-                if (Result != null) {
-                    if (page == 0) {
-                        mAdapter.replace(Result.getDatas());
-                        mBinding.get().recycle.refreshComplete();
-                    } else {
-                        mBinding.get().recycle.loadMoreComplete();
-                        mAdapter.getmObjects().addAll(Result.getDatas());
-                        mAdapter.notifyDataSetChanged();
-                    }
-                    page++;
-                }
-            }
-
-            @Override
-            public void onBusinessError(BaseResponse baseResponse) {
-            }
-
-            @Override
-            public void onComplete() {
-                super.onComplete();
-            }
-
-            @Override
-            public void onNetworkError(ApiResponse apiResponse) {
-
-            }
-        }));
+//        mViewModel.getIndexList(page).observe(this, new CommonObserver<>(new CommonCallback<FeedArticleListData>() {
+//            @Override
+//            public void onComplete(FeedArticleListData Result) {
+//                if (Result != null) {
+//                    if (page == 0) {
+//                        mAdapter.replace(Result.getDatas());
+//                        mBinding.get().recycle.refreshComplete();
+//                    } else {
+//                        mBinding.get().recycle.loadMoreComplete();
+//                        mAdapter.getmObjects().addAll(Result.getDatas());
+//                        mAdapter.notifyDataSetChanged();
+//                    }
+//                    page++;
+//                }
+//            }
+//
+//            @Override
+//            public void onBusinessError(BaseResponse baseResponse) {
+//            }
+//
+//            @Override
+//            public void onComplete() {
+//                super.onComplete();
+//            }
+//
+//            @Override
+//            public void onNetworkError(ApiResponse apiResponse) {
+//
+//            }
+//        }));
+        mViewModel.getArticleIndex(page);
     }
 
     private void setupBanner(List<BannerVo> Result) {

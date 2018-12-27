@@ -1,12 +1,9 @@
 package com.docker.accountmodule.ui;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -23,17 +20,14 @@ import com.docker.commonlibrary.api.ApiResponse;
 import com.docker.commonlibrary.api.BaseResponse;
 import com.docker.commonlibrary.api.CommonCallback;
 import com.docker.commonlibrary.api.CommonObserver;
+import com.docker.commonlibrary.api.NetBoundCallback;
+import com.docker.commonlibrary.api.NetBoundObserver;
 import com.docker.commonlibrary.base.BaseActivity;
 import com.docker.commonlibrary.vo.Resource;
-import com.docker.commonlibrary.vo.Status;
 import com.docker.constantmodule.Constant.ConstantsRouter;
 import com.docker.constantmodule.util.SpTool;
 
-import java.util.Timer;
-
 import javax.inject.Inject;
-
-import timber.log.Timber;
 
 
 /*
@@ -108,13 +102,43 @@ public class accountActivity extends BaseActivity<accountViewModel, Moduleaccoun
             toLogin();
         });
 
-        mViewModel.loginlv.observe(this, loginVo -> {
-            Log.d("sss", "initview: -----------loginVo----------"+loginVo.status);
-            if(loginVo.status == Status.BUSSINESSERROR ){
-                Log.d("sss", "initview: -----------loginVo----------"+loginVo.message );
-            }
-        });
+//        mViewModel.loginlv.observe(this, loginVo -> {
+//            Log.d("sss", "initview: -----------loginVo----------" + loginVo.status);
+//            if (loginVo.status == Status.BUSSINESSERROR) {
+//                Log.d("sss", "initview: -----------loginVo----------" + loginVo.message);
+//            }
+//        });
 
+        mViewModel.loginlv.observe(this, new NetBoundObserver<>(new NetBoundCallback<LoginVo>() {
+            @Override
+            public void onComplete(LoginVo Result) {
+                Log.d("sss", "onComplete: -----------loginVo----------");
+                spSqve("LOGIN_FLAG",true);
+                toHome(null);
+
+            }
+            @Override
+            public void onBusinessError(Resource<LoginVo> resource) {
+                Log.d("sss", "onBusinessError: -----------loginVo----------");
+            }
+
+            @Override
+            public void onNetworkError(Resource<LoginVo> resource) {
+                Log.d("sss", "onNetworkError: -----------loginVo----------");
+            }
+
+            @Override
+            public void onCacheComplete(LoginVo Result) {
+                super.onCacheComplete(Result);
+                Log.d("sss", "onCacheComplete: -----------loginVo----------");
+            }
+
+            @Override
+            public void onComplete() {
+                super.onComplete();
+                Log.d("sss", "onComplete(   ): -----------loginVo----------");
+            }
+        }));
     }
 
 
@@ -166,8 +190,6 @@ public class accountActivity extends BaseActivity<accountViewModel, Moduleaccoun
     private void login() {
         chechParam();
         mViewModel.Login(registerVo.getUsername(), registerVo.getPassword());
-
-
     }
 
     private void toLogin() {

@@ -46,7 +46,6 @@ public class accountViewModel extends BaseViewModel {
             Transformations.switchMap(paramlv, new Function<LoginParam, LiveData<Resource<LoginVo>>>() {
                 @Override
                 public LiveData<Resource<LoginVo>> apply(LoginParam param) {
-
                     return accountRepository.Login(param.name, param.pwd);
                 }
             });

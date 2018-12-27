@@ -18,13 +18,9 @@ public class LoginVo implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     private int aid;
 
-    @ColumnInfo(name = "username")
     private String username;
-    @ColumnInfo(name = "password")
     private String password;
-    @ColumnInfo(name = "icon")
     private String icon;
-    @ColumnInfo(name = "type")
     private int type;
 
 

@@ -1,6 +1,10 @@
 package com.docker.moduleplayer.di;
 
+import android.arch.persistence.room.Room;
+
+import com.docker.commonlibrary.BaseApplication;
 import com.docker.moduleplayer.api.PlayerService;
+import com.docker.moduleplayer.db.PlayerDatabase;
 
 import javax.inject.Singleton;
 
@@ -14,6 +18,12 @@ import retrofit2.Retrofit;
 @Module
 public class PlayerServiceModule {
 
+
+    @Provides
+    @Singleton
+    PlayerDatabase providePlayerDatabase(BaseApplication application) {
+        return Room.databaseBuilder(application, PlayerDatabase.class, "player.db").build();
+    }
 
     @Singleton
     @Provides

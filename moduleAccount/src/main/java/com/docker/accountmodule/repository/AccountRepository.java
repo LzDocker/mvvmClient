@@ -42,12 +42,11 @@ public class AccountRepository {
             protected void saveCallResult(@NonNull LoginVo item) {
                 accountDatabase.accountDao().insertAll(item);
             }
-
             @Override
             protected boolean shouldFetch(@Nullable LoginVo data) {
+
                 return true;
             }
-
             @NonNull
             @Override
             protected LiveData<LoginVo> loadFromDb() {

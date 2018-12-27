@@ -1,21 +1,50 @@
 package com.docker.moduleplayer.vo;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+
+import com.docker.commonlibrary.util.JsonUtil;
+
 import java.util.List;
 
 /**
- * @author quchao
+ * @author https://www.jianshu.com/p/e2a7a45404cc 使用这种方法存库 room 没那么好用啊
  * @date 2018/2/12
  */
-
+@Entity
 public class FeedArticleListData {
+    @PrimaryKey(autoGenerate = true)
+    private int aid;
+
+    public int getAid() {
+        return aid;
+    }
+
+    public void setAid(int aid) {
+        this.aid = aid;
+    }
+
 
     private int curPage;
+
+    @Ignore
     private List<FeedArticleData> datas;
+
+    private String articleListStr;
     private int offset;
     private boolean over;
     private int pageCount;
     private int size;
     private int total;
+
+    public String getArticleListStr() {
+        return articleListStr;
+    }
+
+    public void setArticleListStr(String articleListStr) {
+        this.articleListStr = articleListStr;
+    }
 
     public int getCurPage() {
         return curPage;
