@@ -7,7 +7,9 @@ import android.support.annotation.Nullable;
 
 import com.docker.commonlibrary.api.ApiResponse;
 import com.docker.commonlibrary.api.BaseResponse;
+import com.docker.commonlibrary.repository.BoundResource.CacheStrategy;
 import com.docker.commonlibrary.repository.BoundResource.NetworkBoundResource;
+import com.docker.commonlibrary.repository.BoundResource.NetworkBoundResourceCopy;
 import com.docker.commonlibrary.util.AppExecutors;
 import com.docker.commonlibrary.util.JsonUtil;
 import com.docker.commonlibrary.vo.Resource;
@@ -41,7 +43,7 @@ public class PlayerRepository {
 
     public LiveData<Resource<FeedArticleListData>> getFeedArticle(int page) {
 
-        return new NetworkBoundResource<FeedArticleListData, FeedArticleListData>(appExecutors) {
+        return new NetworkBoundResourceCopy<FeedArticleListData, FeedArticleListData>(appExecutors, CacheStrategy.FIRST_CACHE_THEN_REQUEST) {
 
             @Override
             protected void saveCallResult(@NonNull FeedArticleListData item) {
@@ -49,10 +51,6 @@ public class PlayerRepository {
                 playerDatabase.feedArticleDao().insertAll(item);
             }
 
-            @Override
-            protected boolean shouldFetch(@Nullable FeedArticleListData data) {
-                return true;
-            }
             @NonNull
             @Override
             protected LiveData<FeedArticleListData> loadFromDb() {

@@ -156,6 +156,8 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
             @Override
             public void onComplete() {
                 super.onComplete();
+                mBinding.get().recycle.refreshComplete();
+                mBinding.get().recycle.loadMoreComplete();
                 Log.d("sss", "onComplete: -----------()----------");
             }
 

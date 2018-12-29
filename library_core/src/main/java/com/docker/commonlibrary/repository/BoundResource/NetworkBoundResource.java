@@ -33,12 +33,7 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
             if (shouldFetch(data)) {
                 fetchFromNetwork(dbSource);
             } else {
-                result.addSource(dbSource, new Observer<ResultType>() {
-                    @Override
-                    public void onChanged(@Nullable ResultType newData) {
-                        NetworkBoundResource.this.setZoneValue(Resource.success(newData));
-                    }
-                });
+                result.addSource(dbSource, newData -> NetworkBoundResource.this.setZoneValue(Resource.success(newData)));
             }
         });
     }
@@ -53,19 +48,19 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
             //noinspection ConstantConditions
             if (response.isSuccessful()) {
                 if ("-1".equals(response.body.getErrorCode())) { // bussiness error
-                    setZoneValue(Resource.bussinessError(response.body.getErrorMsg(), null));
+                    result.addSource(dbSource,
+                            newData -> setZoneValue(Resource.error(response.body.getErrorMsg(), newData)));
                 } else {
                     appExecutors.diskIO().execute(() -> {
                         saveCallResult(processResponse(response));
-
                         appExecutors.mainThread().execute(() -> {
-                            LiveData<ResultType> dbSource1 = loadFromDb();
-                            result.addSource(dbSource1,
-                                    newData -> {
-                                        result.removeSource(dbSource1);
-                                        NetworkBoundResource.this.setZoneValue(Resource.success(newData));
-                                    });
-                        }
+                                    LiveData<ResultType> dbSource1 = loadFromDb();
+                                    result.addSource(dbSource1,
+                                            newData -> {
+                                                result.removeSource(dbSource1);
+                                                NetworkBoundResource.this.setZoneValue(Resource.success(newData));
+                                            });
+                                }
                         );
                     });
                 }
