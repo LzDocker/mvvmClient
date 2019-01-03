@@ -59,7 +59,6 @@ dependencies {
 
     annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
     annotationProcessor rootProject.ext.dependencies["dagger-android-processor"]
-
     annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
     annotationProcessor rootProject.ext.dependencies["dagger-android-compiler"]
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
@@ -69,10 +68,10 @@ dependencies {
 
     println IsBuildMudle.toBoolean()
     if (!IsBuildMudle.toBoolean()) {
-        compile project(':moduleAccount')
-        compile project(':moduleGank')
-        compile project(':moduleplayer')
+        implementation project(':moduleAccount')
+        implementation project(':moduleGank')
+        implementation project(':moduleplayer')
     } else {
-        compile project(':library_core')
+        implementation project(':library_core')
     }
 }

@@ -3,7 +3,7 @@ ext {
             minSdkVersion    : 15,
             targetSdkVersion : 25,
             compileSdkVersion: 26,
-            buildToolsVersion: "26.0.2",
+            buildToolsVersion: "28.0.3",
             applicationId    : "com.docker.mvvmclient",
             versionCode      : 100,
             versionName      : "1.0.0"

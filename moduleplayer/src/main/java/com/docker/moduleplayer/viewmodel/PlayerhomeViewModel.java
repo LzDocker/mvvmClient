@@ -60,6 +60,23 @@ public class PlayerhomeViewModel extends BaseViewModel {
     }
 
 
+
+
+
+    private final MutableLiveData<Integer> bannerPm = new MutableLiveData<>();
+    public final LiveData<Resource<List<BannerVo>>> bannerData = Transformations.switchMap(bannerPm, new Function<Integer, LiveData<Resource<List<BannerVo>>>>() {
+        @Override
+        public LiveData<Resource<List<BannerVo>>> apply(Integer input) {
+            return playerRepository.getBanner();
+        }
+    });
+
+    public void getBanner(Integer integer){
+        bannerPm.setValue(integer);
+    }
+
+
+
     public LiveData<ApiResponse<BaseResponse<List<BannerVo>>>> getBanner() {
         return service.getBanner();
     }

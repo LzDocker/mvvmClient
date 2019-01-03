@@ -8,6 +8,7 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
+import com.docker.moduleplayer.vo.BannerVo;
 import com.docker.moduleplayer.vo.FeedArticleListData;
 
 /**
@@ -28,5 +29,9 @@ public interface FeedArticleDao {
 
     @Update
     void update(FeedArticleListData feedArticleListData);
+
+//
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    void insertBanner(BannerVo... bannerVo);
 
 }

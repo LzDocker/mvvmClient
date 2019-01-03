@@ -976,7 +976,6 @@ id appbar
 id async
 id auto
 id banner_view
-id barrier
 id beginning
 id blocking
 id bottom
@@ -988,7 +987,6 @@ id cancel_action
 id center
 id center_horizontal
 id center_vertical
-id chains
 id checkbox
 id chronometer
 id clip_horizontal
@@ -1008,8 +1006,6 @@ id design_menu_item_action_area
 id design_menu_item_action_area_stub
 id design_menu_item_text
 id design_navigation_view
-id dimensions
-id direct
 id disableHome
 id edit_query
 id end
@@ -1153,7 +1149,6 @@ id spread_inside
 id src_atop
 id src_in
 id src_over
-id standard
 id start
 id status_bar_latest_event_content
 id submenuarrow

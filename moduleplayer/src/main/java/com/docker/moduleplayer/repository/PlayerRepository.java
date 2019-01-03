@@ -15,8 +15,11 @@ import com.docker.commonlibrary.util.JsonUtil;
 import com.docker.commonlibrary.vo.Resource;
 import com.docker.moduleplayer.api.PlayerService;
 import com.docker.moduleplayer.db.PlayerDatabase;
+import com.docker.moduleplayer.vo.BannerVo;
 import com.docker.moduleplayer.vo.FeedArticleData;
 import com.docker.moduleplayer.vo.FeedArticleListData;
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -71,6 +74,31 @@ public class PlayerRepository {
             }
         }.asLiveData();
 
+    }
+
+
+    public LiveData<Resource<List<BannerVo>>> getBanner() {
+
+        return new NetworkBoundResourceCopy<List<BannerVo>, List<BannerVo>>(appExecutors, CacheStrategy.IF_NONE_CACHE_REQUEST) {
+
+            @Override
+            protected void saveCallResult(@NonNull List<BannerVo> item) {
+
+            }
+
+            @NonNull
+            @Override
+            protected LiveData<List<BannerVo>> loadFromDb() {
+
+                return null;
+            }
+
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<BaseResponse<List<BannerVo>>>> createCall() {
+                return playerService.getBanner();
+            }
+        }.asLiveData();
     }
 
 
