@@ -2,13 +2,20 @@ package com.docker.moduleplayer.viewmodel;
 
 import android.arch.core.util.Function;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.Transformations;
+import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.docker.commonlibrary.api.ApiResponse;
 import com.docker.commonlibrary.api.BaseResponse;
+import com.docker.commonlibrary.api.NetBoundCallback;
+import com.docker.commonlibrary.api.NetBoundObserver;
 import com.docker.commonlibrary.base.BaseViewModel;
 import com.docker.commonlibrary.util.AppExecutors;
+import com.docker.commonlibrary.viewmodel.CommonVmCallBack;
 import com.docker.commonlibrary.vo.Resource;
 import com.docker.moduleplayer.api.PlayerService;
 import com.docker.moduleplayer.repository.PlayerRepository;
@@ -38,12 +45,8 @@ public class PlayerhomeViewModel extends BaseViewModel {
     public PlayerhomeViewModel() {
     }
 
-
     @Inject
     PlayerRepository playerRepository;
-
-    @Inject
-    AppExecutors appExecutors;
 
 
     private final MutableLiveData<Integer> pagePm = new MutableLiveData();
@@ -59,10 +62,6 @@ public class PlayerhomeViewModel extends BaseViewModel {
         pagePm.setValue(page);
     }
 
-
-
-
-
     private final MutableLiveData<Integer> bannerPm = new MutableLiveData<>();
     public final LiveData<Resource<List<BannerVo>>> bannerData = Transformations.switchMap(bannerPm, new Function<Integer, LiveData<Resource<List<BannerVo>>>>() {
         @Override
@@ -70,15 +69,55 @@ public class PlayerhomeViewModel extends BaseViewModel {
             return playerRepository.getBanner();
         }
     });
+//    public void getBanner(Integer integer){
+//        bannerPm.setValue(integer);
+//    }
 
-    public void getBanner(Integer integer){
-        bannerPm.setValue(integer);
-    }
+    public final MediatorLiveData<Resource<List<BannerVo>>> bannerMData = new MediatorLiveData<>();
+    public LiveData<Resource<List<BannerVo>>> bannerLLData = bannerMData;
 
 
+    /*
+    *
+    * VM层 数据处理和提供给Livedata给UI层
+    *
+    * */
+    public void getBanner() {
+        LiveData<Resource<List<BannerVo>>> bannerLData = playerRepository.getBanner();
+        bannerMData.addSource(bannerLData, newdata -> {
 
-    public LiveData<ApiResponse<BaseResponse<List<BannerVo>>>> getBanner() {
-        return service.getBanner();
+            Log.d("sss", "getBanner: " + newdata);
+            new CommonVmCallBack<List<BannerVo>>() {
+
+                @Override
+                public void onBusinessError(Resource<List<BannerVo>> resource) {
+
+                }
+
+                @Override
+                public void onNetworkError(Resource<List<BannerVo>> resource) {
+
+                }
+
+                @Override
+                public void onLoading(Resource<List<BannerVo>> resource) {
+
+                }
+
+                @Override
+                public void onComplete() {
+                    super.onComplete();
+                }
+
+                @Override
+                public void onComplete(Resource<List<BannerVo>> resource) {
+                    super.onComplete(resource);
+                    Log.d("sss", "getBanner: " + resource);
+                }
+            }.setResource(newdata);
+
+            bannerMData.setValue(newdata);  // 此处setvalue activity中的数据才会刷新
+        });
     }
 
     public LiveData<ApiResponse<BaseResponse<FeedArticleListData>>> getIndexList(int num) {

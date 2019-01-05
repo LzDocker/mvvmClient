@@ -6,15 +6,14 @@ import android.arch.persistence.room.PrimaryKey;
 
 import com.docker.commonlibrary.util.JsonUtil;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author https://www.jianshu.com/p/e2a7a45404cc 使用这种方法存库 room 没那么好用啊
  * @date 2018/2/12
  */
-@Entity
-public class FeedArticleListData {
-    @PrimaryKey(autoGenerate = true)
+public class FeedArticleListData implements Serializable {
     private int aid;
 
     public int getAid() {
@@ -28,7 +27,6 @@ public class FeedArticleListData {
 
     private int curPage;
 
-    @Ignore
     private List<FeedArticleData> datas;
 
     private String articleListStr;

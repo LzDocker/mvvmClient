@@ -50,6 +50,7 @@ public class ClientApp extends BaseApplication {
                 .appModule(getAppModule())
                 .globalConfigModule(getGlobalConfigModule())
                 .httpClientModule(getHttpClientModule())
+                .cacheModule(getCacheModule())
 //                .serviceModule(new ServiceModule())
 //                .accountServiceModule(new AccountServiceModule())
 //                .playerServiceModule(new PlayerServiceModule())

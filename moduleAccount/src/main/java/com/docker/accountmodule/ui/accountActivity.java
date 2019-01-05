@@ -97,33 +97,22 @@ public class accountActivity extends BaseActivity<accountViewModel, Moduleaccoun
                     login();
                 }
             }
-
         });
         mBinding.tvLogin.setOnClickListener(v -> {
             toLogin();
         });
 
-//        mViewModel.loginlv.observe(this, loginVo -> {
-//            Log.d("sss", "initview: -----------loginVo----------" + loginVo.status);
-//            if (loginVo.status == Status.BUSSINESSERROR) {
-//                Log.d("sss", "initview: -----------loginVo----------" + loginVo.message);
-//            }
-//        });
-
         mViewModel.loginlv.observe(this, new NetBoundObserver<>(new NetBoundCallback<LoginVo>() {
             @Override
-            public void onComplete(LoginVo Result) {
+            public void onComplete(Resource<LoginVo> resource) {
+                super.onComplete(resource);
                 spSqve("LOGIN_FLAG",true);
                 toHome(null);
-
             }
             @Override
-            public void onBusinessError(Resource<LoginVo> resource) {
-            }
-
+            public void onBusinessError(Resource<LoginVo> resource) {}
             @Override
-            public void onNetworkError(Resource<LoginVo> resource) {
-            }
+            public void onNetworkError(Resource<LoginVo> resource) {}
 
             @Override
             public void onCacheComplete(LoginVo Result) {

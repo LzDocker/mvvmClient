@@ -1,6 +1,7 @@
 package com.docker.commonlibrary.di.component;
 
 import com.docker.commonlibrary.BaseApplication;
+import com.docker.commonlibrary.db.CacheDatabase;
 import com.docker.commonlibrary.di.module.AppModule;
 import com.docker.commonlibrary.di.module.CacheModule;
 import com.docker.commonlibrary.di.module.GlobalConfigModule;
@@ -41,6 +42,7 @@ public interface BaseAppComponent {
 
     void inject(BaseApplication application);
 
+    CacheDatabase cacheDatabase();
 
 
 }

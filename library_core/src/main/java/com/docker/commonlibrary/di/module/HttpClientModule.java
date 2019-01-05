@@ -1,8 +1,11 @@
 package com.docker.commonlibrary.di.module;
 
+import android.arch.persistence.room.Room;
 import android.content.Context;
 
+import com.docker.commonlibrary.BaseApplication;
 import com.docker.commonlibrary.api.RequestInterceptor;
+import com.docker.commonlibrary.db.CacheDatabase;
 import com.docker.commonlibrary.util.LiveDataCallAdapterFactory;
 import com.docker.commonlibrary.util.cookie.CookieJarImpl;
 import com.docker.commonlibrary.util.cookie.PersistentCookieStore;
@@ -92,5 +95,8 @@ public class HttpClientModule {
     public Gson provideGson() {
         return new Gson();
     }
+
+
+
 
 }

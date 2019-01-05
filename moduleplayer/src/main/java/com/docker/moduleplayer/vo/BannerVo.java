@@ -1,10 +1,12 @@
 package com.docker.moduleplayer.vo;
 
+import java.io.Serializable;
+
 /**
  * Created by zhangxindang on 2018/10/22.
  */
 
-public class BannerVo {
+public class BannerVo implements Serializable {
 
     private String desc;
     private String id;

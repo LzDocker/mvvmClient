@@ -12,20 +12,16 @@ public abstract class NetBoundCallback<T> {
     }
 
     /*
-    * 缓存读取成功
-    * */
+     * 缓存读取成功
+     * */
     public void onCacheComplete(T Result) {
-
     }
 
     public void onComplete(Resource<T> resource) {
-
     }
 
     public void onComplete() {
-
     }
-    public abstract void onComplete(T Result);
 
     public abstract void onBusinessError(Resource<T> resource);
 
