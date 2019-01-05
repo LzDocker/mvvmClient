@@ -104,9 +104,7 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        mViewModel.getBanner(page);
-
-        mViewModel.getBanner();
+//         mViewModel.getBanner();
          mViewModel.bannerLLData.observe(this,new NetBoundObserver<>(new NetBoundCallback<List<BannerVo>>() {
             @Override
             public void onBusinessError(Resource<List<BannerVo>> resource) {
@@ -179,29 +177,6 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
                 }
             }
         }));
-        mViewModel.bannerData.observe(this, new NetBoundObserver<>(new NetBoundCallback<List<BannerVo>>() {
-            @Override
-            public void onCacheComplete(List<BannerVo> Result) {
-                super.onCacheComplete(Result);
-            }
-
-            @Override
-            public void onComplete(Resource<List<BannerVo>> resource) {
-                super.onComplete(resource);
-                if (resource.data != null) {
-                    setupBanner(resource.data);
-                }
-            }
-
-            @Override
-            public void onBusinessError(Resource<List<BannerVo>> resource) {
-            }
-
-            @Override
-            public void onNetworkError(Resource<List<BannerVo>> resource) {
-            }
-        }));
-
     }
 
     private void setupBanner(List<BannerVo> Result) {

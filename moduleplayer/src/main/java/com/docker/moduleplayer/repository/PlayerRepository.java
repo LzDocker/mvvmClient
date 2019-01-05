@@ -39,7 +39,8 @@ public class PlayerRepository {
     }
 
     public LiveData<Resource<FeedArticleListData>> getFeedArticle(int page) {
-        return new NetworkBoundResourceAuto<FeedArticleListData, FeedArticleListData>(appExecutors, CacheStrategy.FIRST_CACHE_THEN_REQUEST, cacheDatabase, "FeedArticleListData" + page) {
+        return new NetworkBoundResourceAuto<FeedArticleListData, FeedArticleListData>(appExecutors, CacheStrategy.REQUEST_FAILED_READ_CACHE, cacheDatabase, "FeedArticleListData" + page) {
+
             @NonNull
             @Override
             protected LiveData<ApiResponse<BaseResponse<FeedArticleListData>>> createCall() {

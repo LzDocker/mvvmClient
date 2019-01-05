@@ -6,6 +6,7 @@ import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.WorkerThread;
 import android.util.Log;
+
 import com.docker.commonlibrary.api.ApiResponse;
 import com.docker.commonlibrary.api.BaseResponse;
 import com.docker.commonlibrary.db.CacheDatabase;
@@ -33,11 +34,10 @@ public abstract class NetworkBoundResourceAuto<ResultType, RequestType> {
     @MainThread
     public NetworkBoundResourceAuto(AppExecutors appExecutors, CacheStrategy cacheStrategy, CacheDatabase cacheDatabase, String cachekey) {
         this.appExecutors = appExecutors;
-        setZoneValue(Resource.loading(null));
         this.cacheStrategy = cacheStrategy;
         this.cacheDatabase = cacheDatabase;
         this.cachekey = cachekey;
-        start();
+        startFetch();
     }
 
     /*
@@ -45,26 +45,10 @@ public abstract class NetworkBoundResourceAuto<ResultType, RequestType> {
      * */
     @MainThread
     public NetworkBoundResourceAuto() {
-        setZoneValue(Resource.loading(null));
         this.cacheStrategy = CacheStrategy.NO_CACHE;
-        start();
+        NO_ChCHE();
     }
-    private void start() {
-        switch (cacheStrategy) {
-            case NO_CACHE:
-                NO_ChCHE();
-                break;
-            case IF_NONE_CACHE_REQUEST:
-                IF_NONE_CACHE_REQUEST();
-                break;
-            case FIRST_CACHE_THEN_REQUEST:
-                FIRST_CACHE_THEN_REQUEST();
-                break;
-            case REQUEST_FAILED_READ_CACHE:
-                REQUEST_FAILED_READ_CACHE();
-                break;
-        }
-    }
+
     /*
      * 回调 ---》
      *
@@ -73,6 +57,7 @@ public abstract class NetworkBoundResourceAuto<ResultType, RequestType> {
      * ===>  loading === success
      * */
     private void NO_ChCHE() {
+        setZoneValue(Resource.loading(null));
         LiveData<ApiResponse<BaseResponse<RequestType>>> apiResponse = createCall();
         result.addSource(apiResponse, response -> {
             result.removeSource(apiResponse);
@@ -98,6 +83,7 @@ public abstract class NetworkBoundResourceAuto<ResultType, RequestType> {
 
     }
     /*
+    FIRST_CACHE_THEN_REQUEST
      * 回调 ---》 第二个loading带着缓存数据，但缓存不保证不为空
      *
      * ===> loading === loading====> bussiness error / networkerror
@@ -105,65 +91,17 @@ public abstract class NetworkBoundResourceAuto<ResultType, RequestType> {
      * ===>  loading ===loading ===> success
      * */
 
-    private void FIRST_CACHE_THEN_REQUEST() {
-        LiveData<ApiResponse<BaseResponse<RequestType>>> dbSource = loadFromDb();
-        result.addSource(dbSource, data -> {
-            result.removeSource(dbSource);
-            fetchFromNetwork(dbSource);
-        });
-    }
 
-    /*
+    /* IF_NONE_CACHE_REQUEST
      * 回调 ---》 有缓存直接返回，没有就请求网络 success 中包含的数据就是可用数据
      *
      * ===> loading ====> bussiness error / networkerror
      *
      * ===>  loading  ===> success
      * */
-    private void IF_NONE_CACHE_REQUEST() {
-        LiveData<ApiResponse<BaseResponse<RequestType>>> dbSource = loadFromDb();
-        result.addSource(dbSource, newdata -> {
-            result.removeSource(dbSource);
-            if (newdata != null) {
-                setZoneValue(Resource.success((ResultType) newdata.body.getData()));
-            } else {
-                LiveData<ApiResponse<BaseResponse<RequestType>>> apiResponse = createCall();
-                result.addSource(apiResponse, response -> {
-                    result.removeSource(apiResponse);
-                    if (response.isSuccessful()) {
-                        if ("-1".equals(response.body.getErrorCode())) { // bussiness error
-                            result.addSource(apiResponse,
-                                    newData -> {
-                                        result.removeSource(apiResponse);
-                                        setZoneValue(Resource.bussinessError(response.body.getErrorMsg(), null));
-                                    });
-                        } else {
-                            appExecutors.diskIO().execute(() -> {
-                                saveCallResult(response);
-                                appExecutors.mainThread().execute(() -> {
-                                            LiveData<ApiResponse<BaseResponse<RequestType>>> dbSource1 = loadFromDb();
-                                            result.addSource(dbSource1,
-                                                    newData -> {
-                                                        result.removeSource(dbSource1);
-                                                        setZoneValue(Resource.success((ResultType) newData.body.getData()));
-                                                    });
-                                        }
-                                );
-                            });
-                        }
-                    } else {
-                        onFetchFailed();
-                        result.addSource(apiResponse,
-                                newData -> {
-                                    result.removeSource(apiResponse);
-                                    setZoneValue(Resource.error(response.errorMessage, null));
-                                });
-                    }
-                });
-            }
-        });
-    }
+
     /*
+    REQUEST_FAILED_READ_CACHE
      * 回调 ---》 网络成功 ---》 loading ---- success
      *           网络失败 ---》 loading ----- error / bussiness error ---> success(可能是空的缓存)
      *
@@ -172,71 +110,74 @@ public abstract class NetworkBoundResourceAuto<ResultType, RequestType> {
      * ===>  loading  ===> success
      * */
 
-    private void REQUEST_FAILED_READ_CACHE() {
-        LiveData<ApiResponse<BaseResponse<RequestType>>> apiResponse = createCall();
-        result.addSource(apiResponse, response -> {
-            result.removeSource(apiResponse);
-            if (response.isSuccessful()) {
-                if ("-1".equals(response.body.getErrorCode())) { // bussiness error
-                    result.addSource(apiResponse,
-                            newData -> {
-                                result.removeSource(apiResponse);
-                                setZoneValue(Resource.bussinessError(response.body.getErrorMsg(), null));
-                                LiveData<ApiResponse<BaseResponse<RequestType>>> dbSource = loadFromDb();
-                                result.addSource(dbSource, newdata -> {
-                                    result.removeSource(dbSource);
-                                    setZoneValue(Resource.success((ResultType) newdata.body.getData()));
-                                });
-                            });
-                } else {
-                    appExecutors.diskIO().execute(() -> {
-                        saveCallResult(response);
-                        appExecutors.mainThread().execute(() -> {
-                                    LiveData<ApiResponse<BaseResponse<RequestType>>> dbSource1 = loadFromDb();
-                                    result.addSource(dbSource1,
-                                            newData -> {
-                                                result.removeSource(dbSource1);
-                                                setZoneValue(Resource.success((ResultType) newData.body.getData()));
-                                            });
-                                }
-                        );
-                    });
-                }
-            } else {
-                onFetchFailed();
-                result.addSource(apiResponse,
-                        newData -> {
-                            result.removeSource(apiResponse);
-                            setZoneValue(Resource.error(response.errorMessage, null));
-                            LiveData<ApiResponse<BaseResponse<RequestType>>> dbSource = loadFromDb();
-                            result.addSource(dbSource, newdata -> {
-                                result.removeSource(dbSource);
-                                if (newdata != null) {
-                                    setZoneValue(Resource.success((ResultType) newdata.body.getData()));
-                                } else {
-                                    setZoneValue(Resource.success(null));
-                                }
-                            });
-                        });
-            }
-        });
+
+    private void startFetch() {
+        setZoneValue(Resource.loading(null));
+        switch (cacheStrategy) {
+            case IF_NONE_CACHE_REQUEST:
+                fetchFromdb();
+                break;
+            case FIRST_CACHE_THEN_REQUEST:
+                fetchFromdb();
+                break;
+            case REQUEST_FAILED_READ_CACHE:
+                fetchFromNetwork();
+                break;
+        }
     }
-    private void fetchFromNetwork(final LiveData<ApiResponse<BaseResponse<RequestType>>> dbSource) {
-        LiveData<ApiResponse<BaseResponse<RequestType>>> apiResponse = createCall();
-        result.addSource(dbSource, newData -> {
-            if (newData != null) {
-                NetworkBoundResourceAuto.this.setZoneValue(Resource.loading((ResultType) newData.body.getData()));
-            } else {
-                NetworkBoundResourceAuto.this.setZoneValue(Resource.loading(null));
-            }
-        });
-        result.addSource(apiResponse, response -> {
-            result.removeSource(apiResponse);
+
+    private void fetchFromdb() {
+        LiveData<ApiResponse<BaseResponse<RequestType>>> dbSource = loadFromDb();
+        result.addSource(dbSource, newdata -> {
             result.removeSource(dbSource);
+            if (newdata != null) {
+                onFetchDbSuccess(newdata);
+            } else {
+                onFetchDbFiled();
+            }
+        });
+    }
+
+    private void onFetchDbFiled() {
+        switch (cacheStrategy) {
+            case IF_NONE_CACHE_REQUEST:
+                fetchFromNetwork();
+                break;
+            case FIRST_CACHE_THEN_REQUEST:
+                setZoneValue(Resource.loading(null));
+                fetchFromNetwork();
+                break;
+            case REQUEST_FAILED_READ_CACHE:
+                setZoneValue(Resource.success(null));
+                break;
+        }
+    }
+
+    private void onFetchDbSuccess(ApiResponse<BaseResponse<RequestType>> newdata) {
+
+        switch (cacheStrategy) {
+            case IF_NONE_CACHE_REQUEST:
+                setZoneValue(Resource.success((ResultType) newdata.body.getData()));
+                break;
+            case FIRST_CACHE_THEN_REQUEST:
+                setZoneValue(Resource.loading((ResultType) newdata.body.getData()));
+                fetchFromNetwork();
+                break;
+            case REQUEST_FAILED_READ_CACHE:
+                setZoneValue(Resource.success((ResultType) newdata.body.getData()));
+                break;
+        }
+
+    }
+
+
+    private void fetchFromNetwork() {
+        LiveData<ApiResponse<BaseResponse<RequestType>>> apiResponse = createCall();
+        result.addSource(apiResponse, response -> {
+            result.removeSource(apiResponse);
             if (response.isSuccessful()) {
                 if ("-1".equals(response.body.getErrorCode())) { // bussiness error
-                    result.addSource(dbSource,
-                            newData -> setZoneValue(Resource.bussinessError(response.body.getErrorMsg(), null)));
+                    onFetchNetFailed(0, response);
                 } else {
                     appExecutors.diskIO().execute(() -> {
                         saveCallResult(response);
@@ -245,7 +186,7 @@ public abstract class NetworkBoundResourceAuto<ResultType, RequestType> {
                                     result.addSource(dbSource1,
                                             newData -> {
                                                 result.removeSource(dbSource1);
-                                                    NetworkBoundResourceAuto.this.setZoneValue(Resource.success((ResultType) newData.body.getData()));
+                                                onFetchNetSuccess(newData);
                                             });
                                 }
                         );
@@ -253,27 +194,97 @@ public abstract class NetworkBoundResourceAuto<ResultType, RequestType> {
                 }
             } else {
                 onFetchFailed();
-                result.addSource(dbSource,
-                        newData -> setZoneValue(Resource.error(response.errorMessage, (ResultType) newData.body.getData())));
+                onFetchNetFailed(1, response);
             }
         });
     }
+
+
+    /*
+     * 1  error
+     * 0  bussiness error
+     * */
+    private void onFetchNetFailed(int errType, ApiResponse<BaseResponse<RequestType>> newdata) {
+
+        switch (cacheStrategy) {
+            case IF_NONE_CACHE_REQUEST:
+                if (errType == 1) {
+                    setZoneValue(Resource.error(newdata.errorMessage, null));
+                } else {
+                    setZoneValue(Resource.bussinessError(newdata.body.getErrorMsg(), null));
+                }
+                break;
+            case FIRST_CACHE_THEN_REQUEST:
+                if (errType == 1) {
+                    setZoneValue(Resource.error(newdata.errorMessage, null));
+                } else {
+                    setZoneValue(Resource.bussinessError(newdata.body.getErrorMsg(), null));
+                }
+                break;
+            case REQUEST_FAILED_READ_CACHE:
+                if (errType == 1) {
+                    setZoneValue(Resource.error(newdata.errorMessage, null));
+                } else {
+                    setZoneValue(Resource.bussinessError(newdata.body.getErrorMsg(), null));
+                }
+               fetchFromdb();
+                break;
+        }
+
+    }
+
+
+    private void onFetchNetSuccess(ApiResponse<BaseResponse<RequestType>> newdata) {
+
+        switch (cacheStrategy) {
+            case IF_NONE_CACHE_REQUEST:
+                if (newdata != null) {
+                    setZoneValue(Resource.success((ResultType) newdata.body.getData()));
+                } else {
+                    setZoneValue(Resource.success(null));
+                }
+                break;
+            case FIRST_CACHE_THEN_REQUEST:
+                if (newdata != null) {
+                    setZoneValue(Resource.success((ResultType) newdata.body.getData()));
+                } else {
+                    setZoneValue(Resource.success(null));
+                }
+                break;
+            case REQUEST_FAILED_READ_CACHE:
+                if (newdata != null) {
+                    setZoneValue(Resource.success((ResultType) newdata.body.getData()));
+                } else {
+                    setZoneValue(Resource.success(null));
+                }
+               fetchFromdb();
+                break;
+        }
+
+    }
+
+
     @MainThread
     private void setZoneValue(Resource<ResultType> newValue) {
         Log.d("ZoneValue", ": -----------setZoneValue----------" + newValue.status);
         result.setValue(newValue);
     }
+
     protected void onFetchFailed() {
     }
+
     public LiveData<Resource<ResultType>> asLiveData() {
         return result;
     }
+
     @WorkerThread
     protected void saveCallResult(@NonNull ApiResponse<BaseResponse<RequestType>> response) {
         CacheEntity cacheEntity = new CacheEntity();
         cacheEntity.setKey(cachekey);
         cacheEntity.setData(IOUtils.toByteArray(response));
+        cacheDatabase.cacheEntityDao().insertCache(cacheEntity);
     }
+
     @NonNull
     @MainThread
     protected LiveData<ApiResponse<BaseResponse<RequestType>>> loadFromDb() {
@@ -289,6 +300,7 @@ public abstract class NetworkBoundResourceAuto<ResultType, RequestType> {
         });
         return responseMediatorLiveData;
     }
+
     @NonNull
     @MainThread
     protected abstract LiveData<ApiResponse<BaseResponse<RequestType>>> createCall();
