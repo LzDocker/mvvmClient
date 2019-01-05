@@ -132,7 +132,7 @@ public class ProCardFragment extends BaseFragment<PlayerhomeViewModel, Modulepla
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         page = 0;
-        initData();
+        mBinding.get().recycle.refresh();
     }
 
     private void initData() {

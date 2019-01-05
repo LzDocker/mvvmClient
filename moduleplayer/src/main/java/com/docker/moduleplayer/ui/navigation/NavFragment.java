@@ -93,8 +93,7 @@ public class NavFragment extends BaseFragment<PlayerhomeViewModel, ModuleplayerF
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        initData();
+        mBinding.get().recycle.refresh();
     }
 
     private void initData() {

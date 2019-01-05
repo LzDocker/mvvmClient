@@ -97,7 +97,7 @@ public class KnowledgeFragment extends BaseFragment<PlayerhomeViewModel, Modulep
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initData();
+        mBinding.get().recycle.refresh();
     }
 
     private void initData() {

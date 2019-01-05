@@ -78,10 +78,10 @@ public class PlayerhomeViewModel extends BaseViewModel {
 
 
     /*
-    *
-    * VM层 数据处理和提供给Livedata给UI层
-    *
-    * */
+     *
+     * VM层 数据处理和提供给Livedata给UI层
+     *
+     * */
     public void getBanner() {
         LiveData<Resource<List<BannerVo>>> bannerLData = playerRepository.getBanner();
         bannerMData.addSource(bannerLData, newdata -> {
