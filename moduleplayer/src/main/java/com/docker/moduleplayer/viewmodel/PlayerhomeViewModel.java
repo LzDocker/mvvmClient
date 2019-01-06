@@ -4,17 +4,11 @@ import android.arch.core.util.Function;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.Transformations;
-import android.support.annotation.Nullable;
 import android.util.Log;
-
 import com.docker.commonlibrary.api.ApiResponse;
 import com.docker.commonlibrary.api.BaseResponse;
-import com.docker.commonlibrary.api.NetBoundCallback;
-import com.docker.commonlibrary.api.NetBoundObserver;
 import com.docker.commonlibrary.base.BaseViewModel;
-import com.docker.commonlibrary.util.AppExecutors;
 import com.docker.commonlibrary.viewmodel.CommonVmCallBack;
 import com.docker.commonlibrary.vo.Resource;
 import com.docker.moduleplayer.api.PlayerService;
