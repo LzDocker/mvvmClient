@@ -104,7 +104,7 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//         mViewModel.getBanner();
+         mViewModel.getBanner();
          mViewModel.bannerLLData.observe(this,new NetBoundObserver<>(new NetBoundCallback<List<BannerVo>>() {
             @Override
             public void onBusinessError(Resource<List<BannerVo>> resource) {
@@ -137,6 +137,7 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
                 super.onComplete();
                 mBinding.get().recycle.refreshComplete();
                 mBinding.get().recycle.loadMoreComplete();
+                Log.d("sss", "onComplete: ----page -----"+page);
             }
 
             @Override

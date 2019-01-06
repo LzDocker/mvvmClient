@@ -35,8 +35,8 @@ public class Resource<T> {
         return new Resource<>(ERROR, data, msg);
     }
 
-    public static <T> Resource<T> loading(@Nullable T data) {
-        return new Resource<>(LOADING, data, null);
+    public static <T> Resource<T> loading(@Nullable String msg,@Nullable T data) {
+        return new Resource<>(LOADING, data, msg);
     }
 
     public static <T> Resource<T> bussinessError(String msg, @Nullable T data) {

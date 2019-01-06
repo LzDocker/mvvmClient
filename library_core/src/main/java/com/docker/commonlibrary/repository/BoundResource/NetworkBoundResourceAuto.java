@@ -57,7 +57,7 @@ public abstract class NetworkBoundResourceAuto<ResultType, RequestType> {
      * ===>  loading === success
      * */
     private void NO_ChCHE() {
-        setZoneValue(Resource.loading(null));
+        setZoneValue(Resource.loading(null,null));
         LiveData<ApiResponse<BaseResponse<RequestType>>> apiResponse = createCall();
         result.addSource(apiResponse, response -> {
             result.removeSource(apiResponse);
@@ -103,16 +103,12 @@ public abstract class NetworkBoundResourceAuto<ResultType, RequestType> {
     /*
     REQUEST_FAILED_READ_CACHE
      * 回调 ---》 网络成功 ---》 loading ---- success
-     *           网络失败 ---》 loading ----- error / bussiness error ---> success(可能是空的缓存)
-     *
-     * ===> loading ====> bussiness error / networkerror
-     *
-     * ===>  loading  ===> success
+     *           网络失败 ---》 loading ----- loading(数据为空，包含网络出错原因) ---> success(可能是空的缓存)
      * */
 
 
     private void startFetch() {
-        setZoneValue(Resource.loading(null));
+        setZoneValue(Resource.loading(null,null));
         switch (cacheStrategy) {
             case IF_NONE_CACHE_REQUEST:
                 fetchFromdb();
@@ -144,11 +140,11 @@ public abstract class NetworkBoundResourceAuto<ResultType, RequestType> {
                 fetchFromNetwork();
                 break;
             case FIRST_CACHE_THEN_REQUEST:
-                setZoneValue(Resource.loading(null));
+                setZoneValue(Resource.loading(null,null));
                 fetchFromNetwork();
                 break;
             case REQUEST_FAILED_READ_CACHE:
-                setZoneValue(Resource.success(null));
+                setZoneValue(Resource.error("-1", null)); // 没有缓存
                 break;
         }
     }
@@ -160,7 +156,7 @@ public abstract class NetworkBoundResourceAuto<ResultType, RequestType> {
                 setZoneValue(Resource.success((ResultType) newdata.body.getData()));
                 break;
             case FIRST_CACHE_THEN_REQUEST:
-                setZoneValue(Resource.loading((ResultType) newdata.body.getData()));
+                setZoneValue(Resource.loading(null,(ResultType) newdata.body.getData()));
                 fetchFromNetwork();
                 break;
             case REQUEST_FAILED_READ_CACHE:
@@ -220,12 +216,13 @@ public abstract class NetworkBoundResourceAuto<ResultType, RequestType> {
                 } else {
                     setZoneValue(Resource.bussinessError(newdata.body.getErrorMsg(), null));
                 }
+
                 break;
             case REQUEST_FAILED_READ_CACHE:
                 if (errType == 1) {
-                    setZoneValue(Resource.error(newdata.errorMessage, null));
+                    setZoneValue(Resource.loading(newdata.errorMessage, null));
                 } else {
-                    setZoneValue(Resource.bussinessError(newdata.body.getErrorMsg(), null));
+                    setZoneValue(Resource.loading(newdata.body.getErrorMsg(), null));
                 }
                fetchFromdb();
                 break;
