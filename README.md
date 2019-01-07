@@ -78,10 +78,58 @@ UI层
 
 
 
+6.整体流程
+
+如果关注点是使用该框架，那么其实整体用法还是固定的，先说说用法吧
+
+a. 新建功能模块module,名字假如为moduleTest目录结构按照 moduleplayer的就可以，当然需要你在project 目录下，创建debug 目录，这是为了使你的moduleTest
+能够自己起飞，单独作为一个项目来运行， 在debug目录下新建你的application,继承baseapplication实现initDi(); 把相关的依赖配置好，然后component（这里假如你会使用dagger2）
+
+b. 到项目真正功能的开发了,那就说说分包
+api        -- retorfit的数据接口
+db         -- 数据库相关（如果你要自己维护缓存，那这个地方需要你自己来写，用的room,如果缓存策略能满足你的开发，那这个地方可以忽略，当然后期会加入etag cache-control等默认服务端缓存策略）
+di         -- 注入 api下的数据接口，ui相关的activity fragment viewmodel 都是在这个地方注入的，至于是怎么注入的这个问题后面讲
+repository -- 仓库，我们不提供数据，我们只是数据的搬运工。数据的获取是在这里，因此所有请求的响应你都能在这里看到她的身影
+ui         -- 这个不说了，我知道你肯定是Android开发 emmm... 还是说下吧 activity fragment 中的职责就是控制view层，响应用户操作，所以不要把处理业务的逻辑放在这里，
+可以放到repository中来处理，然后再通过具体的livedata驱动UI层的view作出响应，所以他们应该是简介的，只监听livedata的变化，把这变化传递给view，xml使用databinding,（我这里没有使用太多，原则
+上讲可以多用一些bindingadapter,但是我总觉得有点本末倒置了，数据驱动就要在xml中处理过多的逻辑，这让我想到了java的jsp,和php，我们是为了维护访方便，解藕清晰才框架的，不是吗？这个就自己考虑吧,没有定义binding包是因为我到现在也没说服自己）
+viewmodel  -- 这一层和mvp的p层有点像，但是更加丝滑（个人感觉），数据处理不再考虑生命周期的限制，从repository拿到数据可以加工也可直接使用（建议加工后成为具体有意义的数据再给UI层，应为不加工的后果可能是把你的架构变成了mvc,哈哈哈，我就是从这走过来的）
+vo         -- 这个就是请求的实体类，当然如果自己维护缓存，也可以当作room的entity层，使用提供的缓存的话，就把你要缓存的实体实现Serializable
+widget     -- 控件
+
+c. 框架的构建流程
+
+d.依赖关系
+从builde.gradle(app)中能看的出来 整体的依赖规则
+
+   if (!IsBuildMudle.toBoolean()) {
+        implementation project(':moduleAccount')
+        implementation project(':moduleGank')
+        implementation project(':moduleplayer')
+    } else {
+        implementation project(':library_core')
+    }
+
+每个模块的都依赖   api project(':library_core')
+
+library_core依赖library_common
+
+e.  library_core 的职责
+
+library_core 提供基础的网络请求模块，基础的注入模块，一些工具类（后期放到common中），可以看到没有components ，这是因为踩坑dagger2的时候（有时间再探探这个坑，或者有dagger2大神给解决下，总觉得目前的不完美）没能使用dependencies和subcomponent这些姿势来解决多个components之间的依赖
+，所以用了不是很完美的一个components 多个module的实现方式，还算丝滑,使用dagger-android来做的四大组件的注入，在baseappliction中暴露initDi方法供继承者注入自己的四大组件，当然了需要实现baseactitivity 或者 basefragment,因为他们的注入是在activity的oncreate中注入了，这时候你可能会问，为什么不再baseactivity中统一注入呢，
+毕竟baseactivity 的handactivity 会holader住所有activity的创建，这个问题我也想过，这姿势肯定很爽，但是我没能实现，一直报错让我不得已用了现在这个姿势，至于出错的原因是什么呢？我想是跟上面说的 dagger2的dependencies和subcomponent有关，这个留着以后探索。至于注入这方面的就不多讲了
+网络请求使用的retorfit 加 LiveDataCallAdapterFactory，livedatacalladapter显得有些脆弱，这里是用的网上找来的，后续会自己动手让她strong一点，至于拦截器这些就不多说了。
+好了关键的网络请求和注入大致就是上面这些了
+
+f. library_common 的职责
+这个就随意些了，common都很熟悉，目前只是把arouter的跳转path的定义和一些工具类放在这里了。存在的意义是我觉从一开始觉得library_core在开发的时候不要频繁的动，common来处理一些公共资源
+
+g. 看完上面这些如果还是迷茫的，那不是你的错，我的。。好吧，自己撸一遍登录注册就明白了(嘿嘿嘿)
+
+h. 未完待续..
 
 
 
 
 
-
-            

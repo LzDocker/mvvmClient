@@ -79,7 +79,6 @@ public abstract class BaseApplication extends MultiDexApplication implements Has
     @Override
     public void onCreate() {
         super.onCreate();
-
         initRefWatcher();
         initRouter();
         initDI();
