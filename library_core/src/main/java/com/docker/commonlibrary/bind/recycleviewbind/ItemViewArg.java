@@ -44,6 +44,15 @@ public class ItemViewArg<T> {
         return itemView.bindingVariable();
     }
 
+    public int eventBindingVariable() {
+        return itemView.eventBindingVariable();
+    }
+
+    public Object eventTargetBindingVariable() {
+        return itemView.eventTargetBindingVariable();
+    }
+
+
     public int layoutRes() {
         return itemView.layoutRes();
     }
@@ -83,6 +92,11 @@ public class ItemViewArg<T> {
         public static final int BINDING_VARIABLE_NONE = 0;
 
         private int bindingVariable;
+
+        private int eventBindingVariable;
+
+        private Object targetObj;
+
         @LayoutRes
         private int layoutRes;
 
@@ -98,9 +112,14 @@ public class ItemViewArg<T> {
             return this;
         }
 
-
         public ItemView setBindingVariable(int bindingVariable) {
             this.bindingVariable = bindingVariable;
+            return this;
+        }
+
+        public ItemView setEventBindingVariable(int bindingVariable,Object target) {
+            this.eventBindingVariable = bindingVariable;
+            this.targetObj = target;
             return this;
         }
 
@@ -114,6 +133,13 @@ public class ItemViewArg<T> {
             return bindingVariable;
         }
 
+        public int eventBindingVariable() {
+            return eventBindingVariable;
+        }
+
+        public Object eventTargetBindingVariable() {
+            return targetObj;
+        }
         @LayoutRes
         public int layoutRes() {
             return layoutRes;

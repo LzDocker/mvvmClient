@@ -56,6 +56,13 @@ public class PlayerhomeViewModel extends BaseViewModel {
         bannerUrl.set("111");
     }
 
+    public final MutableLiveData<KnowledgeHierarchyData> knowEnterMessage = new MutableLiveData<>();
+
+    public void knowItemClick(KnowledgeHierarchyData item) {
+        Log.d("sss", "knowItemClick: ------------------"+item);
+        knowEnterMessage.setValue(item);
+    }
+
     private final MutableLiveData<Integer> pagePm = new MutableLiveData();
     public final LiveData<Resource<FeedArticleListData>> ArticleData =
             Transformations.switchMap(pagePm, new Function<Integer, LiveData<Resource<FeedArticleListData>>>() {
@@ -145,6 +152,7 @@ public class PlayerhomeViewModel extends BaseViewModel {
         public void select(ItemViewArg.ItemView itemView, int position, KnowledgeHierarchyData item) {
             Log.d("sss", "select: ----------------");
             itemView.set(BR.item,R.layout.moduleplayer_konwledge_item);
+            itemView.setEventBindingVariable(BR.viewModel,PlayerhomeViewModel.this);
         }
         @Override
         public int viewTypeCount() {

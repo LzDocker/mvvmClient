@@ -5,6 +5,10 @@
 
     <data>
 
+        <!--<import type="com.docker.moduleplayer.viewmodel.PlayerhomeViewModel"/>-->
+        <variable
+            name="viewModel"
+            type="com.docker.moduleplayer.viewmodel.PlayerhomeViewModel" />
         <variable
             name="item"
             type="com.docker.moduleplayer.vo.KnowledgeHierarchyData" />
@@ -33,6 +37,7 @@
 
 
             <TextView
+                android:onClick="@{()->viewModel.knowItemClick(item)}"
                 android:id="@+id/item_search_pager_author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -34,8 +34,6 @@ public class KnowledgeFragment extends BaseFragment<PlayerhomeViewModel, Modulep
 
     private int page = 0;
 
-    private SimpleCommonRecyclerAdapter<KnowledgeHierarchyData> mAdapter;
-
     @Inject
     ViewModelProvider.Factory factory;
 
@@ -67,36 +65,43 @@ public class KnowledgeFragment extends BaseFragment<PlayerhomeViewModel, Modulep
 
 
 
-//        mBinding.get().recycle.setLoadingMoreProgressStyle(ProgressStyle.SquareSpin);
-//        mBinding.get().recycle.setRefreshProgressStyle(ProgressStyle.BallGridPulse);
-//        mBinding.get().recycle.getDefaultRefreshHeaderView().setRefreshTimeVisible(true);
-//        mBinding.get().recycle.setLoadingListener(new XRecyclerView.LoadingListener() {
-//            @Override
-//            public void onRefresh() {
-//                page = 0;
-//                initData();
-//            }
-//
-//            @Override
-//            public void onLoadMore() {
-//                initData();
-//            }
-//        });
+        mBinding.get().recycle.setLoadingMoreProgressStyle(ProgressStyle.SquareSpin);
+        mBinding.get().recycle.setRefreshProgressStyle(ProgressStyle.BallGridPulse);
+        mBinding.get().recycle.getDefaultRefreshHeaderView().setRefreshTimeVisible(true);
+        mBinding.get().recycle.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                page = 0;
+                initData();
+            }
+
+            @Override
+            public void onLoadMore() {
+                initData();
+            }
+        });
 
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initData();
+//        initData();
+
+        mViewModel.knowEnterMessage.observe(this, new Observer<KnowledgeHierarchyData>() {
+            @Override
+            public void onChanged(@Nullable KnowledgeHierarchyData knowledgeHierarchyData) {
+                enterDetial(knowledgeHierarchyData.getId(),knowledgeHierarchyData);
+            }
+        });
         mBinding.get().setViewModel(mViewModel);
-//        mBinding.get().recycle.refresh();
+        mBinding.get().recycle.refresh();
         mViewModel.KnowledgeHierarchyLLData.observe(this, new Observer<Resource<List<KnowledgeHierarchyData>>>() {
             @Override
             public void onChanged(@Nullable Resource<List<KnowledgeHierarchyData>> listResource) {
                 Log.d("sss", "onChanged: ----");
-//                mBinding.get().recycle.refreshComplete();
-//                mBinding.get().recycle.loadMoreComplete();
+                mBinding.get().recycle.refreshComplete();
+                mBinding.get().recycle.loadMoreComplete();
             }
         });
     }

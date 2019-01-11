@@ -1,6 +1,7 @@
 package com.docker.moduleplayer.ui.index;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -32,6 +33,7 @@ import com.docker.moduleplayer.viewmodel.PlayerhomeViewModel;
 import com.docker.moduleplayer.vo.BannerVo;
 import com.docker.moduleplayer.vo.FeedArticleData;
 import com.docker.moduleplayer.vo.FeedArticleListData;
+import com.docker.moduleplayer.vo.KnowledgeHierarchyData;
 import com.docker.moduleplayer.widget.banner.BannerView;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -105,7 +107,6 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mBinding.get().setViewmodel(mViewModel);
-
          mViewModel.getBanner();
          mViewModel.bannerLLData.observe(this,new NetBoundObserver<>(new NetBoundCallback<List<BannerVo>>() {
             @Override

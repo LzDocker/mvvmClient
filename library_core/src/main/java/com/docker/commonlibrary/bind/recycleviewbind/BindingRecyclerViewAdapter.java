@@ -70,6 +70,14 @@ public class BindingRecyclerViewAdapter<T> extends RecyclerView.Adapter<Recycler
             }
             binding.executePendingBindings();
         }
+
+        if(itemViewArg.eventBindingVariable()!=ItemViewArg.ItemView.BINDING_VARIABLE_NONE){
+            boolean result = binding.setVariable(itemViewArg.eventBindingVariable(), itemViewArg.eventTargetBindingVariable());
+            if (!result) {
+                Utils.throwMissingVariable(binding, itemViewArg.eventBindingVariable(), itemViewArg.layoutRes());
+            }
+            binding.executePendingBindings();
+        }
     }
 
     @Override
