@@ -68,7 +68,7 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
 
     @Override
     protected PlayerhomeViewModel getViewModel() {
-        return ViewModelProviders.of(this, factory).get(PlayerhomeViewModel.class);
+        return ViewModelProviders.of(this.getActivity(), factory).get(PlayerhomeViewModel.class);
     }
 
     @Override
@@ -104,6 +104,8 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mBinding.get().setViewmodel(mViewModel);
+
          mViewModel.getBanner();
          mViewModel.bannerLLData.observe(this,new NetBoundObserver<>(new NetBoundCallback<List<BannerVo>>() {
             @Override

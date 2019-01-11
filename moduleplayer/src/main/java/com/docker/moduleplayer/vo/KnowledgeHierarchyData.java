@@ -1,5 +1,7 @@
 package com.docker.moduleplayer.vo;
 
+import android.databinding.BaseObservable;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -8,7 +10,7 @@ import java.util.List;
  * @date 2018/2/23
  */
 
-public class KnowledgeHierarchyData implements Serializable {
+public class KnowledgeHierarchyData extends BaseObservable implements Serializable {
 
     /**
      * "children": [],

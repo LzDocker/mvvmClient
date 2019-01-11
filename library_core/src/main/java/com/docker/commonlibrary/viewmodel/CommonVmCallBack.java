@@ -1,5 +1,7 @@
 package com.docker.commonlibrary.viewmodel;
 
+import android.databinding.ObservableList;
+
 import com.docker.commonlibrary.vo.Resource;
 /*
 *

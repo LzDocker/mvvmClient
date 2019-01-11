@@ -50,7 +50,7 @@ public class NavFragment extends BaseFragment<PlayerhomeViewModel, ModuleplayerF
 
     @Override
     protected PlayerhomeViewModel getViewModel() {
-        return ViewModelProviders.of(this, factory).get(PlayerhomeViewModel.class);
+        return ViewModelProviders.of(this.getActivity(), factory).get(PlayerhomeViewModel.class);
     }
 
     public static NavFragment getInstance() {

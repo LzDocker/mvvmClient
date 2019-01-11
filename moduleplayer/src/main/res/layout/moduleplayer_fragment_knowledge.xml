@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <com.jcodecraeer.xrecyclerview.XRecyclerView
-        android:id="@+id/recycle"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.docker.moduleplayer.viewmodel.PlayerhomeViewModel" />
+           <import type="com.docker.commonlibrary.bind.recycleviewbind.LayoutManager"/>
+    </data>
+    <!--<com.jcodecraeer.xrecyclerview.XRecyclerView-->
+        <!--android:id="@+id/recycle"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--bind:layoutManager="@{LayoutManager.linear()}"-->
+        <!--bind:itemView="@{viewModel.KnowitemBinding}"-->
+        <!--bind:items="@{viewModel.knowItems}"-->
+       <!--/>-->
+
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:id="@+id/recycle"
+        bind:layoutManager="@{LayoutManager.linear()}"
+        bind:itemView="@{viewModel.KnowitemBinding}"
+        bind:items="@{viewModel.knowItems}"
+        >
+    </android.support.v7.widget.RecyclerView>
 </layout>

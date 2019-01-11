@@ -91,7 +91,7 @@ db         -- 数据库相关（如果你要自己维护缓存，那这个地方
 di         -- 注入 api下的数据接口，ui相关的activity fragment viewmodel 都是在这个地方注入的，至于是怎么注入的这个问题后面讲
 repository -- 仓库，我们不提供数据，我们只是数据的搬运工。数据的获取是在这里，因此所有请求的响应你都能在这里看到她的身影
 ui         -- 这个不说了，我知道你肯定是Android开发 emmm... 还是说下吧 activity fragment 中的职责就是控制view层，响应用户操作，所以不要把处理业务的逻辑放在这里，
-可以放到repository中来处理，然后再通过具体的livedata驱动UI层的view作出响应，所以他们应该是简介的，只监听livedata的变化，把这变化传递给view，xml使用databinding,（我这里没有使用太多，原则
+可以放到viewmodel中来处理，然后再通过具体的livedata驱动UI层的view作出响应，所以他们应该是简介的，只监听livedata的变化，把这变化传递给view，xml使用databinding,（我这里没有使用太多，原则
 上讲可以多用一些bindingadapter,但是我总觉得有点本末倒置了，数据驱动就要在xml中处理过多的逻辑，这让我想到了java的jsp,和php，我们是为了维护访方便，解藕清晰才框架的，不是吗？这个就自己考虑吧,没有定义binding包是因为我到现在也没说服自己）
 viewmodel  -- 这一层和mvp的p层有点像，但是更加丝滑（个人感觉），数据处理不再考虑生命周期的限制，从repository拿到数据可以加工也可直接使用（建议加工后成为具体有意义的数据再给UI层，应为不加工的后果可能是把你的架构变成了mvc,哈哈哈，我就是从这走过来的）
 vo         -- 这个就是请求的实体类，当然如果自己维护缓存，也可以当作room的entity层，使用提供的缓存的话，就把你要缓存的实体实现Serializable

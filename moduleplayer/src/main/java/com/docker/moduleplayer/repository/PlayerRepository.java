@@ -13,6 +13,7 @@ import com.docker.commonlibrary.vo.Resource;
 import com.docker.moduleplayer.api.PlayerService;
 import com.docker.moduleplayer.vo.BannerVo;
 import com.docker.moduleplayer.vo.FeedArticleListData;
+import com.docker.moduleplayer.vo.KnowledgeHierarchyData;
 
 import java.util.List;
 
@@ -57,6 +58,16 @@ public class PlayerRepository {
                 return playerService.getBanner();
             }
         }.asLiveData();
+    }
+
+    public LiveData<Resource<List<KnowledgeHierarchyData>>> getKnowledgeHierarchyData(){
+         return new NetworkBoundResourceAuto<List<KnowledgeHierarchyData>,List<KnowledgeHierarchyData>>(appExecutors,CacheStrategy.FIRST_CACHE_THEN_REQUEST,cacheDatabase,"KnowledgeHierarchyData"){
+             @NonNull
+             @Override
+             protected LiveData<ApiResponse<BaseResponse<List<KnowledgeHierarchyData>>>> createCall() {
+                 return playerService.getKnowledgeHierarchyData();
+             }
+         }.asLiveData();
     }
 
 
