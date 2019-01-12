@@ -1,5 +1,6 @@
 package com.docker.moduleplayer.ui.knowledge;
 
+import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
@@ -93,10 +94,29 @@ public class KnowledgeFragment extends BaseFragment<PlayerhomeViewModel, Modulep
         super.onActivityCreated(savedInstanceState);
         mBinding.get().setViewModel(mViewModel);
         mBinding.get().recycle.refresh();
-        mViewModel.knowEnterMessage.observe(this, observer);
-        mViewModel.KnowledgeHierarchyLLData.observe(this, knowdataObserver);
+
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        mViewModel.KnowledgeHierarchyLLData.observe(this, new Observer<Resource<List<KnowledgeHierarchyData>>>() {
+            @Override
+            public void onChanged(@Nullable Resource<List<KnowledgeHierarchyData>> listResource) {
+                mBinding.get().recycle.refreshComplete();
+                mBinding.get().recycle.loadMoreComplete();
+            }
+        });
+
+        mViewModel.knowEnterMessage.observe(this, new Observer<KnowledgeHierarchyData>(){
+            @Override
+            public void onChanged(@Nullable KnowledgeHierarchyData knowledgeHierarchyData) {
+                Log.d("sss", "onChanged: ------"+mViewModel.knowEnterMessage);
+                KnowledgeFragment.this.enterDetial(knowledgeHierarchyData.getId(), knowledgeHierarchyData);
+            }
+        });
+    }
 
     private void enterDetial(int cid, KnowledgeHierarchyData knowledgeHierarchyData) {
         Intent intent = new Intent(this.getActivity(), KnowledgeDetialActivity.class);

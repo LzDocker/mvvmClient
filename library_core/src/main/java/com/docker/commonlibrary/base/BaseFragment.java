@@ -1,5 +1,6 @@
 package com.docker.commonlibrary.base;
 
+import android.app.Activity;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
@@ -49,6 +50,12 @@ public abstract class BaseFragment <VM extends BaseViewModel,VB extends ViewData
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
         this.mViewModel = this.getViewModel();
         this.getLifecycle().addObserver(this.mViewModel);
     }
