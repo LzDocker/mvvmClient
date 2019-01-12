@@ -9,8 +9,12 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.docker.commonlibrary.R;
+import com.docker.commonlibrary.constant.Constant;
+import com.docker.commonlibrary.constant.Constant.VmtoUIconstant;
 import com.docker.constantmodule.util.SpTool;
 import com.docker.constantmodule.util.ToastTool;
+
+import static com.docker.commonlibrary.constant.Constant.VmtoUIconstant.KEY_NETWORK_COMPLETE;
 
 
 public abstract class BaseActivity<VM extends BaseViewModel, VB extends ViewDataBinding> extends BaseInjectActivity {
@@ -18,11 +22,8 @@ public abstract class BaseActivity<VM extends BaseViewModel, VB extends ViewData
 
     protected VB mBinding;
     protected VM mViewModel;
-
     protected abstract int getLayoutId();
-
     public abstract VM getViewModel();
-
     /*
     *  是否要覆盖父布局
     * */
@@ -42,6 +43,26 @@ public abstract class BaseActivity<VM extends BaseViewModel, VB extends ViewData
         }
         mViewModel = getViewModel();
         getLifecycle().addObserver(mViewModel);
+        initCommonListener();
+    }
+
+
+    public void initCommonListener() {
+
+        mViewModel.commonMLD.observe(this,newdata->{
+
+            switch (newdata.first.intValue()){
+                case VmtoUIconstant.KEY_NETWORK_COMPLETE:closeWaitingView();
+                    break;
+                case VmtoUIconstant.KEY_NETWORK_ERROR:showNetWorkErrorView();
+                    break;
+                case VmtoUIconstant.KEY_NETWORK_BUSSINESS_ERROR:showBussinessErrorView(newdata.second);
+                    break;
+                case VmtoUIconstant.KEY_TOAST:showToast(newdata.second);
+                    break;
+            }
+
+        });
     }
 
     /*
@@ -66,5 +87,21 @@ public abstract class BaseActivity<VM extends BaseViewModel, VB extends ViewData
     protected void spSqve(String key, Object object){
         SpTool.save(this,key,object);
     }
+
+    /*
+    * 获取到数据的时候 关闭相关弹窗 恢复请求状态等动作
+    * */
+    protected void closeWaitingView(){}
+
+    /*
+    * 业务返回失败提示
+    * */
+    protected void showBussinessErrorView(String bussinessError){}
+
+    /*
+    * 网络连接失败
+    * */
+    protected void showNetWorkErrorView(){}
+
 
 }

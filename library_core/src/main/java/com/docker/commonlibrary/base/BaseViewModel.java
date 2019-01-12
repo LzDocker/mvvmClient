@@ -2,14 +2,23 @@ package com.docker.commonlibrary.base;
 
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.arch.lifecycle.ViewModel;
+import android.util.Pair;
 
 /**
  * Created by zhangxindang on 2018/8/21.
  */
 
 public class BaseViewModel extends ViewModel implements LifecycleObserver {
+
+    /*
+    * 通用VM Livedata 传递消息给UI
+    * */
+    public final MutableLiveData<Pair<Integer,String>> commonMLD = new MutableLiveData<>();
+
+
 
     public BaseViewModel() {
 

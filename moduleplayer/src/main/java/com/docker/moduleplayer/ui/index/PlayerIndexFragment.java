@@ -107,81 +107,91 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mBinding.get().setViewmodel(mViewModel);
-         mViewModel.getBanner();
-         mViewModel.bannerLLData.observe(this,new NetBoundObserver<>(new NetBoundCallback<List<BannerVo>>() {
-            @Override
-            public void onBusinessError(Resource<List<BannerVo>> resource) {
-
-            }
-            @Override
-            public void onNetworkError(Resource<List<BannerVo>> resource) {
-
-            }
-
-            @Override
-            public void onComplete(Resource<List<BannerVo>> resource) {
-                super.onComplete(resource);
-                if (resource.data != null) {
-                    setupBanner(resource.data);
-                }
-            }
-        }));
+        mViewModel.getBanner();
+        mViewModel.bannerLLData.observe(this, bannerob);
 
         mBinding.get().recycle.refresh();
-        mViewModel.ArticleData.observe(this, new NetBoundObserver<>(new NetBoundCallback<FeedArticleListData>() {
-            @Override
-            public void onBusinessError(Resource<FeedArticleListData> resource) {  cacheResult = null;}
-
-            @Override
-            public void onNetworkError(Resource<FeedArticleListData> resource) {  cacheResult = null;}
-
-            @Override
-            public void onComplete() {
-                super.onComplete();
-                mBinding.get().recycle.refreshComplete();
-                mBinding.get().recycle.loadMoreComplete();
-                Log.d("sss", "onComplete: ----page -----"+page);
-            }
-
-            @Override
-            public void onComplete(Resource<FeedArticleListData> resource) {
-                super.onComplete(resource);
-                if (cacheResult != null) {
-                    mAdapter.getmObjects().removeAll(cacheResult.getDatas());
-                    cacheResult = null;
-                    page--;
-                }
-                if (resource.data != null) {
-                    if (page == 0) {
-                        mAdapter.replace(resource.data.getDatas());
-                        mBinding.get().recycle.refreshComplete();
-                    } else {
-                        mBinding.get().recycle.loadMoreComplete();
-                        mAdapter.getmObjects().addAll(resource.data.getDatas());
-                        mAdapter.notifyDataSetChanged();
-                    }
-                    page++;
-                }
-            }
-
-            @Override
-            public void onCacheComplete(FeedArticleListData Result) {
-                super.onCacheComplete(Result);
-                if (Result != null) {
-                    cacheResult = Result;
-                    if (page == 0) {
-                        mAdapter.replace(Result.getDatas());
-                        mBinding.get().recycle.refreshComplete();
-                    } else {
-                        mBinding.get().recycle.loadMoreComplete();
-                        mAdapter.getmObjects().addAll(Result.getDatas());
-                        mAdapter.notifyDataSetChanged();
-                    }
-                    page++;
-                }
-            }
-        }));
+        mViewModel.ArticleData.observe(this, observer);
     }
+
+    NetBoundObserver bannerob = new NetBoundObserver<>(new NetBoundCallback<List<BannerVo>>() {
+        @Override
+        public void onBusinessError(Resource<List<BannerVo>> resource) {
+
+        }
+
+        @Override
+        public void onNetworkError(Resource<List<BannerVo>> resource) {
+
+        }
+
+        @Override
+        public void onComplete(Resource<List<BannerVo>> resource) {
+            super.onComplete(resource);
+            if (resource.data != null) {
+                setupBanner(resource.data);
+            }
+        }
+    });
+
+
+    NetBoundObserver observer = new NetBoundObserver<>(new NetBoundCallback<FeedArticleListData>() {
+        @Override
+        public void onBusinessError(Resource<FeedArticleListData> resource) {
+            cacheResult = null;
+        }
+
+        @Override
+        public void onNetworkError(Resource<FeedArticleListData> resource) {
+            cacheResult = null;
+        }
+
+        @Override
+        public void onComplete() {
+            super.onComplete();
+            mBinding.get().recycle.refreshComplete();
+            mBinding.get().recycle.loadMoreComplete();
+            Log.d("sss", "onComplete: ----page -----" + page);
+        }
+
+        @Override
+        public void onComplete(Resource<FeedArticleListData> resource) {
+            super.onComplete(resource);
+            if (cacheResult != null) {
+                mAdapter.getmObjects().removeAll(cacheResult.getDatas());
+                cacheResult = null;
+                page--;
+            }
+            if (resource.data != null) {
+                if (page == 0) {
+                    mAdapter.replace(resource.data.getDatas());
+                    mBinding.get().recycle.refreshComplete();
+                } else {
+                    mBinding.get().recycle.loadMoreComplete();
+                    mAdapter.getmObjects().addAll(resource.data.getDatas());
+                    mAdapter.notifyDataSetChanged();
+                }
+                page++;
+            }
+        }
+
+        @Override
+        public void onCacheComplete(FeedArticleListData Result) {
+            super.onCacheComplete(Result);
+            if (Result != null) {
+                cacheResult = Result;
+                if (page == 0) {
+                    mAdapter.replace(Result.getDatas());
+                    mBinding.get().recycle.refreshComplete();
+                } else {
+                    mBinding.get().recycle.loadMoreComplete();
+                    mAdapter.getmObjects().addAll(Result.getDatas());
+                    mAdapter.notifyDataSetChanged();
+                }
+                page++;
+            }
+        }
+    });
 
     private void setupBanner(List<BannerVo> Result) {
         List<ImageView> viewList = new ArrayList<>();

@@ -32,8 +32,6 @@ import javax.inject.Inject;
 
 public class KnowledgeFragment extends BaseFragment<PlayerhomeViewModel, ModuleplayerFragmentKnowledgeBinding> {
 
-    private int page = 0;
-
     @Inject
     ViewModelProvider.Factory factory;
 
@@ -51,103 +49,52 @@ public class KnowledgeFragment extends BaseFragment<PlayerhomeViewModel, Modulep
         return new KnowledgeFragment();
     }
 
+
     @Override
     protected void initView(View var1) {
-//        mAdapter = new SimpleCommonRecyclerAdapter<>(R.layout.moduleplayer_konwledge_item, BR.item);
-//        mBinding.get().recycle.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        mBinding.get().recycle.setAdapter(mAdapter);
-//        mAdapter.setOnItemClickListener(new SimpleCommonRecyclerAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(View view, int position) {
-//                enterDetial(mAdapter.getItem(position-1).getId(), mAdapter.getItem(position-1));
-//            }
-//        });
-
-
-
         mBinding.get().recycle.setLoadingMoreProgressStyle(ProgressStyle.SquareSpin);
         mBinding.get().recycle.setRefreshProgressStyle(ProgressStyle.BallGridPulse);
         mBinding.get().recycle.getDefaultRefreshHeaderView().setRefreshTimeVisible(true);
         mBinding.get().recycle.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                page = 0;
-                initData();
+                mViewModel.getKnowledgeHierarchyData();
             }
 
             @Override
             public void onLoadMore() {
-                initData();
+                mViewModel.getKnowledgeHierarchyData();
             }
         });
 
     }
+
+    Observer<KnowledgeHierarchyData> observer = new Observer<KnowledgeHierarchyData>(){
+        @Override
+        public void onChanged(@Nullable KnowledgeHierarchyData knowledgeHierarchyData) {
+            Log.d("sss", "onChanged: ------"+mViewModel.knowEnterMessage);
+            KnowledgeFragment.this.enterDetial(knowledgeHierarchyData.getId(), knowledgeHierarchyData);
+        }
+    };
+
+    Observer<Resource<List<KnowledgeHierarchyData>>> knowdataObserver = new Observer<Resource<List<KnowledgeHierarchyData>>>() {
+        @Override
+        public void onChanged(@Nullable Resource<List<KnowledgeHierarchyData>> listResource) {
+            Log.d("sss", "onChanged:----KnowledgeHierarchyLLData- ");
+            mBinding.get().recycle.refreshComplete();
+            mBinding.get().recycle.loadMoreComplete();
+        }
+    };
+
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        initData();
-
-        mViewModel.knowEnterMessage.observe(this, new Observer<KnowledgeHierarchyData>() {
-            @Override
-            public void onChanged(@Nullable KnowledgeHierarchyData knowledgeHierarchyData) {
-                enterDetial(knowledgeHierarchyData.getId(),knowledgeHierarchyData);
-            }
-        });
         mBinding.get().setViewModel(mViewModel);
         mBinding.get().recycle.refresh();
-        mViewModel.KnowledgeHierarchyLLData.observe(this, new Observer<Resource<List<KnowledgeHierarchyData>>>() {
-            @Override
-            public void onChanged(@Nullable Resource<List<KnowledgeHierarchyData>> listResource) {
-                Log.d("sss", "onChanged: ----");
-                mBinding.get().recycle.refreshComplete();
-                mBinding.get().recycle.loadMoreComplete();
-            }
-        });
-    }
-
-    private void initData() {
-
-        mViewModel.getKnowledgeHierarchyData();
-
-//        mViewModel.getKnowledgeHierarchyData().observe(this, new CommonObserver<>(new CommonCallback<List<KnowledgeHierarchyData>>() {
-//            @Override
-//            public void onComplete(List<KnowledgeHierarchyData> Result) {
-//                if (Result != null) {
-//                    for (KnowledgeHierarchyData item : Result) {
-//                        StringBuilder stringBuilder = new StringBuilder();
-//                        for (KnowledgeHierarchyData itemo : item.getChildren()) {
-//                            stringBuilder.append(itemo.getName() + "  ");
-//                            item.setInfoGrow(stringBuilder.toString());
-//                        }
-//                    }
-//
-//                    if (page == 0) {
-//                        mAdapter.replace(Result);
-//                    } else {
-//                        mAdapter.getmObjects().addAll(Result);
-//                        mAdapter.notifyDataSetChanged();
-//                    }
-//                    page++;
-//                }
-//            }
-//
-//            @Override
-//            public void onBusinessError(BaseResponse baseResponse) {
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//                super.onComplete();
-//                mBinding.get().recycle.refreshComplete();
-//                mBinding.get().recycle.loadMoreComplete();
-//            }
-//
-//            @Override
-//            public void onNetworkError(ApiResponse apiResponse) {
-//
-//            }
-//        }));
+        mViewModel.knowEnterMessage.observe(this, observer);
+        mViewModel.KnowledgeHierarchyLLData.observe(this, knowdataObserver);
     }
 
 
@@ -157,11 +104,12 @@ public class KnowledgeFragment extends BaseFragment<PlayerhomeViewModel, Modulep
         intent.putExtra("Data", knowledgeHierarchyData);
         startActivity(intent);
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         if (mBinding != null && mBinding.get() != null && mBinding.get().recycle != null) {
-//            mBinding.get().recycle.destroy();
+            mBinding.get().recycle.destroy();
         }
     }
 

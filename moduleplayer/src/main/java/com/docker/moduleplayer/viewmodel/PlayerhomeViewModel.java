@@ -10,7 +10,6 @@ import android.databinding.ObservableField;
 import android.databinding.ObservableList;
 import android.util.Log;
 import android.view.View;
-
 import com.docker.commonlibrary.api.ApiResponse;
 import com.docker.commonlibrary.api.BaseResponse;
 import com.docker.commonlibrary.base.BaseViewModel;
@@ -28,6 +27,7 @@ import com.docker.moduleplayer.vo.ProjectClassifyData;
 import com.docker.moduleplayer.vo.ProjectListData;
 import com.docker.moduleplayer.vo.WxAuthor;
 import com.docker.moduleplayer.BR;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -49,7 +49,6 @@ public class PlayerhomeViewModel extends BaseViewModel {
     @Inject
     PlayerRepository playerRepository;
 
-
     public final ObservableField<String> bannerUrl = new ObservableField<>();
 
     public void click(View view) {
@@ -59,7 +58,6 @@ public class PlayerhomeViewModel extends BaseViewModel {
     public final MutableLiveData<KnowledgeHierarchyData> knowEnterMessage = new MutableLiveData<>();
 
     public void knowItemClick(KnowledgeHierarchyData item) {
-        Log.d("sss", "knowItemClick: ------------------"+item);
         knowEnterMessage.setValue(item);
     }
 
@@ -83,9 +81,6 @@ public class PlayerhomeViewModel extends BaseViewModel {
             return playerRepository.getBanner();
         }
     });
-//    public void getBanner(Integer integer){
-//        bannerPm.setValue(integer);
-//    }
 
     public final MediatorLiveData<Resource<List<BannerVo>>> bannerMData = new MediatorLiveData<>();
     public LiveData<Resource<List<BannerVo>>> bannerLLData = bannerMData;
@@ -99,9 +94,7 @@ public class PlayerhomeViewModel extends BaseViewModel {
     public void getBanner() {
         LiveData<Resource<List<BannerVo>>> bannerLData = playerRepository.getBanner();
         bannerMData.addSource(bannerLData, newdata -> {
-
             new CommonVmCallBack<List<BannerVo>>() {
-
                 @Override
                 public void onBusinessError(Resource<List<BannerVo>> resource) {
 
@@ -125,7 +118,6 @@ public class PlayerhomeViewModel extends BaseViewModel {
                 @Override
                 public void onComplete(Resource<List<BannerVo>> resource) {
                     super.onComplete(resource);
-                    Log.d("sss", "getBanner: " + resource);
                     bannerUrl.set(resource.data.get(0).getUrl());
                 }
             }.setResource(newdata);
@@ -138,27 +130,23 @@ public class PlayerhomeViewModel extends BaseViewModel {
         return service.getIndexList(num);
     }
 
-//    public LiveData<ApiResponse<BaseResponse<List<KnowledgeHierarchyData>>>> getKnowledgeHierarchyData() {
-//        return service.getKnowledgeHierarchyData();
-//    }
-
     public final MediatorLiveData<Resource<List<KnowledgeHierarchyData>>> KnowledgeHierarchyMData = new MediatorLiveData<>();
     public LiveData<Resource<List<KnowledgeHierarchyData>>> KnowledgeHierarchyLLData = KnowledgeHierarchyMData;
 
 
     public final ObservableList<KnowledgeHierarchyData> knowItems = new ObservableArrayList<>();
-    public  ItemViewArg.ItemViewSelector<KnowledgeHierarchyData> KnowitemBinding = new ItemViewArg.ItemViewSelector<KnowledgeHierarchyData>() {
+    public ItemViewArg.ItemViewSelector<KnowledgeHierarchyData> KnowitemBinding = new ItemViewArg.ItemViewSelector<KnowledgeHierarchyData>() {
         @Override
         public void select(ItemViewArg.ItemView itemView, int position, KnowledgeHierarchyData item) {
-            Log.d("sss", "select: ----------------");
-            itemView.set(BR.item,R.layout.moduleplayer_konwledge_item);
-            itemView.setEventBindingVariable(BR.viewModel,PlayerhomeViewModel.this);
+            itemView.set(BR.item, R.layout.moduleplayer_konwledge_item);
+            itemView.setEventBindingVariable(BR.viewModel, PlayerhomeViewModel.this);
         }
         @Override
         public int viewTypeCount() {
             return 1;
         }
     };
+
     public void getKnowledgeHierarchyData() {
         LiveData<Resource<List<KnowledgeHierarchyData>>> KnowledgeHierarchyDataLV = playerRepository.getKnowledgeHierarchyData();
         KnowledgeHierarchyMData.addSource(KnowledgeHierarchyDataLV, newdata -> {
@@ -182,9 +170,8 @@ public class PlayerhomeViewModel extends BaseViewModel {
                 @Override
                 public void onComplete(Resource<List<KnowledgeHierarchyData>> resource) {
                     super.onComplete(resource);
-                    Log.d("sss", "onComplete: KnowledgeHierarchyData"+resource);
+                    Log.d("sss", "onComplete: ----------KnowledgeHierarchyData-------------");
                     knowItems.addAll(resource.data);
-
                 }
             }.setResource(newdata);
             KnowledgeHierarchyMData.setValue(newdata);
