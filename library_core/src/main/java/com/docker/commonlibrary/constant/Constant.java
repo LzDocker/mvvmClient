@@ -13,7 +13,9 @@ public interface Constant {
 
         int KEY_NETWORK_BUSSINESS_ERROR = 2;   // 业务失败（网络连接正常）
 
-        int KEY_TOAST = 3;   // Toast
+        int KEY_NETWORK_LOADING = 3;   // 请求中
+
+        int KEY_TOAST = 4;   // Toast
 
     }
 

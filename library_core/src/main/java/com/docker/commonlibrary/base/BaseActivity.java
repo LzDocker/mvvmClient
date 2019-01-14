@@ -5,6 +5,7 @@ import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -22,11 +23,14 @@ public abstract class BaseActivity<VM extends BaseViewModel, VB extends ViewData
 
     protected VB mBinding;
     protected VM mViewModel;
+
     protected abstract int getLayoutId();
+
     public abstract VM getViewModel();
+
     /*
-    *  是否要覆盖父布局
-    * */
+     *  是否要覆盖父布局
+     * */
     public boolean isOverrideContentView = false;
 
     @Override
@@ -43,32 +47,14 @@ public abstract class BaseActivity<VM extends BaseViewModel, VB extends ViewData
         }
         mViewModel = getViewModel();
         getLifecycle().addObserver(mViewModel);
-        initCommonListener();
     }
 
 
-    public void initCommonListener() {
-
-        mViewModel.commonMLD.observe(this,newdata->{
-
-            switch (newdata.first.intValue()){
-                case VmtoUIconstant.KEY_NETWORK_COMPLETE:closeWaitingView();
-                    break;
-                case VmtoUIconstant.KEY_NETWORK_ERROR:showNetWorkErrorView();
-                    break;
-                case VmtoUIconstant.KEY_NETWORK_BUSSINESS_ERROR:showBussinessErrorView(newdata.second);
-                    break;
-                case VmtoUIconstant.KEY_TOAST:showToast(newdata.second);
-                    break;
-            }
-
-        });
-    }
 
     /*
-    *
-    * 未覆盖父布局的默认包含一个toolbar
-    * */
+     *
+     * 未覆盖父布局的默认包含一个toolbar
+     * */
     protected void initToolBar(ViewGroup rootView) {
 
 
@@ -80,28 +66,14 @@ public abstract class BaseActivity<VM extends BaseViewModel, VB extends ViewData
 
     }
 
-    protected void showToast(String content){
-        ToastTool.show(this,content);
+    protected void showToast(String content) {
+        ToastTool.show(this, content);
     }
 
-    protected void spSqve(String key, Object object){
-        SpTool.save(this,key,object);
+    protected void spSqve(String key, Object object) {
+        SpTool.save(this, key, object);
     }
 
-    /*
-    * 获取到数据的时候 关闭相关弹窗 恢复请求状态等动作
-    * */
-    protected void closeWaitingView(){}
-
-    /*
-    * 业务返回失败提示
-    * */
-    protected void showBussinessErrorView(String bussinessError){}
-
-    /*
-    * 网络连接失败
-    * */
-    protected void showNetWorkErrorView(){}
 
 
 }

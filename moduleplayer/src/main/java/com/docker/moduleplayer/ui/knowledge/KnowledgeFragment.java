@@ -1,20 +1,16 @@
 package com.docker.moduleplayer.ui.knowledge;
 
 import android.app.Activity;
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.View;
-
-import com.docker.commonlibrary.adapter.SimpleCommonRecyclerAdapter;
+import com.docker.commonlibrary.api.NetBoundCallback;
+import com.docker.commonlibrary.api.NetBoundObserver;
 import com.docker.commonlibrary.base.BaseFragment;
 import com.docker.commonlibrary.vo.Resource;
-import com.docker.moduleplayer.BR;
 import com.docker.moduleplayer.R;
 import com.docker.moduleplayer.databinding.ModuleplayerFragmentKnowledgeBinding;
 import com.docker.moduleplayer.ui.common.KnowledgeDetialActivity;
@@ -70,25 +66,6 @@ public class KnowledgeFragment extends BaseFragment<PlayerhomeViewModel, Modulep
 
     }
 
-    Observer<KnowledgeHierarchyData> observer = new Observer<KnowledgeHierarchyData>(){
-        @Override
-        public void onChanged(@Nullable KnowledgeHierarchyData knowledgeHierarchyData) {
-            Log.d("sss", "onChanged: ------"+mViewModel.knowEnterMessage);
-            KnowledgeFragment.this.enterDetial(knowledgeHierarchyData.getId(), knowledgeHierarchyData);
-        }
-    };
-
-    Observer<Resource<List<KnowledgeHierarchyData>>> knowdataObserver = new Observer<Resource<List<KnowledgeHierarchyData>>>() {
-        @Override
-        public void onChanged(@Nullable Resource<List<KnowledgeHierarchyData>> listResource) {
-            Log.d("sss", "onChanged:----KnowledgeHierarchyLLData- ");
-            mBinding.get().recycle.refreshComplete();
-            mBinding.get().recycle.loadMoreComplete();
-        }
-    };
-
-
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -100,21 +77,26 @@ public class KnowledgeFragment extends BaseFragment<PlayerhomeViewModel, Modulep
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
-        mViewModel.KnowledgeHierarchyLLData.observe(this, new Observer<Resource<List<KnowledgeHierarchyData>>>() {
+        mViewModel.KnowledgeHierarchyMData.observe(this, new NetBoundObserver<>(new NetBoundCallback<List<KnowledgeHierarchyData>>() {
             @Override
-            public void onChanged(@Nullable Resource<List<KnowledgeHierarchyData>> listResource) {
-                mBinding.get().recycle.refreshComplete();
+            public void onComplete() {
                 mBinding.get().recycle.loadMoreComplete();
+                mBinding.get().recycle.refreshComplete();
             }
-        });
 
-        mViewModel.knowEnterMessage.observe(this, new Observer<KnowledgeHierarchyData>(){
             @Override
-            public void onChanged(@Nullable KnowledgeHierarchyData knowledgeHierarchyData) {
-                Log.d("sss", "onChanged: ------"+mViewModel.knowEnterMessage);
-                KnowledgeFragment.this.enterDetial(knowledgeHierarchyData.getId(), knowledgeHierarchyData);
+            public void onBusinessError(Resource<List<KnowledgeHierarchyData>> resource) {
+
             }
+
+            @Override
+            public void onNetworkError(Resource<List<KnowledgeHierarchyData>> resource) {
+
+            }
+        }));
+
+        mViewModel.knowEnterMessage.observe(this, knowledgeHierarchyData -> {
+            KnowledgeFragment.this.enterDetial(knowledgeHierarchyData.getId(), knowledgeHierarchyData);
         });
     }
 
@@ -126,8 +108,8 @@ public class KnowledgeFragment extends BaseFragment<PlayerhomeViewModel, Modulep
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         if (mBinding != null && mBinding.get() != null && mBinding.get().recycle != null) {
             mBinding.get().recycle.destroy();
         }

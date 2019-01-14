@@ -9,7 +9,9 @@ import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
 import android.databinding.ObservableList;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
+
 import com.docker.commonlibrary.api.ApiResponse;
 import com.docker.commonlibrary.api.BaseResponse;
 import com.docker.commonlibrary.base.BaseViewModel;
@@ -94,35 +96,18 @@ public class PlayerhomeViewModel extends BaseViewModel {
     public void getBanner() {
         LiveData<Resource<List<BannerVo>>> bannerLData = playerRepository.getBanner();
         bannerMData.addSource(bannerLData, newdata -> {
-            new CommonVmCallBack<List<BannerVo>>() {
-                @Override
-                public void onBusinessError(Resource<List<BannerVo>> resource) {
-
-                }
-
-                @Override
-                public void onNetworkError(Resource<List<BannerVo>> resource) {
-
-                }
-
+            bannerMData.setValue(newdata);  // 此处setvalue activity中的数据才会刷新
+            new CommonVmCallBack<List<BannerVo>>(newdata) {
                 @Override
                 public void onLoading(Resource<List<BannerVo>> resource) {
 
                 }
-
-                @Override
-                public void onComplete() {
-                    super.onComplete();
-                }
-
                 @Override
                 public void onComplete(Resource<List<BannerVo>> resource) {
-                    super.onComplete(resource);
                     bannerUrl.set(resource.data.get(0).getUrl());
-                }
-            }.setResource(newdata);
 
-            bannerMData.setValue(newdata);  // 此处setvalue activity中的数据才会刷新
+                }
+            };
         });
     }
 
@@ -131,9 +116,6 @@ public class PlayerhomeViewModel extends BaseViewModel {
     }
 
     public final MediatorLiveData<Resource<List<KnowledgeHierarchyData>>> KnowledgeHierarchyMData = new MediatorLiveData<>();
-    public LiveData<Resource<List<KnowledgeHierarchyData>>> KnowledgeHierarchyLLData = KnowledgeHierarchyMData;
-
-
     public final ObservableList<KnowledgeHierarchyData> knowItems = new ObservableArrayList<>();
     public ItemViewArg.ItemViewSelector<KnowledgeHierarchyData> KnowitemBinding = new ItemViewArg.ItemViewSelector<KnowledgeHierarchyData>() {
         @Override
@@ -141,6 +123,7 @@ public class PlayerhomeViewModel extends BaseViewModel {
             itemView.set(BR.item, R.layout.moduleplayer_konwledge_item);
             itemView.setEventBindingVariable(BR.viewModel, PlayerhomeViewModel.this);
         }
+
         @Override
         public int viewTypeCount() {
             return 1;
@@ -150,32 +133,20 @@ public class PlayerhomeViewModel extends BaseViewModel {
     public void getKnowledgeHierarchyData() {
         LiveData<Resource<List<KnowledgeHierarchyData>>> KnowledgeHierarchyDataLV = playerRepository.getKnowledgeHierarchyData();
         KnowledgeHierarchyMData.addSource(KnowledgeHierarchyDataLV, newdata -> {
-            new CommonVmCallBack<List<KnowledgeHierarchyData>>() {
-
-                @Override
-                public void onBusinessError(Resource<List<KnowledgeHierarchyData>> resource) {
-
-                }
-
-                @Override
-                public void onNetworkError(Resource<List<KnowledgeHierarchyData>> resource) {
-
-                }
-
+            KnowledgeHierarchyMData.setValue(newdata);
+            new CommonVmCallBack<List<KnowledgeHierarchyData>>(newdata) {
                 @Override
                 public void onLoading(Resource<List<KnowledgeHierarchyData>> resource) {
 
                 }
-
                 @Override
                 public void onComplete(Resource<List<KnowledgeHierarchyData>> resource) {
-                    super.onComplete(resource);
                     Log.d("sss", "onComplete: ----------KnowledgeHierarchyData-------------");
                     knowItems.addAll(resource.data);
                 }
-            }.setResource(newdata);
-            KnowledgeHierarchyMData.setValue(newdata);
+            };
         });
+
     }
 
 

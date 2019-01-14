@@ -50,12 +50,6 @@ public class KnowledgeDetialActivity extends BaseActivity<PlayerhomeViewModel, M
         super.onCreate(savedInstanceStates);
         getSupportActionBar().hide();
         initView();
-        mViewModel.KnowledgeHierarchyLLData.observe(this, new Observer<Resource<List<KnowledgeHierarchyData>>>() {
-            @Override
-            public void onChanged(@Nullable Resource<List<KnowledgeHierarchyData>> listResource) {
-                Log.d("sss", "onChanged:----KnowledgeDetialActivity- ");
-            }
-        });
     }
 
 

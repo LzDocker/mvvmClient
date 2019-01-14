@@ -185,8 +185,8 @@ public class ProCardFragment extends BaseFragment<PlayerhomeViewModel, Modulepla
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         if (mBinding != null && mBinding.get() != null && mBinding.get().recycle != null) {
             mBinding.get().recycle.destroy();
         }
