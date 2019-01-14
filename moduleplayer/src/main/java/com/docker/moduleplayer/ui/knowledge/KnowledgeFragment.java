@@ -90,6 +90,13 @@ public class KnowledgeFragment extends BaseFragment<PlayerhomeViewModel, Modulep
             }
 
             @Override
+            public void onCacheComplete(List<KnowledgeHierarchyData> Result) {
+                super.onCacheComplete(Result);
+                mBinding.get().recycle.loadMoreComplete();
+                mBinding.get().recycle.refreshComplete();
+            }
+
+            @Override
             public void onNetworkError(Resource<List<KnowledgeHierarchyData>> resource) {
 
             }

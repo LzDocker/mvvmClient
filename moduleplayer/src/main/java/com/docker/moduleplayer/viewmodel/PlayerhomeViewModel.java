@@ -102,6 +102,7 @@ public class PlayerhomeViewModel extends BaseViewModel {
                 public void onLoading(Resource<List<BannerVo>> resource) {
 
                 }
+
                 @Override
                 public void onComplete(Resource<List<BannerVo>> resource) {
                     bannerUrl.set(resource.data.get(0).getUrl());
@@ -141,7 +142,6 @@ public class PlayerhomeViewModel extends BaseViewModel {
                 }
                 @Override
                 public void onComplete(Resource<List<KnowledgeHierarchyData>> resource) {
-                    Log.d("sss", "onComplete: ----------KnowledgeHierarchyData-------------");
                     knowItems.addAll(resource.data);
                 }
             };

@@ -130,7 +130,9 @@ public class PlayerIndexFragment extends BaseFragment<PlayerhomeViewModel, Modul
             @Override
             public void onComplete(Resource<List<BannerVo>> resource) {
                 super.onComplete(resource);
-
+                if (resource.data != null) {
+                    setupBanner(resource.data);
+                }
             }
         }));
         mViewModel.ArticleData.observe(this, new NetBoundObserver<>(new NetBoundCallback<FeedArticleListData>() {
