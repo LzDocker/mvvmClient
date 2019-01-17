@@ -1,5 +1,8 @@
 package com.docker.moduleplayer.di;
 
+import android.arch.persistence.room.Room;
+
+import com.docker.commonlibrary.BaseApplication;
 import com.docker.moduleplayer.api.PlayerService;
 
 import javax.inject.Singleton;

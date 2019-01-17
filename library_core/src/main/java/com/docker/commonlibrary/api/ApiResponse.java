@@ -22,47 +22,68 @@ import android.support.v4.util.ArrayMap;
 import android.util.Log;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import okhttp3.Headers;
 import retrofit2.Response;
+import retrofit2.http.Header;
 
 /**
  * Common class used by API responses.
  *
  * @param <T>
  */
-public class ApiResponse<T> {
+public class ApiResponse<T> implements Serializable {
 
     public static String TAG = "ApiResponse";
-    private static final Pattern LINK_PATTERN = Pattern
-            .compile("<([^>]*)>[\\s]*;[\\s]*rel=\"([a-zA-Z0-9]+)\"");
-
+    
     public final int code;
     @Nullable
     public final T body;
     @Nullable
     public final String errorMessage;
-    @NonNull
-    public final Map<String, String> links;
+
+
+    public static String getTAG() {
+        return TAG;
+    }
+
+    public static void setTAG(String TAG) {
+        ApiResponse.TAG = TAG;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    @Nullable
+    public T getBody() {
+        return body;
+    }
+
+    @Nullable
+    public String getErrorMessage() {
+        return errorMessage;
+    }
 
     public ApiResponse(Throwable error) {
         code = 500;
         body = null;
         errorMessage = error.getMessage();
-        links = Collections.emptyMap();
     }
 
     public ApiResponse(T t) {
         code = 200;
         body = t;
         errorMessage = null;
-        links = Collections.emptyMap();
     }
 
     public ApiResponse(Response<T> response) {
+//       String contentType =  header.get("Content-Type");
         code = response.code();
         if (response.isSuccessful()) {
             body = response.body();
@@ -81,20 +102,6 @@ public class ApiResponse<T> {
             }
             errorMessage = message;
             body = null;
-        }
-        String linkHeader = response.headers().get("link");
-        if (linkHeader == null) {
-            links = Collections.emptyMap();
-        } else {
-            links = new ArrayMap<>();
-            Matcher matcher = LINK_PATTERN.matcher(linkHeader);
-
-            while (matcher.find()) {
-                int count = matcher.groupCount();
-                if (count == 2) {
-                    links.put(matcher.group(2), matcher.group(1));
-                }
-            }
         }
     }
 

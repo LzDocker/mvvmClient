@@ -39,6 +39,7 @@ public class LiveDataCallAdapter<R> implements CallAdapter<R, LiveData<ApiRespon
             protected void onActive() {
                 super.onActive();
                 if (started.compareAndSet(false, true)) {
+
                     call.enqueue(new Callback<R>() {
                         @Override
                         public void onResponse(Call<R> call, Response<R> response) {

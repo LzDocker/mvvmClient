@@ -23,6 +23,7 @@ import com.docker.commonlibrary.api.CommonObserver;
 import com.docker.commonlibrary.base.BaseActivity;
 import com.docker.constantmodule.Constant.ConstantsRouter;
 import com.docker.modulegank.gankActivity;
+import com.docker.moduleplayer.ui.index.PlayerIndexFragment;
 import com.docker.mvvmclient.R;
 import com.docker.mvvmclient.api.AccountService;
 import com.docker.mvvmclient.databinding.ActivityMainBinding;

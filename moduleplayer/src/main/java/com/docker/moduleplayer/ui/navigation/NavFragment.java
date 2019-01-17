@@ -50,7 +50,7 @@ public class NavFragment extends BaseFragment<PlayerhomeViewModel, ModuleplayerF
 
     @Override
     protected PlayerhomeViewModel getViewModel() {
-        return ViewModelProviders.of(this, factory).get(PlayerhomeViewModel.class);
+        return ViewModelProviders.of(this.getActivity(), factory).get(PlayerhomeViewModel.class);
     }
 
     public static NavFragment getInstance() {
@@ -93,8 +93,7 @@ public class NavFragment extends BaseFragment<PlayerhomeViewModel, ModuleplayerF
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        initData();
+        mBinding.get().recycle.refresh();
     }
 
     private void initData() {
@@ -139,8 +138,8 @@ public class NavFragment extends BaseFragment<PlayerhomeViewModel, ModuleplayerF
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         if (mBinding != null && mBinding.get() != null && mBinding.get().recycle != null) {
             mBinding.get().recycle.destroy();
         }

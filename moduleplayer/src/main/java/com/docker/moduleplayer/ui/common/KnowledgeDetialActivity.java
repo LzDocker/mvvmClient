@@ -1,5 +1,6 @@
 package com.docker.moduleplayer.ui.common;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.graphics.Color;
@@ -10,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.docker.commonlibrary.base.BaseActivity;
+import com.docker.commonlibrary.vo.Resource;
 import com.docker.moduleplayer.R;
 import com.docker.moduleplayer.databinding.ModuleplayerActivityKnowledgeDetialBinding;
 import com.docker.moduleplayer.ui.common.adapter.KnowledgePagerAdapter;
@@ -63,6 +65,12 @@ public class KnowledgeDetialActivity extends BaseActivity<PlayerhomeViewModel, M
         for (int i = 0; i < knowledgeHierarchyData.getChildren().size(); i++) {
             mBinding.tablayout.getTabAt(i).setText(knowledgeHierarchyData.getChildren().get(i).getName());
         }
+
+
+        mBinding.tvTest.setOnClickListener(v->{
+            mViewModel.getKnowledgeHierarchyData();
+        });
+
     }
 
 

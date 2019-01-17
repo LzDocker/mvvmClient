@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 
 import com.docker.commonlibrary.adapter.SimpleCommonRecyclerAdapter;
@@ -138,6 +139,7 @@ public class CommonFragment extends BaseFragment<PlayerhomeViewModel, Moduleplay
             @Override
             public void onComplete() {
                 super.onComplete();
+                Log.d("sss", "onComplete: ---CommonFragment-----");
                 mBinding.get().recycle.refreshComplete();
                 mBinding.get().recycle.loadMoreComplete();
             }
@@ -160,9 +162,10 @@ public class CommonFragment extends BaseFragment<PlayerhomeViewModel, Moduleplay
         intent.putExtra("targetUrl", targetUrl);
         startActivity(intent);
     }
+
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         if (mBinding != null && mBinding.get() != null && mBinding.get().recycle != null) {
             mBinding.get().recycle.destroy();
         }

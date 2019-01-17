@@ -2,9 +2,31 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.jcodecraeer.xrecyclerview.XRecyclerView
-        android:id="@+id/recycle"
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.docker.moduleplayer.viewmodel.PlayerhomeViewModel" />
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:onClick="@{viewmodel::click}"
+            android:text="@{viewmodel.bannerUrl.get()}" />
+
+        <com.jcodecraeer.xrecyclerview.XRecyclerView
+            android:id="@+id/recycle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
 
 </layout>

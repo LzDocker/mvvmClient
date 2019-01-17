@@ -4,7 +4,7 @@
             "outputFile": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/incremental/mergeDebugResources/merged.dir/values-land/values-land.xml",
             "map": [
                 {
-                    "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/values-land/values-land.xml",
+                    "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/80f3e769dda75dde77e367ae06a58c66/res/values-land/values-land.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/94a1be4c6dbb1b4b88e07d67a69154e1/res/values-land/values-land.xml",
+                    "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/b0d09286fb0a228c7a1a4802f5146854/res/values-land/values-land.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -38,7 +38,7 @@
             "outputFile": "/Users/zhangxindang/Desktop/Android/source/mvvmClient/moduleplayer/build/intermediates/res/merged/debug/values-land/values-land.xml",
             "map": [
                 {
-                    "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8dc19d83cf4ce3d939d1d7c87ec9cbb5/res/values-land/values-land.xml",
+                    "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/80f3e769dda75dde77e367ae06a58c66/res/values-land/values-land.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -48,7 +48,7 @@
                     }
                 },
                 {
-                    "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/94a1be4c6dbb1b4b88e07d67a69154e1/res/values-land/values-land.xml",
+                    "source": "/Users/zhangxindang/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/b0d09286fb0a228c7a1a4802f5146854/res/values-land/values-land.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

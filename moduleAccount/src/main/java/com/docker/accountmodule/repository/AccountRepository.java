@@ -1,13 +1,19 @@
 package com.docker.accountmodule.repository;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.docker.accountmodule.api.AccountService;
+import com.docker.accountmodule.db.AccountDatabase;
 import com.docker.accountmodule.vo.LoginVo;
 import com.docker.commonlibrary.api.ApiResponse;
 import com.docker.commonlibrary.api.BaseResponse;
+<<<<<<< HEAD
+=======
+import com.docker.commonlibrary.repository.BoundResource.NetworkBoundResource;
+>>>>>>> master
 import com.docker.commonlibrary.util.AppExecutors;
 import com.docker.commonlibrary.vo.Resource;
 
@@ -30,41 +36,38 @@ public class AccountRepository {
         this.appExecutors = appExecutors;
     }
 
+<<<<<<< HEAD
     public LiveData<Resource<BaseResponse<LoginVo>>> Login(String username, String pwd) {
        return null;
+=======
+    @Inject
+    AccountDatabase accountDatabase;
+
+    public LiveData<Resource<LoginVo>> Login(String username, String pwd) {
+        return new NetworkBoundResource<LoginVo, LoginVo>(appExecutors) {
+            @Override
+            protected void saveCallResult(@NonNull LoginVo item) {
+                accountDatabase.accountDao().insertAll(item);
+            }
+            @Override
+            protected boolean shouldFetch(@Nullable LoginVo data) {
+
+                return true;
+            }
+            @NonNull
+            @Override
+            protected LiveData<LoginVo> loadFromDb() {
+                return accountDatabase.accountDao().LoadAccount(username);
+            }
+
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<BaseResponse<LoginVo>>> createCall() {
+                return accountService.login(username, pwd);
+            }
+        }.asLiveData();
+>>>>>>> master
     }
-
-
-
-
-
-//    public LiveData<Resource<LoginVo>> Login(String username, String pwd) {
-//        return new NetworkBoundResourceReal<LoginVo, LoginVo>(appExecutors) {
-//
-//            @Override
-//            protected void saveCallResult(@NonNull LoginVo item) {
-//
-//            }
-//
-//            @Override
-//            protected boolean shouldFetch(@Nullable LoginVo data) {
-//                return false;
-//            }
-//
-//            @NonNull
-//            @Override
-//            protected LiveData<LoginVo> loadFromDb() {
-//                return null;
-//            }
-//
-//            @NonNull
-//            @Override
-//            protected LiveData<ApiResponse<LoginVo>> createCall() {
-//                return accountService.login(username,pwd);
-//            }
-//        }.getAsLiveData();
-//    }
-
 
 
 }

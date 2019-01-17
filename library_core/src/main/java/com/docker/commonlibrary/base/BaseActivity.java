@@ -5,12 +5,17 @@ import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.docker.commonlibrary.R;
+import com.docker.commonlibrary.constant.Constant;
+import com.docker.commonlibrary.constant.Constant.VmtoUIconstant;
 import com.docker.constantmodule.util.SpTool;
 import com.docker.constantmodule.util.ToastTool;
+
+import static com.docker.commonlibrary.constant.Constant.VmtoUIconstant.KEY_NETWORK_COMPLETE;
 
 
 public abstract class BaseActivity<VM extends BaseViewModel, VB extends ViewDataBinding> extends BaseInjectActivity {
@@ -24,8 +29,8 @@ public abstract class BaseActivity<VM extends BaseViewModel, VB extends ViewData
     public abstract VM getViewModel();
 
     /*
-    *  是否要覆盖父布局
-    * */
+     *  是否要覆盖父布局
+     * */
     public boolean isOverrideContentView = false;
 
     @Override
@@ -44,10 +49,12 @@ public abstract class BaseActivity<VM extends BaseViewModel, VB extends ViewData
         getLifecycle().addObserver(mViewModel);
     }
 
+
+
     /*
-    *
-    * 未覆盖父布局的默认包含一个toolbar
-    * */
+     *
+     * 未覆盖父布局的默认包含一个toolbar
+     * */
     protected void initToolBar(ViewGroup rootView) {
 
 
@@ -59,12 +66,14 @@ public abstract class BaseActivity<VM extends BaseViewModel, VB extends ViewData
 
     }
 
-    protected void showToast(String content){
-        ToastTool.show(this,content);
+    protected void showToast(String content) {
+        ToastTool.show(this, content);
     }
 
-    protected void spSqve(String key, Object object){
-        SpTool.save(this,key,object);
+    protected void spSqve(String key, Object object) {
+        SpTool.save(this, key, object);
     }
+
+
 
 }

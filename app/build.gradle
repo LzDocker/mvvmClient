@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
-    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId rootProject.ext.android.applicationId
         minSdkVersion rootProject.ext.android.minSdkVersion
@@ -59,7 +59,6 @@ dependencies {
 
     annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
     annotationProcessor rootProject.ext.dependencies["dagger-android-processor"]
-
     annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
     annotationProcessor rootProject.ext.dependencies["dagger-android-compiler"]
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
@@ -69,10 +68,10 @@ dependencies {
 
     println IsBuildMudle.toBoolean()
     if (!IsBuildMudle.toBoolean()) {
-        compile project(':moduleAccount')
-        compile project(':moduleGank')
-        compile project(':moduleplayer')
+        implementation project(':moduleAccount')
+        implementation project(':moduleGank')
+        implementation project(':moduleplayer')
     } else {
-        compile project(':library_core')
+        implementation project(':library_core')
     }
 }

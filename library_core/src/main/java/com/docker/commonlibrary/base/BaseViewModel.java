@@ -2,8 +2,13 @@ package com.docker.commonlibrary.base;
 
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.MediatorLiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.arch.lifecycle.ViewModel;
+import android.util.Pair;
+
+import com.docker.commonlibrary.vo.Resource;
 
 /**
  * Created by zhangxindang on 2018/8/21.

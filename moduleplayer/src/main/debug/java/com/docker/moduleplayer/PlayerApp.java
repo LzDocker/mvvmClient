@@ -1,6 +1,7 @@
 package com.docker.moduleplayer;
 
 import com.docker.commonlibrary.BaseApplication;
+import com.docker.commonlibrary.di.module.CacheModule;
 import com.docker.moduleplayer.di.PlayerServiceModule;
 
 /**
@@ -15,6 +16,7 @@ public class PlayerApp extends BaseApplication {
                 .globalConfigModule(getGlobalConfigModule())
                 .httpClientModule(getHttpClientModule())
                 .playerServiceModule(new PlayerServiceModule())
+                .cacheModule(getCacheModule())
                 .build()
                 .inject(this);
     }

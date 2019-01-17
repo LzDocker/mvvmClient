@@ -11,11 +11,13 @@ import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.docker.commonlibrary.api.HttpRequestHandler;
 import com.docker.commonlibrary.di.module.AppModule;
+import com.docker.commonlibrary.di.module.CacheModule;
 import com.docker.commonlibrary.di.module.GlobalConfigModule;
 import com.docker.commonlibrary.di.module.HttpClientModule;
 import com.docker.constantmodule.Constant.Api;
@@ -77,7 +79,6 @@ public abstract class BaseApplication extends MultiDexApplication implements Has
     @Override
     public void onCreate() {
         super.onCreate();
-
         initRefWatcher();
         initRouter();
         initDI();
@@ -208,9 +209,9 @@ public abstract class BaseApplication extends MultiDexApplication implements Has
 //        return new ServiceModule();
 //    }
 
-//    protected CacheModule getCacheModule() {
-//        return new CacheModule(ContextCompat.getExternalCacheDirs(this)[0]);
-//    }
+    protected CacheModule getCacheModule() {
+        return new CacheModule(this);
+    }
 
 
     @Override

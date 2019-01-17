@@ -1,10 +1,12 @@
 package com.docker.commonlibrary.api;
 
+import java.io.Serializable;
+
 /**
  * Created by zhangxindang on 2018/9/6.
  */
 
-public class BaseResponse <T>{
+public class BaseResponse <T> implements Serializable {
 
     private T data;
     private String errorCode;

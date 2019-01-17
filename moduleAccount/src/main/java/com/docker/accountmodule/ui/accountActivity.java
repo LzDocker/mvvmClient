@@ -1,11 +1,9 @@
 package com.docker.accountmodule.ui;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -22,8 +20,11 @@ import com.docker.commonlibrary.api.ApiResponse;
 import com.docker.commonlibrary.api.BaseResponse;
 import com.docker.commonlibrary.api.CommonCallback;
 import com.docker.commonlibrary.api.CommonObserver;
+import com.docker.commonlibrary.api.NetBoundCallback;
+import com.docker.commonlibrary.api.NetBoundObserver;
 import com.docker.commonlibrary.base.BaseActivity;
 import com.docker.commonlibrary.vo.Resource;
+import com.docker.commonlibrary.vo.Status;
 import com.docker.constantmodule.Constant.ConstantsRouter;
 import com.docker.constantmodule.util.SpTool;
 
@@ -100,11 +101,33 @@ public class accountActivity extends BaseActivity<accountViewModel, Moduleaccoun
                     login();
                 }
             }
-
         });
         mBinding.tvLogin.setOnClickListener(v -> {
             toLogin();
         });
+
+        mViewModel.loginlv.observe(this, new NetBoundObserver<>(new NetBoundCallback<LoginVo>() {
+            @Override
+            public void onComplete(Resource<LoginVo> resource) {
+                super.onComplete(resource);
+                spSqve("LOGIN_FLAG",true);
+                toHome(null);
+            }
+            @Override
+            public void onBusinessError(Resource<LoginVo> resource) {}
+            @Override
+            public void onNetworkError(Resource<LoginVo> resource) {}
+
+            @Override
+            public void onCacheComplete(LoginVo Result) {
+                super.onCacheComplete(Result);
+            }
+
+            @Override
+            public void onComplete() {
+                super.onComplete();
+            }
+        }));
     }
 
 
@@ -162,8 +185,10 @@ public class accountActivity extends BaseActivity<accountViewModel, Moduleaccoun
         }));*/
     }
 
+
     private void login() {
         chechParam();
+<<<<<<< HEAD
         mViewModel.login(registerVo).enqueue(new Callback<ApiResponse<BaseResponse<LoginVo>>>() {
             @Override
             public void onResponse(Call<ApiResponse<BaseResponse<LoginVo>>> call, Response<ApiResponse<BaseResponse<LoginVo>>> response) {
@@ -198,6 +223,9 @@ public class accountActivity extends BaseActivity<accountViewModel, Moduleaccoun
 
 //        mViewModel.Login(registerVo.getUsername(),registerVo.getPassword());
 
+=======
+        mViewModel.Login(registerVo.getUsername(), registerVo.getPassword());
+>>>>>>> master
     }
 
     private void toLogin() {

@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 
 import com.docker.commonlibrary.api.ApiResponse;
@@ -45,7 +46,7 @@ public class ProFragment extends BaseFragment<PlayerhomeViewModel, ModuleplayerF
 
     @Override
     protected PlayerhomeViewModel getViewModel() {
-        return ViewModelProviders.of(this, factory).get(PlayerhomeViewModel.class);
+        return ViewModelProviders.of(this.getActivity(), factory).get(PlayerhomeViewModel.class);
     }
 
     public static ProFragment getInstance() {
@@ -67,6 +68,8 @@ public class ProFragment extends BaseFragment<PlayerhomeViewModel, ModuleplayerF
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initData();
+//        Log.d("sss", "onActivityCreated: --------"+mViewModel.knowItems.get(0).getName()); 公用同一个viewmodel
+
     }
 
     private void initData() {

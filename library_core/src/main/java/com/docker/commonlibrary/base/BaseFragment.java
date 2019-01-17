@@ -1,10 +1,12 @@
 package com.docker.commonlibrary.base;
 
+import android.app.Activity;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +14,16 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.docker.commonlibrary.R;
+import com.docker.commonlibrary.constant.Constant;
 import com.docker.commonlibrary.util.AutoClearedValue;
+import com.docker.constantmodule.util.ToastTool;
 
 
 /**
  * Created by zhangxindang on 2018/8/31.
  */
 
-public abstract class BaseFragment <VM extends BaseViewModel,VB extends ViewDataBinding> extends BaseInjectFragment {
+public abstract class BaseFragment<VM extends BaseViewModel, VB extends ViewDataBinding> extends BaseInjectFragment {
 
     protected AutoClearedValue<VB> mBinding;
     protected VM mViewModel;
@@ -36,7 +40,7 @@ public abstract class BaseFragment <VM extends BaseViewModel,VB extends ViewData
 
     @Nullable
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        this.rootView = (LinearLayout)inflater.inflate(R.layout.fragment_base, (ViewGroup)null);
+        this.rootView = (LinearLayout) inflater.inflate(R.layout.fragment_base, (ViewGroup) null);
         VB dataBinding = DataBindingUtil.inflate(inflater, this.getLayoutId(), container, false);
         this.mBinding = new AutoClearedValue(this, dataBinding);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(-1, -1);
@@ -49,12 +53,22 @@ public abstract class BaseFragment <VM extends BaseViewModel,VB extends ViewData
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
         this.mViewModel = this.getViewModel();
         this.getLifecycle().addObserver(this.mViewModel);
     }
 
+    protected void showToast(String content) {
+        ToastTool.show(this.getActivity(), content);
+    }
+
     protected BaseActivity getHoldingActivity() {
-        return (BaseActivity)this.getActivity();
+        return (BaseActivity) this.getActivity();
     }
 
     protected LinearLayout getRootView() {
