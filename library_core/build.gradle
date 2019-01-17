@@ -48,6 +48,8 @@ dependencies {
         exclude module: 'jsr305'
     })
     testImplementation rootProject.ext.dependencies["junit"]
+    api rootProject.ext.dependencies["recyclerview"]
+
     debugImplementation rootProject.ext.dependencies["leakcanary-android"]
     releaseImplementation rootProject.ext.dependencies["leakcanary-android-no-op"]
     api rootProject.ext.dependencies["multidex"]
@@ -55,7 +57,7 @@ dependencies {
     api rootProject.ext.dependencies["arouter"]
     annotationProcessor rootProject.ext.dependencies["room-compiler"]
     api rootProject.ext.dependencies["appcompat"]
-    api rootProject.ext.dependencies["recyclerview"]
+
 
     api rootProject.ext.dependencies["retrofit"]
     api rootProject.ext.dependencies["logging-interceptor"]
