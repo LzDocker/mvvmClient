@@ -8,12 +8,12 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/account" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/gank" />
             <option value="$PROJECT_DIR$/library_common" />
             <option value="$PROJECT_DIR$/library_core" />
-            <option value="$PROJECT_DIR$/moduleAccount" />
-            <option value="$PROJECT_DIR$/moduleGank" />
-            <option value="$PROJECT_DIR$/moduleplayer" />
+            <option value="$PROJECT_DIR$/player" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

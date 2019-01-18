@@ -3,7 +3,7 @@ package com.docker.mvvmclient;
 import android.content.Context;
 
 import com.docker.accountmodule.di.AccountServiceModule;
-import com.docker.commonlibrary.BaseApplication;
+import com.docker.core.BaseApplication;
 import com.docker.moduleplayer.di.PlayerServiceModule;
 import com.docker.mvvmclient.di.DaggerAppComponent;
 import com.docker.mvvmclient.di.ServiceModule;

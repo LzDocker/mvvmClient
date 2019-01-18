@@ -33,5 +33,6 @@ dependencies {
     api rootProject.ext.dependencies["cardview"]
     api rootProject.ext.dependencies["design"]
     api rootProject.ext.dependencies["xrecyclerview"]
+    api project(':library_core')
 
 }

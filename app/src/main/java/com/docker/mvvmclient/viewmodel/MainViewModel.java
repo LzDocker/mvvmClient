@@ -2,10 +2,9 @@ package com.docker.mvvmclient.viewmodel;
 
 import android.arch.lifecycle.LiveData;
 
-import com.docker.accountmodule.vo.BannerVo;
-import com.docker.commonlibrary.api.ApiResponse;
-import com.docker.commonlibrary.api.BaseResponse;
-import com.docker.commonlibrary.base.BaseViewModel;
+import com.docker.core.api.ApiResponse;
+import com.docker.core.api.BaseResponse;
+import com.docker.core.base.BaseViewModel;
 import com.docker.mvvmclient.api.AccountService;
 
 import java.util.List;
@@ -26,9 +25,9 @@ public class MainViewModel extends BaseViewModel {
 
     }
 
-
-    public LiveData<ApiResponse<BaseResponse<List<BannerVo>>>> getData() {
-
-        return service.getBanners();
-    }
+////
+//    public LiveData<ApiResponse<BaseResponse<List<BannerVo>>>> getData() {
+//
+//        return service.getBanners();
+//    }
 }

@@ -2,16 +2,16 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/account/account.iml" filepath="$PROJECT_DIR$/account/account.iml" />
       <module fileurl="file://$PROJECT_DIR$/moduleAccount/accountModule.iml" filepath="$PROJECT_DIR$/moduleAccount/accountModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library_core/commonlibrary.iml" filepath="$PROJECT_DIR$/library_core/commonlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/library_common/constantModule.iml" filepath="$PROJECT_DIR$/library_common/constantModule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gank/gank.iml" filepath="$PROJECT_DIR$/gank/gank.iml" />
       <module fileurl="file://$PROJECT_DIR$/library_common/library_common.iml" filepath="$PROJECT_DIR$/library_common/library_common.iml" />
       <module fileurl="file://$PROJECT_DIR$/library_core/library_core.iml" filepath="$PROJECT_DIR$/library_core/library_core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/moduleAccount/moduleAccount.iml" filepath="$PROJECT_DIR$/moduleAccount/moduleAccount.iml" />
-      <module fileurl="file://$PROJECT_DIR$/moduleGank/moduleGank.iml" filepath="$PROJECT_DIR$/moduleGank/moduleGank.iml" />
-      <module fileurl="file://$PROJECT_DIR$/moduleplayer/moduleplayer.iml" filepath="$PROJECT_DIR$/moduleplayer/moduleplayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/mvvmClient.iml" filepath="$PROJECT_DIR$/mvvmClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/player/player.iml" filepath="$PROJECT_DIR$/player/player.iml" />
     </modules>
   </component>
 </project>

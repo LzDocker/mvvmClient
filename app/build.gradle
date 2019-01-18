@@ -64,13 +64,11 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     annotationProcessor rootProject.ext.dependencies["room-compiler"]
 
-//    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
-
     println IsBuildMudle.toBoolean()
     if (!IsBuildMudle.toBoolean()) {
-        implementation project(':moduleAccount')
-        implementation project(':moduleGank')
-        implementation project(':moduleplayer')
+        implementation project(':account')
+        implementation project(':gank')
+        implementation project(':player')
     } else {
         implementation project(':library_core')
     }
